@@ -1,422 +1,797 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--
+  PORTFOLIO — "ALLOY"
+  ------------------------------------------------------------------
+  Concept: the work is presented like a steel mill test certificate.
+  Each body of work is a "heat" (a batch of steel), and each capability
+  is an "element". The composition table at the top is the signature
+  interaction: toggle elements to see which heats they're mixed into.
+
+  VISUALS
+  Every figure is drawn in HTML, CSS and inline SVG, so the site needs no
+  screenshots, photos or video files. The only images are the portrait
+  (assets/images/portrait-circle.jpg), the social-share card (og-image.jpg) and
+  the favicon. Search this file for "PLACEHOLDER" to find the text values
+  still to fill in (the live site URL).
+
+  The archive section links to earlier builds kept in assets/<folder>/.
+
+  All organisations are anonymised. Keep it that way: no real names,
+  logos, internal figures or data in any file you add.
+-->
+<html lang="en-GB">
 <head>
-  <!-- Required meta tags -->
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>ANIL | Portfolio</title>
-  <!-- Fontawesome Icons -->
-  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Vivid Icons JS -->
-  <script src="https://cdn.jsdelivr.net/npm/vivid-icons@1.0.10" type="text/javascript"></script>
+  <!-- Page title and description -->
+  <title>Anil Swami — Steel, software &amp; social good</title>
+  <meta name="description" content="Work across heavy industry, AI-powered internal tools and social impact: web builds, AI tools, social media, video, graphic design and operations.">
+  <meta name="author" content="Anil Swami">
+  <meta name="theme-color" content="#F1EDE4">
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+  <!-- PLACEHOLDER (meta): replace https://example.com/ with the live site URL -->
+  <link rel="canonical" href="https://example.com/">
 
-  <!-- Custom CSS -->
+  <!-- Open Graph / social sharing -->
+  <!-- PLACEHOLDER (meta): og:url and og:image need absolute URLs on the live domain.
+       The share card itself already exists: assets/images/og-image.jpg (1200 × 630). -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Anil Swami">
+  <meta property="og:title" content="Steel, software &amp; social good — stronger mixed">
+  <meta property="og:description" content="Five bodies of work across heavy industry, AI tools and social impact, and the elements each one is made of.">
+  <meta property="og:url" content="https://example.com/">
+  <meta property="og:image" content="https://example.com/assets/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Steel, software and social good — stronger mixed.">
+  <meta property="og:locale" content="en_GB">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Steel, software &amp; social good — stronger mixed">
+  <meta name="twitter:description" content="Five bodies of work across heavy industry, AI tools and social impact.">
+  <meta name="twitter:image" content="https://example.com/assets/images/og-image.jpg">
+
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+
+  <!-- Fonts: Big Shoulders Display (industrial display), IBM Plex Sans (text), IBM Plex Mono (data labels) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
   <link rel="stylesheet" href="css/style.css">
-  <style>
-    body{
-      overflow-x: hidden;
-    }
-  </style>
 
+  <!-- Flag JS early so reveal animations never flash in unstyled -->
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="js/main.js" defer></script>
 </head>
 <body>
-  <div class="wrapper" id="home">
-   <div class="header_top">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <!-- Navbar Logo -->
-      <a class="navbar-brand" href="#home">ANIL<span>Potrfolio</span></a>
-      <!-- Navbar Toggler -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <!-- Navbar Menu -->
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto ">
-          <li class="nav-item active">
-            <a class="nav-link" href="#home">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#about">About Me</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#skills">Skills</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#projects">Projects</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#contact">Contact</a>
-          </li>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============================== HEADER ============================== -->
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a class="wordmark" href="#top" aria-label="Anil Swami — back to top">
+        <span class="wordmark__mark" aria-hidden="true"></span>
+        <span class="wordmark__text">Anil Swami</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#elements">Elements</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
+      </nav>
+
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================== HERO ============================== -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="wrap hero__inner">
+        <p class="eyebrow hero__eyebrow">Work index <span aria-hidden="true">·</span> Five heats <span aria-hidden="true">·</span> <span data-year>2026</span></p>
+
+        <h1 class="hero__title" id="hero-title">
+          <span class="line"><span>Steel, software</span></span>
+          <span class="line"><span>&amp; social good.</span></span>
+          <span class="line line--heat"><span>Stronger mixed.</span></span>
+        </h1>
+
+        <p class="hero__lede">
+          Communication and decision-making inside heavy industry. AI tools that turn
+          dense reports into answers. Video, social and design for causes that need to
+          be heard. Below: five heats of work, an archive of earlier web builds, and the
+          elements behind them.
+        </p>
+
       </div>
 
-    </nav>
-  </div>
-  <div class="header">
-    <div class="container">
-      <div class="contact-info">
-          <span><i class="fa fa-phone-square" aria-hidden="true"></i>| +91-9413975388</span>
-          <span><i class="fa fa-envelope" aria-hidden="true"></i>| anilswami5388@gmail.com</span>
-        </div>
-      <div class="header_content mt-5 p-4">
-        <div class="header_content_heading">
-          <h1><span>HELLO! </span><br>I AM <span class="name">ANIL</span></h1>
-          <h3 class="text-right bg-danger text-dark">-Front-end Web Designer & Developer</h3>
-        </div>
-        <div class="header_content_btns">
-          <button class="btn btn-lg btn-primary mr-3"><a href="#contact" class="text-reset">HIRE ME</a></button>
-          <button class="btn btn-lg btn-outline-primary"><a href="assets/cv.pdf" class="text-reset" download>GET CV</a></button>
+      <!-- ---------- Composition table: the signature "alloy mixer" ---------- -->
+      <div class="wrap">
+        <div class="mix" id="mix">
+          <div class="mix__head">
+            <h2 class="mix__title">Composition by heat</h2>
+            <p class="mix__hint">Select elements to mix them. Heats that contain the whole mix light up.</p>
+          </div>
+
+          <div class="mix__scroll">
+            <table class="mix__table">
+              <caption class="sr-only">
+                The five heats of work and the elements each one uses. The element column
+                headers are toggle buttons that highlight the work containing every selected element.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col" class="c-no"><abbr title="Heat number">No.</abbr></th>
+                  <th scope="col" class="c-work">Work</th>
+                  <th scope="col" class="c-el" data-el="Op"><button class="el-btn" type="button" data-el="Op" aria-pressed="false"><span class="el-btn__no" aria-hidden="true">01</span><span class="el-btn__sym">Op</span><span class="el-btn__name"> Operations</span></button></th>
+                  <th scope="col" class="c-el" data-el="Ai"><button class="el-btn" type="button" data-el="Ai" aria-pressed="false"><span class="el-btn__no" aria-hidden="true">02</span><span class="el-btn__sym">Ai</span><span class="el-btn__name"> AI tools</span></button></th>
+                  <th scope="col" class="c-el" data-el="Wd"><button class="el-btn" type="button" data-el="Wd" aria-pressed="false"><span class="el-btn__no" aria-hidden="true">03</span><span class="el-btn__sym">Wd</span><span class="el-btn__name"> Web dev</span></button></th>
+                  <th scope="col" class="c-el" data-el="Sm"><button class="el-btn" type="button" data-el="Sm" aria-pressed="false"><span class="el-btn__no" aria-hidden="true">04</span><span class="el-btn__sym">Sm</span><span class="el-btn__name"> Social</span></button></th>
+                  <th scope="col" class="c-el" data-el="Vd"><button class="el-btn" type="button" data-el="Vd" aria-pressed="false"><span class="el-btn__no" aria-hidden="true">05</span><span class="el-btn__sym">Vd</span><span class="el-btn__name"> Video</span></button></th>
+                  <th scope="col" class="c-el" data-el="Gd"><button class="el-btn" type="button" data-el="Gd" aria-pressed="false"><span class="el-btn__no" aria-hidden="true">06</span><span class="el-btn__sym">Gd</span><span class="el-btn__name"> Design</span></button></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr class="mix__group"><th scope="rowgroup" colspan="8">Heavy industry</th></tr>
+                <tr class="mix__row" data-heat="01" data-elements="Op Sm Vd Gd">
+                  <td class="c-no">01</td>
+                  <th scope="row" class="c-work"><a href="#heat-01"><span class="w-title">Where the plant floor meets the public feed</span><span class="w-org">Steel manufacturing group</span></a></th>
+                  <td class="c-el" data-el="Op"><span class="dot is-on" aria-hidden="true"></span><span class="sr-only">Yes</span></td>
+                  <td class="c-el" data-el="Ai"><span class="dot" aria-hidden="true"></span><span class="sr-only">No</span></td>
+                  <td class="c-el" data-el="Wd"><span class="dot" aria-hidden="true"></span><span class="sr-only">No</span></td>
+                  <td class="c-el" data-el="Sm"><span class="dot is-on" aria-hidden="true"></span><span class="sr-only">Yes</span></td>
+                  <td class="c-el" data-el="Vd"><span class="dot is-on" aria-hidden="true"></span><span class="sr-only">Yes</span></td>
+                  <td class="c-el" data-el="Gd"><span class="dot is-on" aria-hidden="true"></span><span class="sr-only">Yes</span></td>
+                </tr>
+                <tr class="mix__row" data-heat="02" data-elements="Wd Gd">
+                  <td class="c-no">02</td>
+                  <th scope="row" class="c-work"><a href="#heat-02"><span class="w-title">A new company, online from day one</span><span class="w-org">Newly acquired sister steel company</span></a></th>
+                  <td class="c-el" data-el="Op"><span class="dot" aria-hidden="true"></span><span class="sr-only">No</span></td>
+                  <td class="c-el" data-el="Ai"><span class="dot" aria-hidden="true"></span><span class="sr-only">No</span></td>
+                  <td class="c-el" data-el="Wd"><span class="dot is-on" aria-hidden="true"></span><span class="sr-only">Yes</span></td>
+                  <td class="c-el" data-el="Sm"><span class="dot" aria-hidden="true"></span><span class="sr-only">No</span></td>
+                  <td class="c-el" data-el="Vd"><span class="dot" aria-hidden="true"></span><span class="sr-only">No</span></td>
+                  <td class="c-el" data-el="Gd"><span class="dot is-on" aria-hidden="true"></span><span class="sr-only">Yes</span></td>
+                </tr>
+                <tr class="mix__row" data-heat="03" data-elements="Op Ai Wd">
+                  <td class="c-no">03</td>
+                  <th scope="row" class="c-work"><a href="#heat-03"><span class="w-title">Reports in. Insight out.</span><span class="w-org">AI-powered internal web tools</span></a></th>
+                  <td class="c-el" data-el="Op"><span class="dot is-on" aria-hidden="true"></span><span class="sr-only">Yes</span></td>
+                  <td class="c-el" data-el="Ai"><span class="dot is-on" aria-hidden="true"></span><span class="sr-only">Yes</span></td>
+                  <td class="c-el" data-el="Wd"><span class="dot is-on" aria-hidden="true"></span><span class="sr-only">Yes</span></td>
+                  <td class="c-el" data-el="Sm"><span class="dot" aria-hidden="true"></span><span class="sr-only">No</span></td>
+                  <td class="c-el" data-el="Vd"><span class="dot" aria-hidden="true"></span><span class="sr-only">No</span></td>
+                  <td class="c-el" data-el="Gd"><span class="dot" aria-hidden="true"></span><span class="sr-only">No</span></td>
+                </tr>
+              </tbody>
+
+              <tbody>
+                <tr class="mix__group"><th scope="rowgroup" colspan="8">Social impact</th></tr>
+                <tr class="mix__row" data-heat="04" data-elements="Ai Sm Vd">
+                  <td class="c-no">04</td>
+                  <th scope="row" class="c-work"><a href="#heat-04"><span class="w-title">A new cause, finding its voice</span><span class="w-org">Newly launched NGO</span></a></th>
+                  <td class="c-el" data-el="Op"><span class="dot" aria-hidden="true"></span><span class="sr-only">No</span></td>
+                  <td class="c-el" data-el="Ai"><span class="dot is-on" aria-hidden="true"></span><span class="sr-only">Yes</span></td>
+                  <td class="c-el" data-el="Wd"><span class="dot" aria-hidden="true"></span><span class="sr-only">No</span></td>
+                  <td class="c-el" data-el="Sm"><span class="dot is-on" aria-hidden="true"></span><span class="sr-only">Yes</span></td>
+                  <td class="c-el" data-el="Vd"><span class="dot is-on" aria-hidden="true"></span><span class="sr-only">Yes</span></td>
+                  <td class="c-el" data-el="Gd"><span class="dot" aria-hidden="true"></span><span class="sr-only">No</span></td>
+                </tr>
+                <tr class="mix__row" data-heat="05" data-elements="Gd">
+                  <td class="c-no">05</td>
+                  <th scope="row" class="c-work"><a href="#heat-05"><span class="w-title">Campaigns that work on a wall and in a feed</span><span class="w-org">Development-sector NGO</span></a></th>
+                  <td class="c-el" data-el="Op"><span class="dot" aria-hidden="true"></span><span class="sr-only">No</span></td>
+                  <td class="c-el" data-el="Ai"><span class="dot" aria-hidden="true"></span><span class="sr-only">No</span></td>
+                  <td class="c-el" data-el="Wd"><span class="dot" aria-hidden="true"></span><span class="sr-only">No</span></td>
+                  <td class="c-el" data-el="Sm"><span class="dot" aria-hidden="true"></span><span class="sr-only">No</span></td>
+                  <td class="c-el" data-el="Vd"><span class="dot" aria-hidden="true"></span><span class="sr-only">No</span></td>
+                  <td class="c-el" data-el="Gd"><span class="dot is-on" aria-hidden="true"></span><span class="sr-only">Yes</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Legend for small screens, where column headers show symbols only -->
+          <ul class="mix__legend" aria-hidden="true">
+            <li><b>Op</b> Operations</li>
+            <li><b>Ai</b> AI tools</li>
+            <li><b>Wd</b> Web dev</li>
+            <li><b>Sm</b> Social</li>
+            <li><b>Vd</b> Video</li>
+            <li><b>Gd</b> Design</li>
+          </ul>
+
+          <div class="mix__foot">
+            <p class="mix__readout" data-readout aria-live="polite">Showing all five heats. Select elements above to mix them.</p>
+            <button class="mix__clear" type="button" data-clear hidden>Clear mix</button>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <!-- About Section -->
-  <div class="section" id="about">
-    <div class="section-content">
-     <div class="container">
-      <div class="main_heading">
-        <h2>ABOUT ME</h2>
+    </section>
+
+
+    <!-- ============================== WORK ============================== -->
+    <section class="work" id="work" aria-labelledby="work-title">
+      <div class="wrap">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">§ 01 — The heats</p>
+          <h2 class="section-title" id="work-title">Five heats, poured one at a time</h2>
+          <p class="section-intro">
+            Every organisation here is anonymised by design. What matters is the
+            problem, the mix of disciplines that went into it, and what came out.
+          </p>
+        </header>
+
+
+        <!-- ---------------------------- HEAT 01 ---------------------------- -->
+        <article class="heat" id="heat-01" data-heat="01" data-elements="Op Sm Vd Gd" aria-labelledby="heat-01-title">
+          <div class="heat__aside">
+            <p class="heat__num" data-reveal="pour" aria-hidden="true">01</p>
+            <dl class="heat__meta">
+              <div><dt>Sector</dt><dd>Heavy industry</dd></div>
+              <div><dt>Organisation</dt><dd>Steel manufacturing group</dd></div>
+              <div><dt>Span</dt><dd>5+ years · ongoing</dd></div>
+            </dl>
+            <ul class="chips" aria-label="Elements in this heat">
+              <li class="chip" data-el="Op"><span class="chip__no" aria-hidden="true">01</span><span class="chip__sym" aria-hidden="true">Op</span><span class="chip__name">Operations</span></li>
+              <li class="chip" data-el="Sm"><span class="chip__no" aria-hidden="true">04</span><span class="chip__sym" aria-hidden="true">Sm</span><span class="chip__name">Social</span></li>
+              <li class="chip" data-el="Vd"><span class="chip__no" aria-hidden="true">05</span><span class="chip__sym" aria-hidden="true">Vd</span><span class="chip__name">Video</span></li>
+              <li class="chip" data-el="Gd"><span class="chip__no" aria-hidden="true">06</span><span class="chip__sym" aria-hidden="true">Gd</span><span class="chip__name">Design</span></li>
+            </ul>
+          </div>
+
+          <div class="heat__main">
+            <h3 class="heat__title" id="heat-01-title" data-reveal><span class="sr-only">Heat 01: </span>Where the plant floor meets the public feed</h3>
+
+            <div class="heat__text" data-reveal>
+              <div class="heat__block">
+                <h4>The brief</h4>
+                <p>Heavy industry does real work in its communities, but that work rarely makes it past the factory gate. The stories sit with people on the ground; the decisions about what to say sit somewhere else.</p>
+              </div>
+              <div class="heat__block">
+                <h4>The approach</h4>
+                <p>Work in both rooms. Plan, shoot, edit and publish CSR social content end to end, while taking part in the operational and business decisions behind it. What gets said is shaped by how the plant really runs, and what gets decided accounts for how it will land in public.</p>
+              </div>
+              <div class="heat__block">
+                <h4>Outcomes</h4>
+                <ul class="outcomes">
+                  <li>A steady, recognisable CSR voice, sustained for more than five years</li>
+                  <li>In-house production from site shoot to published post, with no agency hand-off</li>
+                  <li>Communication weighed at the decision table, not bolted on after it</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Fig. 01 (HTML/CSS, no image files): operations and communication overlap at the decision table -->
+            <figure class="fig" data-reveal>
+              <div class="fig__plate" aria-hidden="true">
+                <div class="venn">
+                  <div class="venn__c venn__c--a"><span class="venn__t">Plant floor</span><span class="venn__s">Production<br>Planning<br>Reporting</span></div>
+                  <div class="venn__c venn__c--b"><span class="venn__t">Public feed</span><span class="venn__s">CSR stories<br>Reels<br>Design</span></div>
+                  <span class="venn__x">Decisions</span>
+                </div>
+              </div>
+              <figcaption class="fig__cap"><b>Fig. 01</b> Operations and communication overlap at the decision table.</figcaption>
+            </figure>
+          </div>
+        </article>
+
+
+        <!-- ---------------------------- HEAT 02 ---------------------------- -->
+        <article class="heat" id="heat-02" data-heat="02" data-elements="Wd Gd" aria-labelledby="heat-02-title">
+          <div class="heat__aside">
+            <p class="heat__num" data-reveal="pour" aria-hidden="true">02</p>
+            <dl class="heat__meta">
+              <div><dt>Sector</dt><dd>Heavy industry</dd></div>
+              <div><dt>Organisation</dt><dd>Newly acquired sister steel company</dd></div>
+              <div><dt>Scope</dt><dd>Full design &amp; build</dd></div>
+            </dl>
+            <ul class="chips" aria-label="Elements in this heat">
+              <li class="chip" data-el="Wd"><span class="chip__no" aria-hidden="true">03</span><span class="chip__sym" aria-hidden="true">Wd</span><span class="chip__name">Web dev</span></li>
+              <li class="chip" data-el="Gd"><span class="chip__no" aria-hidden="true">06</span><span class="chip__sym" aria-hidden="true">Gd</span><span class="chip__name">Design</span></li>
+            </ul>
+          </div>
+
+          <div class="heat__main">
+            <h3 class="heat__title" id="heat-02-title" data-reveal><span class="sr-only">Heat 02: </span>A new company, online from day one</h3>
+
+            <div class="heat__text" data-reveal>
+              <div class="heat__block">
+                <h4>The brief</h4>
+                <p>A newly acquired steel company needed a web presence of its own: credible to buyers and partners, distinct in its own right, yet clearly part of the wider group.</p>
+              </div>
+              <div class="heat__block">
+                <h4>The approach</h4>
+                <p>Design and build the whole site in-house: structure, content hierarchy, visual design and a hand-written front end. Responsive from the first sketch, light enough to load quickly on mobile networks, and simple for the team to keep up to date.</p>
+              </div>
+              <div class="heat__block">
+                <h4>Outcomes</h4>
+                <ul class="outcomes">
+                  <li>A complete corporate website, designed and developed end to end</li>
+                  <li>An identity that stands on its own and still sits comfortably in the group family</li>
+                  <li>No agency dependency for updates or new pages</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Fig. 02 (HTML/CSS): the corporate site as a wireframe. Screenshots are left out to keep the company anonymous. -->
+            <figure class="fig" data-reveal>
+              <div class="fig__plate" aria-hidden="true">
+                <div class="site-ill">
+                  <div class="browser-ill">
+                    <div class="browser-ill__bar"><i></i><i></i><i></i></div>
+                    <div class="wf">
+                      <div class="wf__nav"><span class="wf__logo"></span><span class="wf__links"><i></i><i></i><i></i><i></i></span></div>
+                      <div class="wf__hero">
+                        <div class="wf__copy"><b></b><b></b><b class="is-short"></b><span class="wf__btn"></span></div>
+                        <div class="wf__art"><span></span></div>
+                      </div>
+                      <div class="wf__cards"><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                  <div class="phone-ill">
+                    <div class="wf wf--mobile">
+                      <div class="wf__nav"><span class="wf__logo"></span><span class="wf__burger"></span></div>
+                      <div class="wf__art"><span></span></div>
+                      <div class="wf__copy"><b></b><b class="is-short"></b><span class="wf__btn"></span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <figcaption class="fig__cap"><b>Fig. 02</b> The corporate site as a wireframe, on desktop and mobile. Screenshots are left out so the company stays anonymous.</figcaption>
+            </figure>
+          </div>
+        </article>
+
+
+        <!-- ---------------------------- HEAT 03 ---------------------------- -->
+        <article class="heat" id="heat-03" data-heat="03" data-elements="Op Ai Wd" aria-labelledby="heat-03-title">
+          <div class="heat__aside">
+            <p class="heat__num" data-reveal="pour" aria-hidden="true">03</p>
+            <dl class="heat__meta">
+              <div><dt>Sector</dt><dd>Heavy industry</dd></div>
+              <div><dt>Organisation</dt><dd>Internal teams</dd></div>
+              <div><dt>Status</dt><dd>In development</dd></div>
+            </dl>
+            <ul class="chips" aria-label="Elements in this heat">
+              <li class="chip" data-el="Op"><span class="chip__no" aria-hidden="true">01</span><span class="chip__sym" aria-hidden="true">Op</span><span class="chip__name">Operations</span></li>
+              <li class="chip" data-el="Ai"><span class="chip__no" aria-hidden="true">02</span><span class="chip__sym" aria-hidden="true">Ai</span><span class="chip__name">AI tools</span></li>
+              <li class="chip" data-el="Wd"><span class="chip__no" aria-hidden="true">03</span><span class="chip__sym" aria-hidden="true">Wd</span><span class="chip__name">Web dev</span></li>
+            </ul>
+          </div>
+
+          <div class="heat__main">
+            <h3 class="heat__title" id="heat-03-title" data-reveal><span class="sr-only">Heat 03: </span>Reports in. Insight out.</h3>
+
+            <div class="heat__text" data-reveal>
+              <div class="heat__block">
+                <h4>The brief</h4>
+                <p>Production and business reports arrive faster than anyone can read them properly. The numbers are all there. The time to find what actually changed isn't.</p>
+              </div>
+              <div class="heat__block">
+                <h4>The approach</h4>
+                <p>Small internal web apps with a three-step flow. <strong>Upload</strong> a report as it comes out of existing systems. <strong>Analyse</strong> it with AI that structures the data, compares it with earlier periods and flags anything unusual. <strong>Get insights</strong> as a plain-language summary, plus the questions worth asking next.</p>
+              </div>
+              <div class="heat__block">
+                <h4>Outcomes</h4>
+                <ul class="outcomes">
+                  <li>A first read of a routine report in minutes, not hours</li>
+                  <li>The same summary structure every time, so periods compare at a glance</li>
+                  <li>Tools shaped by someone who reads these reports, not a generic dashboard</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Fig. 03 (HTML/CSS): illustrative mock-up. Every name and number in it is fictional. -->
+            <figure class="mock" data-reveal>
+              <div class="mock__window" aria-hidden="true">
+                <div class="mock__bar">
+                  <span class="mock__dots"><i></i><i></i><i></i></span>
+                  <span class="mock__name">report-reader <em>· internal demo</em></span>
+                  <span class="mock__flag">Fictional sample data</span>
+                </div>
+
+                <ol class="mock__steps">
+                  <li class="mock__step mock__step--upload">
+                    <p class="mock__label"><b>01</b> Upload</p>
+                    <div class="mock__drop">
+                      <svg class="mock__icon" viewBox="0 0 24 24" focusable="false"><path d="M6 2h8l5 5v15H6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 2v5h5M9 13h7M9 16.5h7M9 9.5h3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                      <span class="mock__file">sample_report_WK00.xlsx</span>
+                      <span class="mock__fileinfo">3 sheets · demo file</span>
+                    </div>
+                  </li>
+
+                  <li class="mock__step mock__step--analyse">
+                    <p class="mock__label"><b>02</b> Analyse</p>
+                    <ul class="mock__checks">
+                      <li>Reading 3 sheets</li>
+                      <li>Matching to last week</li>
+                      <li>Scanning for outliers</li>
+                    </ul>
+                    <div class="mock__progress"><span></span></div>
+                  </li>
+
+                  <li class="mock__step mock__step--insight">
+                    <p class="mock__label"><b>03</b> Insight</p>
+                    <div class="mock__chart">
+                      <p class="mock__chart-title">Widgets made per day, Line B <em>(fictional)</em></p>
+                      <div class="mock__bars">
+                        <div class="mbar" style="--v: .96"><span class="mbar__fill"></span><span class="mbar__day">Mon</span></div>
+                        <div class="mbar" style="--v: .94"><span class="mbar__fill"></span><span class="mbar__day">Tue</span></div>
+                        <div class="mbar mbar--flag" style="--v: .67"><span class="mbar__val">84 · −30%</span><span class="mbar__fill"></span><span class="mbar__day">Wed</span></div>
+                        <div class="mbar" style="--v: .98"><span class="mbar__fill"></span><span class="mbar__day">Thu</span></div>
+                        <div class="mbar" style="--v: 1"><span class="mbar__fill"></span><span class="mbar__day">Fri</span></div>
+                      </div>
+                    </div>
+                    <ul class="mock__insights">
+                      <li><b>Wednesday dipped 30%</b> against the weekly average.</li>
+                      <li>Downtime notes mention “Machine Z” twice.</li>
+                      <li>Worth asking: was Wednesday planned maintenance?</li>
+                    </ul>
+                  </li>
+                </ol>
+              </div>
+              <figcaption class="fig__cap"><b>Fig. 03</b> Upload → analyse → insight. All names and figures are fictional sample data.</figcaption>
+            </figure>
+          </div>
+        </article>
+
+
+        <!-- ---------------------------- HEAT 04 ---------------------------- -->
+        <article class="heat" id="heat-04" data-heat="04" data-elements="Ai Sm Vd" aria-labelledby="heat-04-title">
+          <div class="heat__aside">
+            <p class="heat__num" data-reveal="pour" aria-hidden="true">04</p>
+            <dl class="heat__meta">
+              <div><dt>Sector</dt><dd>Social impact</dd></div>
+              <div><dt>Organisation</dt><dd>Newly launched NGO</dd></div>
+              <div><dt>Span</dt><dd>Since launch · ongoing</dd></div>
+            </dl>
+            <ul class="chips" aria-label="Elements in this heat">
+              <li class="chip" data-el="Ai"><span class="chip__no" aria-hidden="true">02</span><span class="chip__sym" aria-hidden="true">Ai</span><span class="chip__name">AI tools</span></li>
+              <li class="chip" data-el="Sm"><span class="chip__no" aria-hidden="true">04</span><span class="chip__sym" aria-hidden="true">Sm</span><span class="chip__name">Social</span></li>
+              <li class="chip" data-el="Vd"><span class="chip__no" aria-hidden="true">05</span><span class="chip__sym" aria-hidden="true">Vd</span><span class="chip__name">Video</span></li>
+            </ul>
+          </div>
+
+          <div class="heat__main">
+            <h3 class="heat__title" id="heat-04-title" data-reveal><span class="sr-only">Heat 04: </span>A new cause, finding its voice</h3>
+
+            <div class="heat__text" data-reveal>
+              <div class="heat__block">
+                <h4>The brief</h4>
+                <p>A newly launched NGO with a clear mission and no audience yet. No content library, no production team and no budget to waste.</p>
+              </div>
+              <div class="heat__block">
+                <h4>The approach</h4>
+                <p>Run its social channels from the first post: tone of voice, formats, calendar and community. Produce short-form video with AI-assisted steps for the slow parts (rough cuts, captions, clean-up, versions), then finish every piece by hand so it moves fast without feeling machine-made.</p>
+              </div>
+              <div class="heat__block">
+                <h4>Outcomes</h4>
+                <ul class="outcomes">
+                  <li>A social presence built from zero</li>
+                  <li>A repeatable video workflow sized for a small team</li>
+                  <li>AI for speed, human editing for care</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Fig. 04 (HTML/CSS/SVG): an edit timeline where AI drafts and every clip is finished by hand -->
+            <figure class="fig" data-reveal>
+              <div class="fig__plate" aria-hidden="true">
+                <div class="tl">
+                  <div class="tl__ruler"><span>0s</span><span>5s</span><span>10s</span><span>15s</span></div>
+                  <div class="tl__track">
+                    <span class="tl__lbl">Video</span>
+                    <div class="tl__lane">
+                      <i class="clip clip--ai" style="--s: 0; --w: 34">Rough cut</i>
+                      <i class="clip clip--hand" style="--s: 35; --w: 30">Trim</i>
+                      <i class="clip clip--hand" style="--s: 66; --w: 34">Colour</i>
+                    </div>
+                  </div>
+                  <div class="tl__track">
+                    <span class="tl__lbl">Text</span>
+                    <div class="tl__lane">
+                      <i class="clip clip--ai" style="--s: 3; --w: 29">Captions</i>
+                      <i class="clip clip--ai" style="--s: 35; --w: 27">Captions</i>
+                      <i class="clip clip--hand" style="--s: 66; --w: 22">Fixes</i>
+                    </div>
+                  </div>
+                  <div class="tl__track">
+                    <span class="tl__lbl">Audio</span>
+                    <div class="tl__lane tl__lane--wave">
+                      <svg viewBox="0 0 200 20" preserveAspectRatio="none" focusable="false"><path d="M0 10h6l2-6 3 12 3-9 3 6 3-4 3 3h8l2-7 3 13 3-10 3 5 3-3h10l2-6 3 12 2-8 3 5 3-2h9l2-8 3 15 3-11 3 6 3-3h12l2-5 3 10 3-7 3 4h10l2-7 3 13 3-9 3 5 3-3h9l2-6 3 11 2-7 3 4 3-2h10l2-7 3 13 3-9 3 5h13" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+                    </div>
+                  </div>
+                  <span class="tl__head"></span>
+                </div>
+                <p class="legend"><span><i class="sw sw--ai"></i>AI-assisted</span><span><i class="sw sw--hand"></i>Hand-edited</span></p>
+              </div>
+              <figcaption class="fig__cap"><b>Fig. 04</b> AI drafts the rough cut and captions; every clip is finished by hand.</figcaption>
+            </figure>
+          </div>
+        </article>
+
+
+        <!-- ---------------------------- HEAT 05 ---------------------------- -->
+        <article class="heat" id="heat-05" data-heat="05" data-elements="Gd" aria-labelledby="heat-05-title">
+          <div class="heat__aside">
+            <p class="heat__num" data-reveal="pour" aria-hidden="true">05</p>
+            <dl class="heat__meta">
+              <div><dt>Sector</dt><dd>Social impact</dd></div>
+              <div><dt>Organisation</dt><dd>Development-sector NGO</dd></div>
+              <div><dt>Scope</dt><dd>Print &amp; digital design</dd></div>
+            </dl>
+            <ul class="chips" aria-label="Elements in this heat">
+              <li class="chip" data-el="Gd"><span class="chip__no" aria-hidden="true">06</span><span class="chip__sym" aria-hidden="true">Gd</span><span class="chip__name">Design</span></li>
+            </ul>
+            <p class="heat__note">A pure element: design, done properly.</p>
+          </div>
+
+          <div class="heat__main">
+            <h3 class="heat__title" id="heat-05-title" data-reveal><span class="sr-only">Heat 05: </span>Campaigns that work on a wall and in a feed</h3>
+
+            <div class="heat__text" data-reveal>
+              <div class="heat__block">
+                <h4>The brief</h4>
+                <p>Development messages have to land with very different audiences: on a printed poster in a community space, and on a phone screen in a scrolling feed.</p>
+              </div>
+              <div class="heat__block">
+                <h4>The approach</h4>
+                <p>Design campaigns as systems rather than one-offs. One core idea, adapted across posters, social creatives and print collateral, in every size and format needed, without losing clarity or consistency.</p>
+              </div>
+              <div class="heat__block">
+                <h4>Outcomes</h4>
+                <ul class="outcomes">
+                  <li>Campaign sets that stay consistent from print to digital</li>
+                  <li>Print-ready artwork and platform-ready social formats from one design</li>
+                  <li>Clear messages first, decoration second</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Fig. 05 (HTML/CSS): one campaign composition adapted across print and digital formats -->
+            <figure class="fig" data-reveal>
+              <div class="fig__plate" aria-hidden="true">
+                <div class="formats">
+                  <div class="fmt fmt--a3"><div class="art"><span class="art__sun"></span><p class="art__head">One idea.<br>Every format.</p></div><p class="fmt__lbl">Poster · A3</p></div>
+                  <div class="fmt fmt--post"><div class="art"><span class="art__sun"></span><p class="art__head">One idea.<br>Every format.</p></div><p class="fmt__lbl">Post · 4:5</p></div>
+                  <div class="fmt fmt--story"><div class="art"><span class="art__sun"></span><p class="art__head">One idea.<br>Every format.</p></div><p class="fmt__lbl">Story · 9:16</p></div>
+                  <div class="fmt fmt--banner"><div class="art"><span class="art__sun"></span><p class="art__head">One idea.<br>Every format.</p></div><p class="fmt__lbl">Banner · 16:9</p></div>
+                </div>
+              </div>
+              <figcaption class="fig__cap"><b>Fig. 05</b> One composition, adapted across print and digital formats.</figcaption>
+            </figure>
+          </div>
+        </article>
       </div>
-      <div class="row no-gutters align-items-center justify-content-between">
-        <div class="col-md-6 justify-content-start">
-          <img src="img/about.png" alt="" class="img-fluid ml-n5">
-        </div>
-        <div class="col-md-6">
-          <p class="text-muted text-justify" style="line-height:2;">
-            Hi, My name is <span class="font-weight-bold">ANIL SWAMI</span>. and you are most welcome to my mini portfolio website. I am a <span class="font-weight-bold">frontend web designer and developer</span>. i currently staying in Jaipur, Rajasthan.<br>I am a person who has high passion in designing and developing technologies, solving logical problems, learning new technologies and computer languages. In short 'I Love To Code'. One of my dream is to master all the web technologies and become one of the top designers and developers, and now i am working toward it.<br>
-            The major fact of my life is that i completed my B.Tech in Electrical but i want to do what i love to do thats why i started learning web technologies. It seems a little bit hard at starting but i believe 'Patience is the key'.
-            For more information about my educational qualification and other things you can get my CV from the home page.
-            THANK YOU !
+    </section>
+
+
+    <!-- ============================== ARCHIVE (earlier web builds) ============================== -->
+    <!-- Each link opens an original 2021 build stored in assets/<folder>/.
+         Businesses are described rather than named here; the builds themselves are unchanged. -->
+    <section class="archive" id="archive" aria-labelledby="archive-title">
+      <div class="wrap">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">§ 02 — Archive</p>
+          <h2 class="section-title" id="archive-title">Earlier web builds</h2>
+          <p class="section-intro">
+            Fifteen sites from 2021, built with HTML, CSS, JavaScript and Bootstrap.
+            Businesses are described rather than named; each link opens the original build.
+          </p>
+        </header>
+
+        <div class="builds__head" aria-hidden="true"><span>No.</span><span>Build</span><span>Pages</span><span>Open</span></div>
+        <ol class="builds" data-reveal>
+          <li class="build">
+            <span class="build__no" aria-hidden="true">A-01</span>
+            <div class="build__body">
+              <h3 class="build__title">IT managed-services provider</h3>
+              <p class="build__scope">Solutions, platforms and industry pages, plus a client login</p>
+            </div>
+            <p class="build__pages">66 pages</p>
+            <p class="build__links"><a href="assets/WANGO/index.html" target="_blank" rel="noopener">View build<span class="sr-only">: IT managed-services provider (opens in a new tab)</span> <span aria-hidden="true">↗</span></a></p>
+          </li>
+          <li class="build">
+            <span class="build__no" aria-hidden="true">A-02</span>
+            <div class="build__body">
+              <h3 class="build__title">Relocation companies <span class="build__count">× 5</span></h3>
+              <p class="build__scope">Five separate sites for packers and movers, with service pages and enquiry forms</p>
+            </div>
+            <p class="build__pages">47 pages</p>
+            <p class="build__links">
+              <a class="is-num" href="assets/FriendsPackersMovers/index.html" target="_blank" rel="noopener"><span class="sr-only">Relocation site </span>01<span class="sr-only"> (opens in a new tab)</span></a>
+              <a class="is-num" href="assets/Iconexpress/index.html" target="_blank" rel="noopener"><span class="sr-only">Relocation site </span>02<span class="sr-only"> (opens in a new tab)</span></a>
+              <a class="is-num" href="assets/Kanu/index.html" target="_blank" rel="noopener"><span class="sr-only">Relocation site </span>03<span class="sr-only"> (opens in a new tab)</span></a>
+              <a class="is-num" href="assets/MeharaPackers/index.html" target="_blank" rel="noopener"><span class="sr-only">Relocation site </span>04<span class="sr-only"> (opens in a new tab)</span></a>
+              <a class="is-num" href="assets/ShiftingPackersAndMovers/index.html" target="_blank" rel="noopener"><span class="sr-only">Relocation site </span>05<span class="sr-only"> (opens in a new tab)</span></a>
+            </p>
+          </li>
+          <li class="build">
+            <span class="build__no" aria-hidden="true">A-03</span>
+            <div class="build__body">
+              <h3 class="build__title">Gym &amp; fitness studio</h3>
+              <p class="build__scope">Training, timetable, trainers and shop</p>
+            </div>
+            <p class="build__pages">7 pages</p>
+            <p class="build__links"><a href="assets/Fitness/index.html" target="_blank" rel="noopener">View build<span class="sr-only">: gym and fitness studio (opens in a new tab)</span> <span aria-hidden="true">↗</span></a></p>
+          </li>
+          <li class="build">
+            <span class="build__no" aria-hidden="true">A-04</span>
+            <div class="build__body">
+              <h3 class="build__title">Startup consultancy</h3>
+              <p class="build__scope">Services, portfolio, internships and blog</p>
+            </div>
+            <p class="build__pages">7 pages</p>
+            <p class="build__links"><a href="assets/StandupStartups/index.html" target="_blank" rel="noopener">View build<span class="sr-only">: startup consultancy (opens in a new tab)</span> <span aria-hidden="true">↗</span></a></p>
+          </li>
+          <li class="build">
+            <span class="build__no" aria-hidden="true">A-05</span>
+            <div class="build__body">
+              <h3 class="build__title">Printing &amp; branding company</h3>
+              <p class="build__scope">Services, products and gallery</p>
+            </div>
+            <p class="build__pages">6 pages</p>
+            <p class="build__links"><a href="assets/DynamicSolutions/index.html" target="_blank" rel="noopener">View build<span class="sr-only">: printing and branding company (opens in a new tab)</span> <span aria-hidden="true">↗</span></a></p>
+          </li>
+          <li class="build">
+            <span class="build__no" aria-hidden="true">A-06</span>
+            <div class="build__body">
+              <h3 class="build__title">Film production house</h3>
+              <p class="build__scope">Services, gallery and shooting locations</p>
+            </div>
+            <p class="build__pages">6 pages</p>
+            <p class="build__links"><a href="assets/SGF/index.html" target="_blank" rel="noopener">View build<span class="sr-only">: film production house (opens in a new tab)</span> <span aria-hidden="true">↗</span></a></p>
+          </li>
+          <li class="build">
+            <span class="build__no" aria-hidden="true">A-07</span>
+            <div class="build__body">
+              <h3 class="build__title">E-commerce services agency</h3>
+              <p class="build__scope">Services, blog and contact</p>
+            </div>
+            <p class="build__pages">5 pages</p>
+            <p class="build__links"><a href="assets/Ankush/index.html" target="_blank" rel="noopener">View build<span class="sr-only">: e-commerce services agency (opens in a new tab)</span> <span aria-hidden="true">↗</span></a></p>
+          </li>
+          <li class="build">
+            <span class="build__no" aria-hidden="true">A-08</span>
+            <div class="build__body">
+              <h3 class="build__title">Construction company</h3>
+              <p class="build__scope">Services, project gallery and contact</p>
+            </div>
+            <p class="build__pages">5 pages</p>
+            <p class="build__links"><a href="assets/IshratBhat/index.html" target="_blank" rel="noopener">View build<span class="sr-only">: construction company (opens in a new tab)</span> <span aria-hidden="true">↗</span></a></p>
+          </li>
+          <li class="build">
+            <span class="build__no" aria-hidden="true">A-09</span>
+            <div class="build__body">
+              <h3 class="build__title">PVC products marketplace</h3>
+              <p class="build__scope">Product catalogue with a login page</p>
+            </div>
+            <p class="build__pages">2 pages</p>
+            <p class="build__links"><a href="assets/pvcmart/index.html" target="_blank" rel="noopener">View build<span class="sr-only">: PVC products marketplace (opens in a new tab)</span> <span aria-hidden="true">↗</span></a></p>
+          </li>
+          <li class="build">
+            <span class="build__no" aria-hidden="true">A-10</span>
+            <div class="build__body">
+              <h3 class="build__title">Online course platform</h3>
+              <p class="build__scope">Landing page with course listings</p>
+            </div>
+            <p class="build__pages">1 page</p>
+            <p class="build__links"><a href="assets/mind/index.html" target="_blank" rel="noopener">View build<span class="sr-only">: online course platform (opens in a new tab)</span> <span aria-hidden="true">↗</span></a></p>
+          </li>
+          <li class="build">
+            <span class="build__no" aria-hidden="true">A-11</span>
+            <div class="build__body">
+              <h3 class="build__title">Fashion store</h3>
+              <p class="build__scope">Header and mega-menu navigation</p>
+            </div>
+            <p class="build__pages">1 page</p>
+            <p class="build__links"><a href="assets/drasoo/index.html" target="_blank" rel="noopener">View build<span class="sr-only">: fashion store navigation (opens in a new tab)</span> <span aria-hidden="true">↗</span></a></p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ============================== ELEMENTS (capabilities) ============================== -->
+    <section class="elements" id="elements" aria-labelledby="elements-title">
+      <div class="wrap">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">§ 03 — The elements</p>
+          <h2 class="section-title" id="elements-title">Six elements, one practice</h2>
+          <p class="section-intro">
+            Each one stands on its own. Together they make work that no single
+            discipline would get to alone.
+          </p>
+        </header>
+
+        <!-- EDIT: the "tools" lines describe skills, not software. Add specific
+             software names (editing suite, design apps, AI platforms) if you want them shown. -->
+        <ol class="ptable">
+          <li class="el" data-reveal>
+            <p class="el__no" aria-hidden="true">01</p>
+            <p class="el__sym" aria-hidden="true">Op</p>
+            <h3 class="el__name">Operations &amp; decisions</h3>
+            <p class="el__desc">Production-side know-how and a seat at the table for business decisions. Knowing how the plant actually runs is what makes the communication and the tools credible.</p>
+            <p class="el__tools">Production reporting · CSR programmes · Planning · Cross-team decisions</p>
+          </li>
+          <li class="el" data-reveal>
+            <p class="el__no" aria-hidden="true">02</p>
+            <p class="el__sym" aria-hidden="true">Ai</p>
+            <h3 class="el__name">AI tools</h3>
+            <p class="el__desc">Internal web apps that use AI to read reports, structure them and surface what changed. Small, specific and quick to put to work.</p>
+            <p class="el__tools">LLM APIs · Prompt design · Document parsing · AI-assisted editing</p>
+          </li>
+          <li class="el" data-reveal>
+            <p class="el__no" aria-hidden="true">03</p>
+            <p class="el__sym" aria-hidden="true">Wd</p>
+            <h3 class="el__name">Web development</h3>
+            <p class="el__desc">Full sites and web apps, designed and hand-built. Responsive, accessible and quick to load, with no agency in the loop.</p>
+            <p class="el__tools">HTML · CSS · JavaScript · Responsive design · Accessibility</p>
+          </li>
+          <li class="el" data-reveal>
+            <p class="el__no" aria-hidden="true">04</p>
+            <p class="el__sym" aria-hidden="true">Sm</p>
+            <h3 class="el__name">Social media</h3>
+            <p class="el__desc">Strategy, calendars, copy and community for brands and causes, from an industrial group's CSR to an NGO's first posts.</p>
+            <p class="el__tools">Content strategy · Calendars · Copywriting · Community · Analytics</p>
+          </li>
+          <li class="el" data-reveal>
+            <p class="el__no" aria-hidden="true">05</p>
+            <p class="el__sym" aria-hidden="true">Vd</p>
+            <h3 class="el__name">Video</h3>
+            <p class="el__desc">Short-form video that is shot, cut and captioned, with AI-assisted steps for speed and hand-editing for feel.</p>
+            <p class="el__tools">Shooting · Editing · AI-assisted cuts · Captions · Reels</p>
+          </li>
+          <li class="el" data-reveal>
+            <p class="el__no" aria-hidden="true">06</p>
+            <p class="el__sym" aria-hidden="true">Gd</p>
+            <h3 class="el__name">Graphic design</h3>
+            <p class="el__desc">Posters, campaign creatives and print and digital collateral, designed as systems rather than one-offs.</p>
+            <p class="el__tools">Posters · Campaign systems · Print production · Social creatives</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ============================== CONTACT ============================== -->
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="wrap contact__inner">
+        <p class="eyebrow eyebrow--dark">§ 04 — Next heat</p>
+        <h2 class="contact__title" id="contact-title" data-reveal>Got work that needs more than one discipline?</h2>
+        <p class="contact__lede" data-reveal>Web builds, AI tools, social, video, design, or all of them at once. Send a line about what you're working on.</p>
+
+        <!-- Email -->
+        <a class="contact__mail" href="mailto:anilswami5388@gmail.com" data-reveal>
+          <span>anilswami5388@gmail.com</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19 19 5M8 5h11v11" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>
+        </a>
+
+        <!-- Signature: small circular portrait (assets/images/portrait-circle.jpg, 320 × 320) -->
+        <div class="signoff" data-reveal>
+          <img class="signoff__photo" src="assets/images/portrait-circle.jpg" width="320" height="320" loading="lazy" decoding="async" alt="Portrait of Anil Swami">
+          <p class="signoff__text">
+            <span class="signoff__label">Mixed by</span>
+            <span class="signoff__name">Anil Swami</span>
+            <span class="signoff__els" aria-hidden="true"><b>Op</b><b>Ai</b><b>Wd</b><b>Sm</b><b>Vd</b><b>Gd</b></span>
           </p>
         </div>
       </div>
+    </section>
+  </main>
+
+  <!-- ============================== FOOTER ============================== -->
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <p>© <span data-year>2026</span> Anil Swami</p>
+      <p>Organisations are described here, not named.</p>
+      <p><a href="#top">Back to top <span aria-hidden="true">↑</span></a></p>
     </div>
-  </div>
-</div>
-
-<!-- Skills Section -->
-<div class="section" id="skills">
-  <div class="section-content">
-    <div class="container">
-      <div class="main_heading mb-n5">
-        <h2>SKILLS</h2>
-      </div>
-      <div class="row no-gutters align-items-center">
-        <div class="col-lg-6 col-md-12 col-12">
-          <div class="names my-3">
-            <h5>HTML</h5>
-            <div class="progress w-90">
-              <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 80%">80%</div>
-            </div>
-          </div>
-          <div class="names my-3">
-            <h5>CSS</h5>
-            <div class="progress w-90">
-              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 85%">85%</div>
-            </div>
-          </div>
-          <div class="names my-3">
-            <h5>JavaScript</h5>
-            <div class="progress w-90">
-              <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 70%">70%</div>
-            </div>
-          </div>
-          <div class="names my-3">
-            <h5>Bootstrap</h5>
-            <div class="progress w-90">
-              <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 80%">80%</div>
-            </div>
-          </div>
-          <div class="names my-3">
-            <h5>PHP</h5>
-            <div class="progress w-90">
-              <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">40%</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <img src="img/skills.png" alt="" class="img-fluid">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Skills Section End-->
-
-<!-- Projects Section -->
-<div class="section" id="projects">
-  <div class="section-content">
-    <div class="container">
-      <div class="main_heading">
-        <h2>PROJECTS</h2>
-      </div>
-      <div class="row no-gutters align-items-center pt-5">
-        <div class="col-12 col-md-4 col-lg-3">
-          <div class="card mb-md-0 mb-5 p-4">
-            <img class="card-img-top mx-auto" src="img/sslogo.svg" alt="Card image" style="width:50%">
-            <div class="card-body text-center">
-              <h5 class="card-title">Standup Startups</h5>
-            </div>
-            <a href="assets/StandupStartups/index.html" class="btn btn-primary">View</a>
-            <a href="assets/StandupStartups.rar" class="btn btn-primary mt-3 d-none" download>Download</a>
-          </div>
-        </div>
-        <div class="col-12 col-md-4 col-lg-3">
-          <div class="card mb-md-0 mb-5 p-4">
-            <img class="card-img-top mx-auto" src="img/card-img.png" alt="Card image" style="width:50%">
-            <div class="card-body text-center">
-              <h5 class="card-title">A2S Ecommerce Solutions</h5>
-            </div>
-            <a href="assets/Ankush/index.html" class="btn btn-primary">Live Demo</a>
-            <a href="assets/Ankush.rar" class="btn btn-primary mt-3 d-none" download>Download</a>
-          </div>
-        </div>
-        <div class="col-12 col-md-4 col-lg-3">
-          <div class="card mb-md-0 mb-5 p-4">
-            <img class="card-img-top mx-auto" src="img/card-img.png" alt="Card image" style="width:50%">
-            <div class="card-body text-center">
-              <h5 class="card-title">Shifting Packers And Movers</h5>
-            </div>
-            <a href="assets/ShiftingPackersAndMovers/index.html" class="btn btn-primary">Live Demo</a>
-          </div>
-        </div>
-        <div class="col-12 col-md-4 col-lg-3 d-none">
-          <div class="card mb-md-0 mb-5 p-4">
-            <img class="card-img-top mx-auto" src="img/card-img.png" alt="Card image" style="width:50%">
-            <div class="card-body text-center">
-              <h5 class="card-title">SGF Production House</h5>
-            </div>
-            <a href="assets/SGF/index.html" class="btn btn-primary">Live Demo</a>
-          </div>
-        </div>
-        <div class="col-12 col-md-4 col-lg-3 d-none">
-          <div class="card mb-md-0 mb-5 p-4">
-            <img class="card-img-top mx-auto" src="img/card-img.png" alt="Card image" style="width:50%">
-            <div class="card-body text-center">
-              <h5 class="card-title">Mind Education</h5>
-            </div>
-            <a href="assets/mind/index.html" class="btn btn-primary">Live Demo</a>
-          </div>
-        </div>
-        <div class="col-12 col-md-4 col-lg-3">
-          <div class="card mb-md-0 mb-5 p-4">
-            <img class="card-img-top mx-auto" src="img/card-img.png" alt="Card image" style="width:50%">
-            <div class="card-body text-center">
-              <h5 class="card-title">Mehara Packers</h5>
-            </div>
-            <a href="assets/MeharaPackers/index.html" class="btn btn-primary">Live Demo</a>
-          </div>
-        </div>
-        <div class="col-12 col-md-4 col-lg-3">
-          <div class="card mb-md-0 mb-5 p-4">
-            <img class="card-img-top mx-auto" src="img/card-img.png" alt="Card image" style="width:50%">
-            <div class="card-body text-center">
-              <h5 class="card-title">Iconexpress Packers And Movers</h5>
-            </div>
-            <a href="assets/Iconexpress/index.html" class="btn btn-primary">Live Demo</a>
-          </div>
-        </div>
-        <div class="col-12 col-md-4 col-lg-3">
-          <div class="card mb-md-0 mb-5 p-4">
-            <img class="card-img-top mx-auto" src="img/card-img.png" alt="Card image" style="width:50%">
-            <div class="card-body text-center">
-              <h5 class="card-title">WANGO MSP</h5>
-            </div>
-            <a href="assets/WANGO/index.html" class="btn btn-primary">Live Demo</a>
-          </div>
-        </div>
-        <div class="col-12 col-md-4 col-lg-3">
-          <div class="card mb-md-0 mb-5 p-4">
-            <img class="card-img-top mx-auto" src="img/card-img.png" alt="Card image" style="width:50%">
-            <div class="card-body text-center">
-              <h5 class="card-title">Dynamic Solutions</h5>
-            </div>
-            <a href="assets/DynamicSolutions/index.html" class="btn btn-primary">Live Demo</a>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-4 col-lg-3">
-          <div class="card mb-md-0 mb-5 p-4">
-            <img class="card-img-top mx-auto" src="img/card-img.png" alt="Card image" style="width:50%">
-            <div class="card-body text-center">
-              <h5 class="card-title">Kanu Packers And Movers</h5>
-            </div>
-            <a href="assets/Kanu/index.html" class="btn btn-primary">Live Demo</a>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-4 col-lg-3">
-          <div class="card mb-md-0 mb-5 p-4">
-            <img class="card-img-top mx-auto" src="img/card-img.png" alt="Card image" style="width:50%">
-            <div class="card-body text-center">
-              <h5 class="card-title">Ishrat Bhat Construction</h5>
-            </div>
-            <a href="assets/IshratBhat/index.html" class="btn btn-primary">Live Demo</a>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-4 col-lg-3">
-          <div class="card mb-md-0 mb-5 p-4">
-            <img class="card-img-top mx-auto" src="img/card-img.png" alt="Card image" style="width:50%">
-            <div class="card-body text-center">
-              <h5 class="card-title">Friends Packers And Movers</h5>
-            </div>
-            <a href="assets/FriendsPackersMovers/index.html" class="btn btn-primary">Live Demo</a>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-4 col-lg-3">
-          <div class="card mb-md-0 mb-5 p-4">
-            <img class="card-img-top mx-auto" src="img/card-img.png" alt="Card image" style="width:50%">
-            <div class="card-body text-center">
-              <h5 class="card-title">Fitness Gym</h5>
-            </div>
-            <a href="assets/Fitness/index.html" class="btn btn-primary">Live Demo</a>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-4 col-lg-3">
-          <div class="card mb-md-0 mb-5 p-4">
-            <img class="card-img-top mx-auto" src="img/card-img.png" alt="Card image" style="width:50%">
-            <div class="card-body text-center">
-              <h5 class="card-title">Drasoo</h5>
-            </div>
-            <a href="assets/drasoo/index.html" class="btn btn-primary">Live Demo</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Projects Section End-->
-
-<!-- Contact Section -->
-<div class="section" id="contact">
-  <div class="section-content">
-    <div class="container">
-      <div class="main_heading">
-        <h2>CONTACT ME</h2>
-      </div>
-      <div class="container">
-        <div class="row no-gutters justify-content-center">
-          <div class="col-lg-8 col-md-8 col-10">
-            <!-- Form Start -->
-            <form action="/action_page.php">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Enter Your Name" id="username" autocomplete="off" required>
-              </div>
-              <div class="form-group">
-                <input type="email" class="form-control" placeholder="Enter Email" id="email" autocomplete="off" required>
-              </div>
-              <div class="form-group">
-                <input type="number" class="form-control" placeholder="Enter Mobile Number" id="mobile" autocomplete="off" required>
-              </div>
-              <div class="form-group">
-                <textarea class="form-control" rows="4" placeholder="Enter Your Message" id="comment"></textarea>
-              </div>
-              <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-            </form>
-            <!-- Form End -->
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Contact Section -->
-
-<!-- Footer Section -->
-<div class="footer">
-  <div class="section-content">
-    <div class="container">
-      <div class="row no-gutters justify-content-center">
-        <div class="col-12">
-         <div class="footer-icons d-flex justify-content-center my-5">
-           <i class="fa fa-facebook-square" aria-hidden="true"></i>
-           <i class="fa fa-instagram" aria-hidden="true"></i>
-           <i class="fa fa-linkedin-square" aria-hidden="true"></i>
-         </div>
-       </div>
-     </div>
-     <div class="row no-gutters justify-content-center">
-      <div class="col-md-6 text-center">
-       <div class="sub_heading">
-         <h4>About Site</h4>
-       </div>
-       <p class="text-justify custom_text">
-         This is my portfolio website built using HTML, CSS and Bootstrap.
-         The back-end functionality is still to add and i am currently working on it.
-         i am working on a different design also for this website. And will add more Projects in it.
-       </p>
-     </div>
-     <div class="col-md-6 text-center">
-      <div class="sub_heading">
-       <h4>Navigation Links</h4>
-     </div>
-     <div class="footer-nav-links custom_text">
-       <ul>
-         <li><a href="#home">Home</a></li>
-         <li><a href="#about">About</a></li>
-         <li><a href="#skills">Skills</a></li>
-         <li><a href="#projects">Projects</a></li>
-         <li><a href="#contact">Contact</a></li>
-       </ul>
-     </div>
-   </div>
- </div>
- 
-</div>
-</div>
-</div>
-<!-- Scroll Button -->
-  <div>
-    <i class="fa fa-arrow-up" onclick="topFunction()" id="myBtn" style="display: block;"></i>
-  </div>
-<div class="w-100 footer_bottom">
-    <p>Copyright &copy;2021 All rights reserved | made by 'Anil Swami'.</p>
-</div>
-<!-- Wrapper Closes Here-->
-</div>
-
-
-
-<!-- Custom Script JS-->
-<script type="text/javascript">
-  // Scroll Button
-  // Get the button:
-  mybutton = document.getElementById("myBtn");
-
-  //When the user scrolls down 20px from the top of the document, show the buttons
-  window.onscroll = function() {scrollFunction()};
-
-  function scrollFunction(){
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-      mybutton.style.display = "block";
-    } else {
-      mybutton.style.display = "none";
-    }
-  }
-  //When the user clicks on the button, scroll to the top of the document
-  function topFunction(){
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-  }
-  </script>
-
-<!-- jQuery, Popper.js, and Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
+  </footer>
 </body>
 </html>

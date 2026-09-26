@@ -1,0 +1,63 @@
+=============================
+PORTFOLIO GIT CHEAT SHEET
+=============================
+
+Before starting:
+git pull
+
+Check changes:
+git status
+
+See code differences:
+git diff
+
+Stage everything:
+git add .
+
+Commit:
+git commit -m "Describe your changes"
+
+Upload to GitHub:
+git push
+
+
+-----------------------------
+BRANCHES
+-----------------------------
+
+Current branch:
+git branch
+
+All branches:
+git branch -a
+
+Switch branch:
+git switch master
+
+Create new branch:
+git switch -c branch-name
+
+
+-----------------------------
+HISTORY
+-----------------------------
+
+Commit history:
+git log --oneline
+
+GitHub connection:
+git remote -v
+
+
+-----------------------------
+UNDO
+-----------------------------
+
+Discard changes in a file:
+git restore filename
+
+Unstage a file:
+git restore --staged filename
+
+See staged changes:
+git diff --cached
