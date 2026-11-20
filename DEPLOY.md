@@ -1,3 +1,17 @@
+# Deploying
+
+## GitHub Pages (live now)
+
+The site is live at https://anil-swami.github.io/portfolio/. The workflow in `.github/workflows/pages.yml` publishes the committed `dist/` folder every time `main` is pushed. To update the site:
+
+1. Edit `content/portfolio.json` (or the code).
+2. `npm run build`
+3. Commit and push to `main`, including `dist/`. The site updates in about a minute (see the repository's **Actions** tab).
+
+The previous portfolio is kept on the `master` branch.
+
+If you move to your own domain later, change `siteUrl` in `site.config.json` and rebuild.
+
 # Deploying to GoDaddy cPanel
 
 The site is fully static. There is no Node app to run on the server: you build on your own computer and upload the `dist/` folder.
