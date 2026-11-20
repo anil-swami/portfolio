@@ -1,7 +1,7 @@
 import { CuboidCollider, RigidBody } from '@react-three/rapier'
-import { colors } from '../theme'
 import { CRATE_TOWER } from '../world/layout'
 import { ModelSlot } from './models'
+import { crateTexture } from './textures'
 
 const ROWS = [4, 3, 2, 1] // 10 crates stacked as a pyramid
 const GAP = 1.04
@@ -13,21 +13,13 @@ const crates = ROWS.flatMap((count, row) =>
   })),
 )
 
-/** A code-built SMD chip, 1 x 1 x 1 m, with silver pins on two sides. */
+/** A code-built wooden crate, 1 x 1 x 1 m. */
 function CrateFallback() {
   return (
-    <group>
-      <mesh castShadow receiveShadow>
-        <boxGeometry args={[0.86, 1, 1]} />
-        <meshStandardMaterial color={colors.chip} roughness={0.65} />
-      </mesh>
-      {[-1, 1].map((side) => (
-        <mesh key={side} position={[side * 0.455, -0.2, 0]} castShadow>
-          <boxGeometry args={[0.09, 0.6, 0.8]} />
-          <meshStandardMaterial color={colors.metal} roughness={0.35} metalness={0.35} />
-        </mesh>
-      ))}
-    </group>
+    <mesh castShadow receiveShadow>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial map={crateTexture()} roughness={0.85} />
+    </mesh>
   )
 }
 

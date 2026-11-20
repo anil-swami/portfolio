@@ -58,6 +58,8 @@ interface GameState extends Settings {
   /** How many chip LEDs are lit (power-on sequence). */
   ledsOn: number
   activeZone: ZoneId | null
+  /** The zone whose panel already opened on this visit; it re-arms once the car leaves. */
+  openedZone: ZoneId | null
   panel: PanelId | null
   hintDone: boolean
   secretFound: boolean
@@ -97,6 +99,7 @@ export const useGame = create<GameState>((set, get) => {
     backend: null,
     ledsOn: 0,
     activeZone: null,
+    openedZone: null,
     panel: null,
     hintDone: false,
     secretFound: false,
@@ -129,9 +132,19 @@ export const useGame = create<GameState>((set, get) => {
       }, LED_STEP_MS)
     },
 
-    setActiveZone: (activeZone) => set({ activeZone }),
+    setActiveZone: (activeZone) => {
+      set({ activeZone })
+      // Driving into a chip's area opens its panel automatically, once per visit.
+      const { phase, panel, openedZone, openPanel } = get()
+      if (activeZone && activeZone !== openedZone && phase === 'playing' && panel === null) {
+        set({ openedZone: activeZone })
+        openPanel(activeZone)
+      }
+    },
     clearActiveZone: (zone) => {
-      if (get().activeZone === zone) set({ activeZone: null })
+      const { activeZone, openedZone } = get()
+      if (activeZone === zone) set({ activeZone: null })
+      if (openedZone === zone) set({ openedZone: null })
     },
 
     openPanel: (panel) => {
@@ -153,7 +166,7 @@ export const useGame = create<GameState>((set, get) => {
     },
     setCompat: (compat) => {
       // The canvas remounts with the other renderer, so the car is no longer inside any zone.
-      set({ compat, activeZone: null, backend: null })
+      set({ compat, activeZone: null, openedZone: null, backend: null })
       persist()
     },
     toggleMute: () => {

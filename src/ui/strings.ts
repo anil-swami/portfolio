@@ -39,4 +39,5 @@ export const strings = {
   sceneError: 'The 3D world could not start on this device.',
   sceneErrorAction: 'Open the simple view',
   noscript: 'This 3D portfolio needs JavaScript.',
+  map: 'Map of the world. The arrow is your car.',
 } as const

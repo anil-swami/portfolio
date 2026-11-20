@@ -5,17 +5,24 @@ import { Physics } from '@react-three/rapier'
 import { WebGPURenderer } from 'three/webgpu'
 import { useGame } from '../state/store'
 import { colors } from '../theme'
-import { Board } from './Board'
 import { Car } from './Car'
-import { Chips } from './Chips'
+import { Animals } from './Animals'
+import { Bridges } from './Bridges'
+import { Cabins } from './Cabins'
 import { CrateTower } from './CrateTower'
 import { Decor } from './Decor'
 import { FollowCamera } from './FollowCamera'
+import { Ground } from './Ground'
+import { Hills } from './Hills'
 import { Lights } from './Lights'
 import { ProjectBoards } from './ProjectBoards'
 import { Secret } from './Secret'
-import { SkillCapacitors } from './SkillCapacitors'
-import { Traces } from './Traces'
+import { Roads } from './Roads'
+import { Rocks } from './Rocks'
+import { SkillPosts } from './SkillPosts'
+import { Trees } from './Trees'
+import { Undergrowth } from './Undergrowth'
+import { Water } from './Water'
 
 type RendererOptions = ConstructorParameters<typeof WebGPURenderer>[0]
 
@@ -60,7 +67,7 @@ export default function Scene() {
         if (import.meta.env.DEV) (window as unknown as { __r3f?: unknown }).__r3f = state
       }}
       dpr={dpr}
-      camera={{ fov: 45, near: 0.5, far: 500, position: [0, 14, 16] }}
+      camera={{ fov: 50, near: 0.5, far: 700, position: [0, 5, 10] }}
       gl={async (props) => {
         const renderer = new WebGPURenderer({
           ...(props as unknown as RendererOptions),
@@ -76,8 +83,8 @@ export default function Scene() {
         return renderer
       }}
     >
-      <color attach="background" args={[colors.workbench]} />
-      <fog attach="fog" args={[colors.workbench, 75, 210]} />
+      <color attach="background" args={[colors.sky]} />
+      <fog attach="fog" args={[colors.haze, 90, 380]} />
 
       {/* Lower the resolution when the frame rate drops, raise it again when there is headroom */}
       <PerformanceMonitor
@@ -91,10 +98,17 @@ export default function Scene() {
 
       <Suspense fallback={null}>
         <Physics gravity={[0, -20, 0]}>
-          <Board />
-          <Traces />
-          <Chips />
-          <SkillCapacitors />
+          <Ground />
+          <Hills />
+          <Roads />
+          <Water />
+          <Bridges />
+          <Trees />
+          <Undergrowth />
+          <Rocks />
+          <Animals />
+          <Cabins />
+          <SkillPosts />
           <ProjectBoards />
           <Decor />
           <CrateTower />

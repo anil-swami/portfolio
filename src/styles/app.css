@@ -235,6 +235,18 @@ a {
   pointer-events: none;
 }
 
+.minimap {
+  top: calc(max(16px, env(safe-area-inset-top)) + 36px);
+  left: max(16px, env(safe-area-inset-left));
+  width: 168px;
+  height: 168px;
+  border: 2px solid var(--deep-mask);
+  border-top-color: var(--copper);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
 .hud__buttons {
   top: max(16px, env(safe-area-inset-top));
   right: max(16px, env(safe-area-inset-right));
@@ -641,6 +653,11 @@ a {
 /* ---------- Mobile ---------- */
 
 @media (max-width: 720px) {
+  .minimap {
+    width: 112px;
+    height: 112px;
+  }
+
   .panel {
     top: auto;
     left: 0;

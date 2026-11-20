@@ -35,9 +35,16 @@ export function Car() {
     const rb = body.current
     if (!rb) return
     if (import.meta.env.DEV) {
-      // Dev aid: __teleport(x, z) in the browser console moves the car.
-      ;(window as unknown as { __teleport?: (x: number, z: number) => void }).__teleport = (x, z) =>
+      // Dev aids: __car is the live car state; __teleport(x, z, yaw?) moves (and optionally turns) the car.
+      ;(window as unknown as { __car?: typeof carState }).__car = carState
+      ;(window as unknown as { __teleport?: (x: number, z: number, yaw?: number) => void }).__teleport = (x, z, yaw) => {
         rb.setTranslation({ x, y: SPAWN.y, z }, true)
+        if (yaw !== undefined) {
+          rb.setRotation(new Quaternion().setFromAxisAngle(new Vector3(0, 1, 0), yaw), true)
+          rb.setLinvel({ x: 0, y: 0, z: 0 }, true)
+          rb.setAngvel({ x: 0, y: 0, z: 0 }, true)
+        }
+      }
     }
     const dt = Math.min(rawDelta, 1 / 30)
     const game = useGame.getState()

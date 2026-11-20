@@ -1,4 +1,4 @@
-/** Web Audio sounds: an engine hum that follows speed, and a short blip. No audio files. */
+/** Web Audio sounds: an engine hum that follows speed, a short blip, and forest ambience (wind and birdsong). No audio files. */
 
 let ctx: AudioContext | null = null
 let master: GainNode | null = null
@@ -40,6 +40,8 @@ export function startAudio(isMuted: boolean): void {
   engineOsc.connect(engineFilter).connect(engineGain).connect(master)
   engineOsc.start()
 
+  startAmbience(ctx, master)
+
   document.addEventListener('visibilitychange', () => {
     if (!ctx) return
     if (document.hidden) void ctx.suspend()
@@ -77,4 +79,69 @@ export function blip(): void {
   osc.connect(gain).connect(master)
   osc.start(t)
   osc.stop(t + 0.22)
+}
+
+const WIND_LEVEL = 0.05
+const CHIRP_LEVEL = 0.05
+
+/** A soft wind (filtered noise that slowly swells) and a bird call every few seconds. */
+function startAmbience(audio: AudioContext, out: GainNode): void {
+  // Two seconds of noise, looped, through a low band-pass filter
+  const length = audio.sampleRate * 2
+  const buffer = audio.createBuffer(1, length, audio.sampleRate)
+  const data = buffer.getChannelData(0)
+  for (let i = 0; i < length; i++) data[i] = Math.random() * 2 - 1
+  const noise = audio.createBufferSource()
+  noise.buffer = buffer
+  noise.loop = true
+  const band = audio.createBiquadFilter()
+  band.type = 'bandpass'
+  band.frequency.value = 420
+  band.Q.value = 0.6
+  const wind = audio.createGain()
+  wind.gain.value = WIND_LEVEL
+  // A very slow oscillator makes the wind rise and fall
+  const gust = audio.createOscillator()
+  gust.frequency.value = 0.08
+  const gustDepth = audio.createGain()
+  gustDepth.gain.value = WIND_LEVEL * 0.6
+  gust.connect(gustDepth).connect(wind.gain)
+  noise.connect(band).connect(wind).connect(out)
+  noise.start()
+  gust.start()
+
+  const scheduleChirp = () => {
+    window.setTimeout(() => {
+      if (audio.state === 'running' && !muted) chirp(audio, out)
+      scheduleChirp()
+    }, 2500 + Math.random() * 5500)
+  }
+  scheduleChirp()
+}
+
+/** One short bird call: two to four quick rising and falling whistles. */
+function chirp(audio: AudioContext, out: GainNode): void {
+  const notes = 2 + Math.floor(Math.random() * 3)
+  const pitch = 2200 + Math.random() * 1600
+  // Pan each bird somewhere around the listener
+  const pan = audio.createStereoPanner()
+  pan.pan.value = Math.random() * 1.6 - 0.8
+  pan.connect(out)
+  let t = audio.currentTime + 0.02
+  for (let i = 0; i < notes; i++) {
+    const osc = audio.createOscillator()
+    const gain = audio.createGain()
+    osc.type = 'sine'
+    const length = 0.07 + Math.random() * 0.06
+    osc.frequency.setValueAtTime(pitch, t)
+    osc.frequency.exponentialRampToValueAtTime(pitch * (1.25 + Math.random() * 0.3), t + length * 0.5)
+    osc.frequency.exponentialRampToValueAtTime(pitch * 0.9, t + length)
+    gain.gain.setValueAtTime(0.0001, t)
+    gain.gain.exponentialRampToValueAtTime(CHIRP_LEVEL, t + 0.01)
+    gain.gain.exponentialRampToValueAtTime(0.0001, t + length)
+    osc.connect(gain).connect(pan)
+    osc.start(t)
+    osc.stop(t + length + 0.02)
+    t += length + 0.04 + Math.random() * 0.05
+  }
 }

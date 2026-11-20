@@ -53,12 +53,12 @@ A portfolio website where the visitor drives a small car around a 3D world, in t
 - A "Simple view": a plain HTML page with the same content, for recruiters and Google.
 - A fully static build that can be hosted on any shared hosting, with no server to run.
 
-**Concept: a circuit board you can drive on.** Anil trained as an electrical engineer, so the world is a giant printed circuit board (PCB):
+**Concept: a forest you can drive through.** (This replaced the original circuit-board world; see section 7.)
 
-- Solder-mask green ground, copper traces as roads, chips as the content zones.
-- Small capacitors, resistors and SMD parts as props.
-- Silkscreen-style white labels printed on the board.
-- When the visitor presses Start, the board "powers on": LEDs light up one by one. This is the one signature animation; keep other motion minimal.
+- A 500 m open landscape: grass meadows, patches of forest, a river with wooden bridges, ponds, and hills on the horizon.
+- Dirt roads lead from the start clearing to five log cabins, one per content zone, each with an overhead wooden sign.
+- Deer, rabbits and foxes wander and run from the car; ducks paddle on the ponds; birds circle overhead.
+- When the visitor presses Start, the cabins "light up": each cabin's windows and lantern turn on one after another. This is the one signature animation.
 
 ---
 
@@ -224,23 +224,39 @@ Empty strings (LinkedIn, GitHub, resume) mean "hide this item". Anil fills them 
 
 ## 7. World layout
 
-Units are metres. The board is 120 × 120, centred on the origin. The car spawns at the origin facing −Z (north).
+The world is an open nature landscape (forest, rivers, ponds, animals), replacing the original circuit board. It was built in phases; see "Forest world phases" below.
+
+Units are metres. The world is 500 × 500, centred on the origin; the car can drive inside ±225 (invisible walls) and low-poly hills rise beyond. The car spawns at the origin facing −Z (north). All positions are in `src/world/layout.ts`.
 
 | Item | Position (x, z) | Notes |
 |---|---|---|
-| Spawn pad | (0, 0) | Round copper pad, 8 m wide, "Anil Swami" silkscreen label in front of it |
-| About chip (U1) | (0, −30) | |
-| Skills chip (U2) | (32, −8) | 7 capacitors in an arc behind it, one per skill, each with a small label |
-| Projects chip (U3) | (26, 26) | 7 standing boards (like SD cards) in a row, one per project, title label on each |
-| Experience chip (U4) | (−26, 26) | |
-| Contact chip (U5) | (−32, −8) | |
-| Crate tower | (−8, −12) | 10 small black SMD chips stacked as a pyramid; dynamic bodies the car can knock over |
-| Secret LED | (−52, −52) | Hidden behind a large capacitor near the corner |
+| Spawn clearing | (0, 0) | Round dirt clearing, 20 m wide, where all roads meet; a wooden welcome sign with the name stands at its edge |
+| About cabin | (0, −75) | Road arrives heading north |
+| Skills cabin | (90, −30) | Road arrives heading east; one carved wooden post per skill in an arc behind it, each with a two-sided name placard |
+| Projects cabin | (75, 70) | Road arrives heading east; one wooden notice board per project (a paper notice with the name) in a row to its north, turned towards the road |
+| Experience cabin | (−75, 70) | Road arrives heading west |
+| Contact cabin | (−90, −30) | Road arrives heading west |
+| Crate tower | (−8, −14) | 10 wooden crates stacked as a pyramid; dynamic bodies the car can knock over |
+| Secret | (−150, −152) | A mushroom hidden behind a mossy boulder; it glows once found |
 
-- **Chips** are 8 × 8 m black boxes, 1.6 m tall, with pins along the sides, a silkscreen label ("U1 About"), and one amber LED on top. Solid colliders.
-- **Copper traces** run from the spawn pad to each chip: flat copper strips, 4 m wide, 4 cm high, with a 45° bend where needed. Visual only (the ground collider is flat).
-- **Decoration:** vias (small copper rings), resistor rows, mounting holes in the corners, board edge in a slightly darker green.
-- **Board edge:** invisible walls at ±60 so the car cannot fall off. Beyond the edge, a workbench surface in `#23272A`.
+- **Cabins** are 8 × 8 m log cabins (stone foundation, log walls, gable roof, chimney), turned so the door faces the arriving road. Windows and a lantern by the door light up in the power-on sequence. Each has an overhead wooden signboard on two log posts spanning the road just before it (title on both faces; the posts are solid, the car drives under the board) and a fixed circular area (see section 9). Solid box colliders.
+- **Roads** are curved dirt ribbons, 5 m wide with a worn verge, built from smoothed control points. One road runs from the spawn clearing to each zone, bending once and ending with a straight 25 m run in the zone's arrival direction. A scenic loop road (radius about 160 m) circles the zones, joined to the spawn clearing by a road to the south and one to the north-east. Visual only (the ground collider is flat).
+- **Ground:** grass with broad light and dark patches (vertex colours from seeded noise), extending past the world edge under the distant hills. Sky blue background with a light haze fog.
+- **Water:** a 12 m river runs from the north edge to the east edge, with sandy banks, reeds and a flowing ripple texture; five ponds with sandy shores, lily pads and reeds. Water is solid to the car (invisible colliders), except along the roads, where wooden bridges cross. The three bridges are placed automatically where roads cross the river, each with solid rails.
+- **Vegetation:** about 4,300 trees (pines, oaks, birches; birches favour water) in noise-shaped forests with open meadows between, denser towards the world edge and beyond the walls; bushes along forest edges and road verges, flower patches in meadows, grass tufts, rocks (more by the water) and fallen logs. Trees keep 8.5 m from road centres so the chase camera is not blocked. Trunks, big rocks and logs are solid. A 2 m lookup grid (`src/world/worldMap.ts`) of distances to roads and water keeps everything off roads, water and reserved areas.
+- **Animals:** deer (14), rabbits (26), foxes (7), ducks (3 per pond) and birds (3 flocks of 6), all code-built. Land animals wander near home, pause, and run when the car comes within 11–18 m; ducks stay in their pond; birds circle and flap. Each species is two instanced meshes (body, and legs or wings).
+- Everything random is seeded, so the world looks the same on every visit.
+
+### Forest world phases
+
+1. **Open world:** 500 m grass terrain, sky and haze, hills instead of walls, curved dirt roads, zones spread out. *(done)*
+2. **Landmarks:** chips become forest cabins, capacitors become carved skill posts, project boards become wooden notice boards, crate tower and secret re-themed, signs without PCB codes. *(done)*
+3. **Vegetation:** instanced trees (pine, oak, birch), bushes, rocks, flowers and grass tufts, kept off roads and zone areas; solid tree trunks. *(done)*
+4. **Water:** a river with bridges where roads cross, and ponds; the car cannot drive into water. *(done)*
+5. **Animals:** code-built deer, rabbits, foxes, ducks and birds that wander and move away from the car. *(done)*
+6. **Polish:** minimap, forest ambience (wind and birdsong), bundle check (the world layout has no three.js import, so the first-paint bundle stays small), README and BLENDER.md updates. *(done)*
+
+Every new object has a code-built version, so the site still works with zero `.glb` files.
 
 ---
 
@@ -294,17 +310,17 @@ Units are metres. The board is 120 × 120, centred on the origin. The car spawns
 
 ### Zones
 
-- Each chip has a sensor collider of about 14 × 14 m around it.
-- When the car enters, show the interact prompt at the bottom centre: "Press E to open About" (amber pill).
-- E opens that zone's panel.
+- Each chip has a fixed circular area, 7.5 m radius, centred on the chip (a cylinder sensor collider). It is drawn on the board as a silkscreen ring that turns amber while the car is inside.
+- Driving into the area opens that zone's panel automatically, once per visit. After the panel is closed it does not reopen until the car leaves the area and comes back.
+- While the car is inside with no panel open, show the interact prompt at the bottom centre: "Press E to open About" (amber pill). E reopens that zone's panel.
 
 ### Screens and overlays
 
 1. **Loading screen:** board-green background, the loading lines cycling, a thin copper progress bar (drei `useProgress`).
 2. **Start screen:** name (large, Saira), the three roles, intro line, "Start exploring" (primary) and "Skip to simple view" (link). The 3D board is visible, dimmed, behind it.
-3. **Power-on:** on Start, the LEDs on each chip turn on one after another (about 250 ms apart), then the HUD appears. Skip it if reduced motion is on.
+3. **Power-on:** on Start, each cabin's windows and lantern light up one after another (about 250 ms apart), then the HUD appears. Skip it if reduced motion is on.
 4. **HUD:**
-   - Top left: "Anil Swami" small.
+   - Top left: "Anil Swami" small, and under it a north-up minimap of the whole world (168 px; 112 px on narrow screens) showing forests, water, roads, each cabin as an amber disc with the first letter of its title, and the car as an arrow.
    - Top right: icon buttons for sound, settings and simple view.
    - Bottom left: controls hint. Fade it out after the car has moved for 5 seconds.
    - Bottom centre: interact prompt.
@@ -318,7 +334,7 @@ Units are metres. The board is 120 × 120, centred on the origin. The car spawns
 - No audio files needed at first. Use the Web Audio API:
   - Engine hum: sawtooth oscillator through a low-pass filter. Pitch and volume follow speed.
   - A short "blip" when a panel opens.
-- Start audio only after the Start click (browser autoplay rules). M and the HUD button mute it.
+- Start audio only after the Start click (browser autoplay rules). M and the HUD button mute it. Besides the engine and the panel blip, a soft wind and occasional synthesized birdsong play (Web Audio, no files).
 
 ### Performance
 

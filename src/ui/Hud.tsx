@@ -2,6 +2,7 @@ import type { PointerEvent } from 'react'
 import { content } from '../content'
 import { useGame } from '../state/store'
 import { SettingsIcon, SimpleViewIcon, SoundOffIcon, SoundOnIcon } from './Icons'
+import { Minimap } from './Minimap'
 import { strings } from './strings'
 
 // After a mouse or touch press, give focus back to the page so Space brakes instead of pressing the button again.
@@ -19,6 +20,7 @@ export function Hud() {
   return (
     <div className="hud">
       <p className="hud__name">{content.start.name}</p>
+      <Minimap />
 
       <div className="hud__buttons">
         <button

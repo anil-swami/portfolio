@@ -27,9 +27,10 @@ export function Lights() {
 
   return (
     <>
-      <hemisphereLight args={['#ffffff', colors.solderMask, 1.0]} />
+      <hemisphereLight args={[colors.sky, colors.grassDark, 1.1]} />
       <directionalLight
         ref={sun}
+        color={colors.sun}
         intensity={3.1}
         castShadow={shadows}
         shadow-mapSize={[2048, 2048]}

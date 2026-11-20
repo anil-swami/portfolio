@@ -1,45 +1,44 @@
 import { CuboidCollider, RigidBody } from '@react-three/rapier'
 import { content } from '../content'
-import { colors } from '../theme'
 import { zoneById } from '../world/layout'
-import { SilkLabel } from './SilkLabel'
+import { WoodSign } from './WoodSign'
 
 const WIDTH = 2.6
-const HEIGHT = 3.4
-const DEPTH = 0.18
-const SPACING = 3.1
-const TILT = -0.3 // lean back so the titles face the camera
-const ROW_OFFSET = { x: 4, z: -10 } // row sits north of the chip, clear of the incoming trace
+const HEIGHT = 2.1
+const BOARD_Y = 1.9
+const SPACING = 3.2
+const ROW_OFFSET = { x: 4, z: -11 } // row stands north of the cabin, clear of the arriving road
 
-/** One standing board (like an SD card) per project, with the project name printed on it. */
+/** One wooden notice board per project, in a row beside the Projects cabin, turned towards the arriving road. */
 export function ProjectBoards() {
   const projects = content.projects.items
-  const chip = zoneById('projects')
+  const cabin = zoneById('projects')
   const mid = (projects.length - 1) / 2
+  // Point on the road the boards turn to face: 25 m back along the arrival direction.
+  const lookX = cabin.x - cabin.arrive[0] * 25
+  const lookZ = cabin.z - cabin.arrive[1] * 25
+
+  const spots = projects.map((project, i) => {
+    const x = cabin.x + ROW_OFFSET.x + (i - mid) * SPACING
+    const z = cabin.z + ROW_OFFSET.z
+    return { project, x, z, yaw: Math.atan2(lookX - x, lookZ - z) }
+  })
 
   return (
     <>
-      {projects.map((project, i) => (
-        <group key={project.name} position={[chip.x + ROW_OFFSET.x + (i - mid) * SPACING, 0, chip.z + ROW_OFFSET.z]} rotation={[TILT, 0, 0]}>
-          <mesh position={[0, HEIGHT / 2, 0]} castShadow receiveShadow>
-            <boxGeometry args={[WIDTH, HEIGHT, DEPTH]} />
-            <meshStandardMaterial color={colors.chip} roughness={0.6} />
-          </mesh>
-          {/* Copper contacts along the bottom edge */}
-          <mesh position={[0, 0.5, DEPTH / 2 + 0.006]}>
-            <planeGeometry args={[WIDTH - 0.4, 0.5]} />
-            <meshStandardMaterial color={colors.copper} roughness={0.4} metalness={0.3} />
-          </mesh>
-          <SilkLabel text={project.name} width={WIDTH - 0.3} height={2.2} size={0.5} flat={false} position={[0, 2.05, DEPTH / 2 + 0.012]} />
+      {spots.map(({ project, x, z, yaw }) => (
+        <group key={project.name} position={[x, 0, z]} rotation={[0, yaw, 0]}>
+          <WoodSign text={project.name} width={WIDTH} height={HEIGHT} boardY={BOARD_Y} textSize={0.42} style="paper" />
         </group>
       ))}
 
       <RigidBody type="fixed" colliders={false}>
-        {projects.map((project, i) => (
+        {spots.map(({ project, x, z, yaw }) => (
           <CuboidCollider
             key={project.name}
-            args={[WIDTH / 2, HEIGHT / 2, 0.6]}
-            position={[chip.x + ROW_OFFSET.x + (i - mid) * SPACING, HEIGHT / 2, chip.z + ROW_OFFSET.z - 0.4]}
+            args={[WIDTH / 2, (BOARD_Y + HEIGHT / 2) / 2, 0.25]}
+            position={[x, (BOARD_Y + HEIGHT / 2) / 2, z]}
+            rotation={[0, yaw, 0]}
           />
         ))}
       </RigidBody>

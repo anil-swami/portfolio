@@ -7,15 +7,17 @@ The site runs with no models at all. Every model slot has a version built in cod
 | File | What | Size and origin |
 |---|---|---|
 | `car.glb` | The car | Fits 1.8 × 1.0 × 2.8 m. Origin at the centre of that box. Wheel objects named `wheel_fl`, `wheel_fr`, `wheel_rl`, `wheel_rr`, each with its origin at the wheel centre |
-| `zone-about.glb`, `zone-skills.glb`, `zone-projects.glb`, `zone-experience.glb`, `zone-contact.glb` | Chip buildings | Footprint up to 8 × 8 m, origin at the base centre |
-| `crate.glb` | One stackable SMD chip | 1 × 1 × 1 m, origin at the centre |
-| `decor.glb` | Extra board decoration | Placed at the world origin, visual only, no collisions |
+| `zone-about.glb`, `zone-skills.glb`, `zone-projects.glb`, `zone-experience.glb`, `zone-contact.glb` | Forest cabins, one per zone | Footprint up to 8 × 8 m, up to 6 m tall, origin at the base centre, door facing Blender's front view (−Y) |
+| `crate.glb` | One stackable wooden crate | 1 × 1 × 1 m, origin at the centre |
+| `decor.glb` | Extra world decoration | Placed at the world origin, visual only, no collisions |
 
 Things to know:
 
 - **Collisions never change.** Physics always uses the simple boxes from code. Models are visual only, so keep them inside the sizes above.
 - **Car wheels.** The site spins the four `wheel_*` objects around their local X axis and steers the two front ones around Y. If a name is missing, that wheel simply does not move.
-- **Chip LEDs.** If a zone model contains a mesh whose name starts with `led` (for example `led_dome`), the site lights that mesh during the power-on sequence. If there is no such mesh, the code-built amber LED is shown on top of the model.
+- **Cabin lights.** If a zone model contains a mesh whose name starts with `led` (for example `led_lantern`), the site lights that mesh during the power-on sequence. If there is no such mesh, the code-built lantern stands beside the door.
+- **Cabins turn to face their road.** Each cabin is rotated so its door faces the arriving road, so model the door on the front (−Y) side.
+- **Trees, plants, rocks, water and animals** are always built in code; they have no model slots.
 
 ## Blender rules
 
@@ -29,13 +31,15 @@ Palette:
 
 | Name | Hex |
 |---|---|
-| Solder mask | `#1E5B3A` |
-| Deep mask | `#143D28` |
-| Copper | `#C9874B` |
-| Silkscreen | `#EEF0E8` |
-| Chip | `#1A1C1E` |
-| LED amber | `#FFB627` |
-| Workbench | `#23272A` |
+| Grass | `#5E9440` |
+| Wood | `#8A5A34` |
+| Wood dark | `#5C3A22` |
+| Wood light | `#B9844F` |
+| Log | `#7A4E2D` |
+| Roof | `#6E3B2C` |
+| Stone | `#8E918A` |
+| Window glow | `#FFC861` |
+| Lantern amber | `#FFB627` |
 
 ## From Blender to the site
 
@@ -49,6 +53,6 @@ To go back to the code-built version, delete the file from `src/assets/models/`.
 ## Prompts for Claude in Blender
 
 - "Create a low-poly toy car about 2.8 m long, 1.8 m wide, 1 m tall, in amber #FFB627 with dark grey wheels. Front facing −Y. Name the wheels wheel_fl, wheel_fr, wheel_rl, wheel_rr, with origins at each wheel centre. Under 15k triangles. Apply transforms."
-- "Create a large IC chip building, 8 × 8 m footprint and 1.6 m tall, matte black #1A1C1E, with silver pins along all four sides and a small amber LED dome on top. Origin at the base centre."
-- "Create a small SMD chip, 1 × 1 × 1 m, matte black with silver pins on two sides. Origin at the centre."
+- "Create a low-poly log cabin with an 8 × 8 m footprint and a gable roof, about 6 m tall: log walls #7A4E2D, roof #6E3B2C, stone foundation #8E918A, a door and two windows on the front (−Y) side, and a lantern by the door named led_lantern. Origin at the base centre. Under 30k triangles."
+- "Create a wooden crate, 1 × 1 × 1 m, light planks #B9844F with a dark frame #5C3A22 and a diagonal brace. Origin at the centre."
 - "Export the selected object as glTF Binary to models-src/car.glb with +Y up and modifiers applied."

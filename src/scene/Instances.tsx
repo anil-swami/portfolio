@@ -1,10 +1,12 @@
 import { useLayoutEffect, useRef, type ReactNode } from 'react'
-import { Object3D, type InstancedMesh } from 'three'
+import { Color, Object3D, type InstancedMesh } from 'three'
 
 export interface Instance {
   p: [number, number, number]
   r?: [number, number, number]
   s?: [number, number, number]
+  /** Optional per-instance colour, multiplied with the material colour (use a white material). */
+  c?: string
 }
 
 interface InstancesProps {
@@ -16,8 +18,9 @@ interface InstancesProps {
 }
 
 const dummy = new Object3D()
+const tint = new Color()
 
-/** One draw call for many copies of the same static prop (pins, vias, resistors). */
+/** One draw call for many copies of the same static prop (pins, trees, rocks). */
 export function Instances({ items, children, castShadow, receiveShadow }: InstancesProps) {
   const ref = useRef<InstancedMesh>(null)
 
@@ -30,8 +33,10 @@ export function Instances({ items, children, castShadow, receiveShadow }: Instan
       dummy.scale.set(...(item.s ?? [1, 1, 1]))
       dummy.updateMatrix()
       mesh.setMatrixAt(i, dummy.matrix)
+      if (item.c) mesh.setColorAt(i, tint.set(item.c))
     })
     mesh.instanceMatrix.needsUpdate = true
+    if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true
   }, [items])
 
   if (items.length === 0) return null
