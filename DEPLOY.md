@@ -2,7 +2,7 @@
 
 ## GitHub Pages (live now)
 
-The site is live at https://anil-swami.github.io/portfolio/. The workflow in `.github/workflows/pages.yml` publishes the committed `dist/` folder every time `main` is pushed. To update the site:
+The site is live at https://trybrix.site (custom domain on GitHub Pages; https://anil-swami.github.io/portfolio/ redirects there). The workflow in `.github/workflows/pages.yml` publishes the committed `dist/` folder every time `main` is pushed. To update the site:
 
 1. Edit `content/portfolio.json` (or the code).
 2. `npm run build`
