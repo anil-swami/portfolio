@@ -278,9 +278,10 @@ Units are metres. The board is 120 × 120, centred on the origin. The car spawns
 
 ### Camera
 
-- Fixed angle, like Bruno's site: offset (0, 14, 16) from the car, always looking at the car.
-- Smooth follow with frame-rate-independent easing: `1 - exp(-4 * delta)`.
-- Mouse wheel / pinch zooms between 0.6× and 1.6× of the offset.
+- Chase camera, like a racing game: about 10 m behind and 4.5 m above the car, turning with the car's heading and looking at a point about 6 m ahead of it, so the player sees the road in front.
+- Smooth follow with frame-rate-independent easing: `1 - exp(-6 * delta)` for position and a slower `1 - exp(-3.5 * delta)` for the heading, so turns read clearly without snapping. Pulls back slightly with forward speed.
+- Mouse wheel / pinch zooms between 0.6× and 1.6× of the chase distance.
+- The sun's shadow area is centred ahead of the car, where the camera looks.
 
 ### Lighting
 

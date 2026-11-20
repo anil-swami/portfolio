@@ -6,6 +6,7 @@ import { useGame } from '../state/store'
 import { colors } from '../theme'
 
 const SHADOW_RANGE = 26
+const SHADOW_AHEAD = 12 // centre the shadow area ahead of the car, where the chase camera looks
 
 /** Hemisphere light plus one sun. The sun and its shadow camera follow the car. */
 export function Lights() {
@@ -17,8 +18,10 @@ export function Lights() {
     if (!sun.current) return
     // Assigned here (not as a JSX prop) so the light aims at this exact object, which is in the scene.
     if (sun.current.target !== target) sun.current.target = target
-    sun.current.position.set(carState.x - 15, 26, carState.z + 9)
-    target.position.set(carState.x, 0, carState.z)
+    const cx = carState.x + Math.sin(carState.yaw) * SHADOW_AHEAD
+    const cz = carState.z + Math.cos(carState.yaw) * SHADOW_AHEAD
+    sun.current.position.set(cx - 15, 26, cz + 9)
+    target.position.set(cx, 0, cz)
     target.updateMatrixWorld()
   })
 

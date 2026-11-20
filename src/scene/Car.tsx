@@ -108,6 +108,7 @@ export function Car() {
       carState.y = worldPos.y
       carState.z = worldPos.z
     }
+    carState.yaw = Math.atan2(forward.x, forward.z)
     carState.speed = speed
     updateEngine(speed, driving)
 
