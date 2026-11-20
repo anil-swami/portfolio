@@ -1,0 +1,33 @@
+# Anil Swami portfolio: static hosting rules (Apache / cPanel)
+
+# /simple serves simple.html
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^simple/?$ simple.html [L]
+</IfModule>
+
+# MIME types
+AddType model/gltf-binary .glb
+AddType application/wasm .wasm
+AddType image/svg+xml .svg
+AddType font/woff2 .woff2
+
+# Caching: hashed files in /assets/ never change, HTML must always be fresh
+<IfModule mod_headers.c>
+  <If "%{REQUEST_URI} =~ m#/assets/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "^(robots\.txt|sitemap\.xml)$">
+    Header set Cache-Control "public, max-age=3600"
+  </FilesMatch>
+</IfModule>
+
+# Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+  AddOutputFilterByType DEFLATE application/javascript text/javascript application/json
+  AddOutputFilterByType DEFLATE application/xml image/svg+xml application/wasm
+</IfModule>

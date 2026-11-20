@@ -1,0 +1,10 @@
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
+.vite/
+
+# dist/ is committed on purpose: the site is built locally and deployed by cPanel Git (see DEPLOY.md).
+
+# Local Claude Code settings
+.claude/settings.local.json

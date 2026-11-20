@@ -1,0 +1,8 @@
+---
+# cPanel "Git Version Control" deployment: copies the built site into the web root.
+# Replace CPANEL_USERNAME with your cPanel username (shown at the top right of cPanel).
+# For a subdomain or addon domain, change public_html to that domain's document root.
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/CPANEL_USERNAME/public_html/
+    - /bin/cp -R dist/. $DEPLOYPATH

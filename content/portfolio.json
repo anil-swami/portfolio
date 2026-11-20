@@ -1,0 +1,254 @@
+{
+  "meta": {
+    "title": "Anil Swami — Digital Marketer, Web Developer and Designer",
+    "description": "Anil Swami is a Gurugram-based digital marketer and web developer who plans campaigns, builds websites and dashboards, and uses AI tools to ship faster. Drive around the portfolio or open the simple view."
+  },
+  "start": {
+    "name": "Anil Swami",
+    "roles": [
+      "Digital Marketer",
+      "Web Developer",
+      "Designer"
+    ],
+    "intro": "I plan digital campaigns, build websites and dashboards, and use AI tools to ship them faster.",
+    "button": "Start exploring",
+    "simpleViewButton": "Skip to simple view"
+  },
+  "about": {
+    "title": "About",
+    "paragraphs": [
+      "Hi, I'm Anil, a digital marketer and web developer based in Gurugram, India. I studied electrical engineering, trained in front-end web development, and moved into in-house digital marketing and web work.",
+      "I plan campaigns across Meta, Google Ads and YouTube, write content and ad copy, improve SEO, and build websites and dashboards. I use ChatGPT and Claude every day for research, ideas and code, and I always check and refine what they produce.",
+      "Whenever a task repeats, I try to turn it into a simple tool."
+    ]
+  },
+  "skills": {
+    "title": "Skills",
+    "zones": [
+      {
+        "name": "Web Development",
+        "line": "Websites, web apps and dashboards, from layout to deployment."
+      },
+      {
+        "name": "Automation and AI",
+        "line": "Prompt writing and AI-assisted research, content, code and workflows, with every output reviewed for accuracy."
+      },
+      {
+        "name": "Data and Dashboards",
+        "line": "Spreadsheets and APIs turned into clear, interactive dashboards."
+      },
+      {
+        "name": "SEO and Analytics",
+        "line": "Keyword research, on-page SEO and website content improved using search and performance data."
+      },
+      {
+        "name": "Digital Marketing",
+        "line": "Campaign planning on Meta, Google Ads, Display and YouTube, plus content calendars, captions and ad copy."
+      },
+      {
+        "name": "Graphic Design",
+        "line": "Posters, social posts, ads, thumbnails, brochures, resumes and print layouts."
+      },
+      {
+        "name": "Video",
+        "line": "Reels, short videos and simple animations."
+      }
+    ],
+    "stack": [
+      {
+        "group": "Frontend",
+        "items": [
+          "HTML5",
+          "CSS3",
+          "JavaScript",
+          "Bootstrap",
+          "React"
+        ]
+      },
+      {
+        "group": "Backend",
+        "items": [
+          "Node.js",
+          "Express"
+        ]
+      },
+      {
+        "group": "Databases",
+        "items": [
+          "MongoDB",
+          "PostgreSQL",
+          "SQL"
+        ]
+      },
+      {
+        "group": "Tools",
+        "items": [
+          "Git",
+          "GitHub",
+          "VS Code",
+          "cPanel"
+        ]
+      },
+      {
+        "group": "Analytics and ads",
+        "items": [
+          "Search Console",
+          "GA4",
+          "Tag Manager",
+          "Google Ads",
+          "Google Display",
+          "YouTube Ads",
+          "Meta Ads"
+        ]
+      },
+      {
+        "group": "AI",
+        "items": [
+          "ChatGPT",
+          "Claude",
+          "Claude Code",
+          "Prompt writing"
+        ]
+      },
+      {
+        "group": "Design",
+        "items": [
+          "Canva",
+          "Nano Banana",
+          "AI image tools"
+        ]
+      },
+      {
+        "group": "Productivity",
+        "items": [
+          "Google Sheets",
+          "Microsoft Office"
+        ]
+      },
+      {
+        "group": "Learning now",
+        "items": [
+          "Python",
+          ".NET"
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "title": "Projects",
+    "items": [
+      {
+        "name": "Business websites",
+        "line": "Responsive multi-page websites with a blog, deployed through GitHub.",
+        "tags": [
+          "Node.js",
+          "Git",
+          "cPanel"
+        ]
+      },
+      {
+        "name": "SEO analytics dashboard",
+        "line": "Live search and traffic data from Google APIs on one screen.",
+        "tags": [
+          "Node.js",
+          "Google APIs",
+          "Chart.js"
+        ]
+      },
+      {
+        "name": "Keyword tracking dashboard",
+        "line": "Hundreds of keywords tracked month by month, with filters and trends.",
+        "tags": [
+          "JavaScript",
+          "Chart.js",
+          "Python"
+        ]
+      },
+      {
+        "name": "Data reporting app",
+        "line": "Excel uploads saved to a database and turned into charts.",
+        "tags": [
+          "Node.js",
+          "Express",
+          "SQL"
+        ]
+      },
+      {
+        "name": "Interactive org chart",
+        "line": "A searchable, zoomable chart for a large organisation.",
+        "tags": [
+          "JavaScript",
+          "SVG"
+        ]
+      },
+      {
+        "name": "Work hub",
+        "line": "One dashboard for tasks, content, inventory and reports. In progress.",
+        "tags": [
+          "Node.js",
+          "PostgreSQL"
+        ]
+      },
+      {
+        "name": "Desktop pet",
+        "line": "A tiny cartoon pet for the Windows desktop that walks, naps, sits on icons and reacts to the mouse. Open source on GitHub.",
+        "tags": [
+          "Electron",
+          "JavaScript"
+        ]
+      },
+      {
+        "name": "Design work",
+        "line": "Social posts, posters, ads, brochures and covers.",
+        "tags": [
+          "Canva",
+          "AI image tools"
+        ]
+      }
+    ]
+  },
+  "experience": {
+    "title": "Experience and education",
+    "roles": [
+      {
+        "title": "Digital Marketing Professional",
+        "where": "In-house marketing role",
+        "period": "Present",
+        "line": "Plan campaigns across Meta, Google Ads, Display and YouTube; write content calendars, captions, ad copy and website content; support SEO; prepare creative briefs; and build the company's websites and internal tools."
+      }
+    ],
+    "education": [
+      {
+        "name": "B.Tech, Electrical Engineering, Jaipur Institute of Technology",
+        "year": "2019"
+      },
+      {
+        "name": "Front-end Web Design and Development, Samyak Computer Classes, Jaipur",
+        "year": "2020"
+      },
+      {
+        "name": "Industrial Automation (PLC, SCADA, HMI), Seldom India Software Training Institute, Jaipur",
+        "year": "2018"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact",
+    "line": "Let's build something.",
+    "email": "Anilswami5388@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/anil-swami-5044bb176/",
+    "github": "https://github.com/anil-swami",
+    "resumePdf": "anil-swami-resume.pdf"
+  },
+  "world": {
+    "loadingLines": [
+      "Loading the world…",
+      "Warming up the engine…",
+      "Almost there…"
+    ],
+    "controlsHint": "WASD or arrow keys to drive. Shift to boost. E to interact.",
+    "interactPrompt": "Press E to open",
+    "secret": "You found a secret. Thanks for exploring!",
+    "credits": "Designed and built by Anil Swami. Made with Three.js, React Three Fiber and Rapier."
+  }
+}
