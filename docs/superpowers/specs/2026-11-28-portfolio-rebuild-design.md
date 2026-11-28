@@ -129,7 +129,7 @@ result (facts) · link to the live site · "Want one like this?" contact band.
 - LinkedIn https://www.linkedin.com/in/anil-swami-5044bb176/, GitHub https://github.com/anil-swami,
   YouTube https://www.youtube.com/@Technly-990/.
 
-## 8. Answers from Ani (28 Nov 2026)
+### 5.8 Answers from Ani (28 Nov 2026)
 - Email: his Gmail for now. WhatsApp number: open (to-do; buttons hidden until set).
 - salsteel.co.in and mysaanchi.com: yes, show publicly (as in-house work).
 - Accounts Call: leave off for now.
