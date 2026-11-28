@@ -4,6 +4,7 @@ import Icon from './Icon.astro';
 import BrandIcon from './BrandIcon.astro';
 import { site, whatsappLink } from '../data/site';
 const wa = whatsappLink();
+const t = site.sections.footer;
 const year = new Date().getFullYear();
 ---
 <footer class="footer">
@@ -11,14 +12,14 @@ const year = new Date().getFullYear();
   <div class="wrap footer__grid">
     <div class="footer__brand">
       <Logo light />
-      <p>Business websites, built fast and built to be found. Based in {site.location}, working with clients anywhere.</p>
+      <p>{t.blurb}</p>
     </div>
     <div>
-      <h3>Explore</h3>
+      <h3>{t.explore}</h3>
       <ul>{site.nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul>
     </div>
     <div>
-      <h3>Get in touch</h3>
+      <h3>{t.contact}</h3>
       <ul class="footer__contact">
         <li><a href={`mailto:${site.email}`}><Icon name="Mail" size={16} /> {site.email}</a></li>
         {wa && <li><a href={wa} target="_blank" rel="noopener"><Icon name="MessageCircle" size={16} /> WhatsApp</a></li>}
@@ -26,7 +27,7 @@ const year = new Date().getFullYear();
       </ul>
     </div>
     <div>
-      <h3>Follow</h3>
+      <h3>{t.follow}</h3>
       <ul class="footer__contact">
         <li><a href={site.links.youtube} target="_blank" rel="noopener"><BrandIcon name="youtube" size={16} /> Technly on YouTube</a></li>
         <li><a href={site.links.linkedin} target="_blank" rel="noopener"><BrandIcon name="linkedin" size={16} /> LinkedIn</a></li>
@@ -36,7 +37,7 @@ const year = new Date().getFullYear();
   </div>
   <div class="wrap footer__bottom">
     <p>© {year} {site.name}. All rights reserved.</p>
-    <p>Designed and built by me, with Astro.</p>
+    <p>{t.credit}</p>
   </div>
 </footer>
 

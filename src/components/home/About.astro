@@ -2,22 +2,22 @@
 import Icon from '../Icon.astro';
 import { site } from '../../data/site';
 const a = site.about;
+const t = site.sections.about;
 const tints = ['indigo', 'coral', 'teal', 'amber', 'sky', 'violet'];
 ---
 <section class="section" id="about">
   <div class="wrap about">
     <div class="about__text reveal">
-      <span class="eyebrow"><Icon name="Sparkles" size={15} /> About</span>
+      <span class="eyebrow"><Icon name="Sparkles" size={15} /> {t.eyebrow}</span>
       <h2>{a.title}</h2>
       {a.paragraphs.map((p) => <p>{p}</p>)}
       <p class="about__edu"><Icon name="CircleCheck" size={16} /> {a.education}</p>
       <div class="about__btns">
-        <a class="btn btn--deep" href="/#contact">Work with me <Icon name="ArrowRight" size={18} /></a>
-        <a class="btn btn--outline" href={site.resume} target="_blank" rel="noopener"><Icon name="FileText" size={18} /> Resume (PDF)</a>
+        <a class="btn btn--deep" href="/#contact">{t.cta} <Icon name="ArrowRight" size={18} /></a>
       </div>
     </div>
     <div class="stack reveal">
-      <h3>What I build with</h3>
+      <h3>{t.stackTitle}</h3>
       {a.stack.map((g, i) => (
         <div class="stack__group" data-tint={tints[i % tints.length]}>
           <span class="stack__label">{g.group}</span>

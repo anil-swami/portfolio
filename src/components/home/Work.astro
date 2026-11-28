@@ -1,19 +1,20 @@
 ---
 import Icon from '../Icon.astro';
 import { site } from '../../data/site';
+const t = site.sections.work;
 ---
 <section class="section" id="work">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow"><Icon name="Briefcase" size={15} /> Selected work</span>
-      <h2>Real websites, <span class="grad-text--light">live on the internet</span></h2>
-      <p>Built in-house for businesses I work with. Open them, click around, check the speed on your phone.</p>
+      <span class="eyebrow"><Icon name="Briefcase" size={15} /> {t.eyebrow}</span>
+      <h2>{t.title} <span class="grad-text--light">{t.highlight}</span></h2>
+      <p>{t.intro}</p>
     </div>
 
     <div class="cases">
       {site.work.map((w, i) => (
         <article class="case-card reveal" data-tint={w.tint} style={`--d:${i * 0.1}s`}>
-          <a class="case-card__shot" href={`/work/${w.slug}/`} aria-label={`${w.name} case study`}>
+          <a class="case-card__shot" href={`/work/${w.slug}/`} tabindex="-1" aria-hidden="true">
             <span class="browser" aria-hidden="true"><i></i><i></i><i></i><span>{w.domain}</span></span>
             <img src={`/work/${w.slug}.jpg`} alt={`Home page of ${w.domain}`} width="1440" height="900" loading="lazy" decoding="async" />
           </a>
@@ -23,15 +24,15 @@ import { site } from '../../data/site';
             <p>{w.summary}</p>
             <ul class="tags">{w.tech.map((t) => <li>{t}</li>)}</ul>
             <div class="case-card__links">
-              <a class="btn btn--deep btn--sm" href={`/work/${w.slug}/`}>Case study <Icon name="ArrowRight" size={16} /></a>
-              <a class="btn btn--outline btn--sm" href={w.url} target="_blank" rel="noopener">Visit site <Icon name="ArrowUpRight" size={16} /></a>
+              <a class="btn btn--deep btn--sm" href={`/work/${w.slug}/`}>{t.caseLink} <Icon name="ArrowRight" size={16} /></a>
+              <a class="btn btn--outline btn--sm" href={w.url} target="_blank" rel="noopener">{t.siteLink} <Icon name="ArrowUpRight" size={16} /></a>
             </div>
           </div>
         </article>
       ))}
     </div>
 
-    <h3 class="more__title reveal">More I've built</h3>
+    <h3 class="more__title reveal">{t.moreTitle}</h3>
     <div class="more">
       {site.more.map((m, i) => (
         <a class="more-card reveal" href={m.url} target="_blank" rel="noopener" data-tint={m.tint} style={`--d:${i * 0.08}s`}>

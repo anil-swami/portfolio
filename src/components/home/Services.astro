@@ -1,13 +1,14 @@
 ---
 import Icon from '../Icon.astro';
 import { site } from '../../data/site';
+const t = site.sections.services;
 ---
 <section class="section section--soft" id="services">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow"><Icon name="Wrench" size={15} /> Services</span>
-      <h2>What I can <span class="grad-text--light">build for you</span></h2>
-      <p>One developer, start to finish: you always talk to the person who writes the code.</p>
+      <span class="eyebrow"><Icon name="Wrench" size={15} /> {t.eyebrow}</span>
+      <h2>{t.title} <span class="grad-text--light">{t.highlight}</span></h2>
+      <p>{t.intro}</p>
     </div>
     <div class="services">
       {site.services.map((s, i) => (
@@ -15,7 +16,7 @@ import { site } from '../../data/site';
           <span class="service-card__icon"><Icon name={s.icon} size={28} /></span>
           <h3>{s.title}</h3>
           <p>{s.text}</p>
-          <a class="service-card__more" href="/#contact">Get a quote <Icon name="ArrowRight" size={16} /></a>
+          <a class="service-card__more" href="/#contact">{t.cta} <Icon name="ArrowRight" size={16} /></a>
         </article>
       ))}
     </div>

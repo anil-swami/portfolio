@@ -19,7 +19,8 @@ export const site = {
     github: 'https://github.com/anil-swami',
     youtube: 'https://www.youtube.com/@Technly-990/',
   },
-  resume: '/anil-swami-resume.pdf',
+  // The resume PDF (/anil-swami-resume.pdf) is still served but not linked: it is a marketing CV with a personal
+  // phone number. Link a tech-only CV here when there is one.
   nav: [
     { label: 'Work', href: '/#work' },
     { label: 'Services', href: '/#services' },
@@ -28,7 +29,24 @@ export const site = {
     { label: 'Contact', href: '/#contact' },
   ],
 
+  // Headings, intros and button labels for each section of the home page.
+  sections: {
+    work: { eyebrow: 'Selected work', title: 'Real websites,', highlight: 'live on the internet', intro: 'Built in-house for businesses I work with. Open them, click around, check the speed on your phone.', moreTitle: "More I've built", caseLink: 'Case study', siteLink: 'Visit site' },
+    services: { eyebrow: 'Services', title: 'What I can', highlight: 'build for you', intro: 'One developer, start to finish: you always talk to the person who writes the code.', cta: 'Get a quote' },
+    process: { eyebrow: 'How it works', title: 'From first call to', highlight: 'live website' },
+    why: { eyebrow: 'Why work with me', title: 'A website that works as hard as', highlight: 'you do', intro: 'Most small-business sites are slow, hard to find on Google and impossible to update. Mine are built the other way round.', cta: 'Get a quote' },
+    ai: { eyebrow: 'AI corner', title: 'I explain AI, and', highlight: 'build with it', intro: "For people who follow my AI content: the channel, and the tools I've made with AI coding assistants.", builtTitle: "Things I've built with AI", subscribe: 'Subscribe on YouTube', watch: 'Watch Shorts' },
+    about: { eyebrow: 'About', stackTitle: 'What I build with', cta: 'Work with me' },
+    faq: { eyebrow: 'FAQ', title: 'Questions business owners', highlight: 'ask me', intro: 'Something else on your mind? Send me an email, I usually reply the same day.', cta: 'Email me' },
+    contact: { title: "Let's build your", highlight: 'website', text: "Tell me about your business. I'll reply with a clear plan and a fixed quote.", cta: 'Email me for a quote', subject: 'Website quote' },
+    footer: { blurb: 'Business websites, built fast and built to be found. Based in Gurugram, India, working with clients anywhere.', explore: 'Explore', contact: 'Get in touch', follow: 'Follow', credit: 'Designed and built by me, with Astro.' },
+  },
+
   hero: {
+    ctaPrimary: 'Get a quote',
+    ctaSecondary: 'See my work',
+    // The two floating chips beside the monogram.
+    visualChips: ['Loads in a blink', 'Found on Google'],
     eyebrow: 'Web developer · Gurugram, India',
     title: 'Fast, good-looking websites that',
     highlight: 'bring you customers',
@@ -140,11 +158,6 @@ export const site = {
     { q: 'Can I update the website myself?', a: 'Yes. I can add a simple editor for your blog or news, and small text changes are included in the care plan.' },
     { q: 'Do I own the website and domain?', a: 'Yes. The domain, hosting and code are in your name. I set things up so you\'re never locked in to me.' },
   ],
-
-  contact: {
-    title: 'Let\'s build your website',
-    text: 'Tell me about your business. I\'ll reply with a clear plan and a fixed quote.',
-  },
 };
 
 /** WhatsApp chat link, or null while no number is set (buttons then hide themselves). */

@@ -3,7 +3,8 @@ import Icon from '../Icon.astro';
 import BrandIcon from '../BrandIcon.astro';
 import { site, whatsappLink } from '../../data/site';
 const wa = whatsappLink();
-const mail = `mailto:${site.email}?subject=${encodeURIComponent('Website quote')}`;
+const t = site.sections.contact;
+const mail = `mailto:${site.email}?subject=${encodeURIComponent(t.subject)}`;
 ---
 <section class="contact" id="contact">
   <div class="wrap">
@@ -11,8 +12,8 @@ const mail = `mailto:${site.email}?subject=${encodeURIComponent('Website quote')
       <span class="contact__glow contact__glow--1" aria-hidden="true"></span>
       <span class="contact__glow contact__glow--2" aria-hidden="true"></span>
       <div class="contact__copy">
-        <h2>{site.contact.title.replace('website', '')}<span class="grad-text">website</span></h2>
-        <p>{site.contact.text}</p>
+        <h2>{t.title} <span class="grad-text">{t.highlight}</span></h2>
+        <p>{t.text}</p>
         <ul class="contact__social">
           <li><a href={site.links.linkedin} target="_blank" rel="noopener"><BrandIcon name="linkedin" size={18} /> LinkedIn</a></li>
           <li><a href={site.links.github} target="_blank" rel="noopener"><Icon name="GitBranch" size={18} /> GitHub</a></li>
@@ -20,7 +21,7 @@ const mail = `mailto:${site.email}?subject=${encodeURIComponent('Website quote')
         </ul>
       </div>
       <div class="contact__actions">
-        <a class="btn" href={mail}><Icon name="Mail" size={18} /> Email me for a quote</a>
+        <a class="btn" href={mail}><Icon name="Mail" size={18} /> {t.cta}</a>
         {wa && <a class="btn btn--wa" href={wa} target="_blank" rel="noopener"><Icon name="MessageCircle" size={18} /> WhatsApp</a>}
         <span class="contact__email">{site.email}</span>
       </div>

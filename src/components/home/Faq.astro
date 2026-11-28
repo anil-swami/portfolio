@@ -1,14 +1,15 @@
 ---
 import Icon from '../Icon.astro';
 import { site } from '../../data/site';
+const t = site.sections.faq;
 ---
 <section class="section section--soft" id="faq">
   <div class="wrap faq">
     <div class="faq__intro reveal">
-      <span class="eyebrow"><Icon name="MessageCircle" size={15} /> FAQ</span>
-      <h2>Questions business owners <span class="grad-text--light">ask me</span></h2>
-      <p>Something else on your mind? Send me an email, I usually reply the same day.</p>
-      <a class="btn btn--deep btn--sm" href={`mailto:${site.email}`}><Icon name="Mail" size={16} /> Email me</a>
+      <span class="eyebrow"><Icon name="MessageCircle" size={15} /> {t.eyebrow}</span>
+      <h2>{t.title} <span class="grad-text--light">{t.highlight}</span></h2>
+      <p>{t.intro}</p>
+      <a class="btn btn--deep btn--sm" href={`mailto:${site.email}`}><Icon name="Mail" size={16} /> {t.cta}</a>
     </div>
     <div class="faq__list">
       {site.faqs.map((f, i) => (

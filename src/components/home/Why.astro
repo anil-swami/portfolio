@@ -1,14 +1,15 @@
 ---
 import Icon from '../Icon.astro';
 import { site } from '../../data/site';
+const t = site.sections.why;
 ---
 <section class="section section--warm" id="why">
   <div class="wrap why">
     <div class="why__intro reveal">
-      <span class="eyebrow"><Icon name="CircleCheck" size={15} /> Why work with me</span>
-      <h2>A website that works as hard as <span class="grad-text--light">you do</span></h2>
-      <p>Most small-business sites are slow, hard to find on Google and impossible to update. Mine are built the other way round.</p>
-      <a class="btn" href="/#contact">Get a quote <Icon name="ArrowRight" size={18} /></a>
+      <span class="eyebrow"><Icon name="CircleCheck" size={15} /> {t.eyebrow}</span>
+      <h2>{t.title} <span class="grad-text--light">{t.highlight}</span></h2>
+      <p>{t.intro}</p>
+      <a class="btn" href="/#contact">{t.cta} <Icon name="ArrowRight" size={18} /></a>
     </div>
     <ul class="why__list">
       {site.why.map((w, i) => (

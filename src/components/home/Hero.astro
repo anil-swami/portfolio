@@ -16,16 +16,16 @@ const h = site.hero;
       <h1>{h.title} <span class="grad-text">{h.highlight}</span></h1>
       <p>{h.text}</p>
       <div class="hero__ctas">
-        <a class="btn" href="/#contact">Get a quote <Icon name="ArrowRight" size={18} /></a>
-        <a class="btn btn--ghost" href="/#work">See my work</a>
+        <a class="btn" href="/#contact">{h.ctaPrimary} <Icon name="ArrowRight" size={18} /></a>
+        <a class="btn btn--ghost" href="/#work">{h.ctaSecondary}</a>
       </div>
       <ul class="hero__chips">{h.chips.map((c) => <li><Icon name="CircleCheck" size={16} /> {c}</li>)}</ul>
     </div>
     <div class="hero__visual" data-hero-visual>
       <!-- Shown when particles are off (reduced motion, Save-Data, no canvas). -->
       <div class="mono" aria-hidden="true"><span>{site.initials}</span></div>
-      <div class="chip chip--a" aria-hidden="true"><Icon name="Zap" size={18} /> Loads in a blink</div>
-      <div class="chip chip--b" aria-hidden="true"><Icon name="TrendingUp" size={18} /> Found on Google</div>
+      <div class="chip chip--a" aria-hidden="true"><Icon name="Zap" size={18} /> {h.visualChips[0]}</div>
+      <div class="chip chip--b" aria-hidden="true"><Icon name="TrendingUp" size={18} /> {h.visualChips[1]}</div>
     </div>
   </div>
 </section>

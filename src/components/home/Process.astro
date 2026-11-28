@@ -1,12 +1,13 @@
 ---
 import Icon from '../Icon.astro';
 import { site } from '../../data/site';
+const t = site.sections.process;
 ---
 <section class="section" id="process">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow"><Icon name="ClipboardList" size={15} /> How it works</span>
-      <h2>From first call to <span class="grad-text--light">live website</span></h2>
+      <span class="eyebrow"><Icon name="ClipboardList" size={15} /> {t.eyebrow}</span>
+      <h2>{t.title} <span class="grad-text--light">{t.highlight}</span></h2>
     </div>
     <ol class="steps">
       {site.steps.map((s, i) => (

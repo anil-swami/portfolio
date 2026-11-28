@@ -3,14 +3,15 @@ import Icon from '../Icon.astro';
 import BrandIcon from '../BrandIcon.astro';
 import { site } from '../../data/site';
 const ai = site.ai;
+const t = site.sections.ai;
 ---
 <section class="section ai" id="ai">
   <div class="ai__bg" aria-hidden="true"></div>
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow eyebrow--dark"><Icon name="Sparkles" size={15} /> AI corner</span>
-      <h2>I explain AI, and <span class="grad-text">build with it</span></h2>
-      <p>For people who follow my AI content: the channel, and the tools I've made with AI coding assistants.</p>
+      <span class="eyebrow eyebrow--dark"><Icon name="Sparkles" size={15} /> {t.eyebrow}</span>
+      <h2>{t.title} <span class="grad-text">{t.highlight}</span></h2>
+      <p>{t.intro}</p>
     </div>
 
     <div class="ai__top">
@@ -19,8 +20,8 @@ const ai = site.ai;
         <h3>{ai.channel.name} <small>· {ai.channel.tagline}</small></h3>
         <p>{ai.channel.text}</p>
         <div class="channel__btns">
-          <a class="btn" href={ai.channel.url} target="_blank" rel="noopener">Subscribe on YouTube <Icon name="ArrowUpRight" size={18} /></a>
-          <a class="btn btn--ghost" href={ai.channel.shortsUrl} target="_blank" rel="noopener"><Icon name="Play" size={16} /> Watch Shorts</a>
+          <a class="btn" href={ai.channel.url} target="_blank" rel="noopener">{t.subscribe} <Icon name="ArrowUpRight" size={18} /></a>
+          <a class="btn btn--ghost" href={ai.channel.shortsUrl} target="_blank" rel="noopener"><Icon name="Play" size={16} /> {t.watch}</a>
         </div>
       </div>
       <div class="shorts">
@@ -34,7 +35,7 @@ const ai = site.ai;
       </div>
     </div>
 
-    <h3 class="built__title reveal">Things I've built with AI</h3>
+    <h3 class="built__title reveal">{t.builtTitle}</h3>
     <div class="built">
       {ai.built.map((b, i) => (
         <article class="built-card reveal" data-tint={b.tint} style={`--d:${i * 0.08}s`}>

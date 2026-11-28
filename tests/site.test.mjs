@@ -57,9 +57,14 @@ test('4 services, 4 steps, 5 FAQs, 4 counters', () => {
   assert.equal(count(/data-count="\d+"/g), 4);
 });
 
-test('AI corner links the Technly channel; resume is linked', () => {
+test('AI corner links the Technly channel', () => {
   assert.ok(html.includes('href="https://www.youtube.com/@Technly-990/"'));
-  assert.ok(html.includes('href="/anil-swami-resume.pdf"'));
+});
+
+// The current resume PDF is a marketing CV with a personal phone number: not linked until a tech-only CV exists.
+// The file itself stays served at /anil-swami-resume.pdf so old links keep working.
+test('resume PDF is not linked from the home page', () => {
+  assert.ok(!html.includes('anil-swami-resume.pdf'));
 });
 
 test('tech work only, and no Accounts Call', () => {
@@ -77,4 +82,17 @@ test('structured data: Person with profiles, and the web service', () => {
 
 test('canonical points at trybrix.site', () => {
   assert.ok(html.includes('<link rel="canonical" href="https://trybrix.site/">'));
+});
+
+// Every heading and intro comes from src/data/site.ts (CLAUDE.md rule: no text in components).
+import { site } from "../src/data/site.ts";
+test("section headings and intros come from the content file", () => {
+  assert.ok(site.sections, "site.sections exists");
+  for (const [key, sec] of Object.entries(site.sections)) {
+    for (const field of ["eyebrow", "title", "highlight"]) {
+      const v = sec[field];
+      // Astro writes apostrophes as &#39; in HTML.
+      if (v) assert.ok(html.includes(v) || html.includes(v.replaceAll("'", "&#39;")), key + "." + field + ": " + v);
+    }
+  }
 });
