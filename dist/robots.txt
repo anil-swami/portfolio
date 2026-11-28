@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /accountscall/
+
+Sitemap: https://trybrix.site/sitemap.xml

@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+const t = site.sections.notFound;
+---
+<BaseLayout title={`${t.title} ${t.highlight} · ${site.name}`} description={t.text} noindex>
+  <section class="nf">
+    <div class="nf__bg" aria-hidden="true"><span class="nf__num">404</span></div>
+    <div class="wrap nf__in">
+      <span class="nf__eyebrow"><Icon name="Sparkles" size={15} /> {t.eyebrow}</span>
+      <h1>{t.title} <span class="grad-text">{t.highlight}</span></h1>
+      <p>{t.text}</p>
+      <div class="nf__btns">
+        <a class="btn" href="/">{t.home} <Icon name="ArrowRight" size={18} /></a>
+        <a class="btn btn--ghost" href="/#work">{t.work}</a>
+        <a class="btn btn--ghost" href="/#contact">{t.contact}</a>
+      </div>
+      <p class="nf__play">{t.playHint} <a href={site.play.href}><Icon name="Gamepad2" size={16} /> {site.play.label}</a></p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf { position: relative; overflow: hidden; color: #fff; min-height: calc(100vh - var(--header-h) - 220px); display: grid; align-items: center;
+    background: radial-gradient(120% 90% at 85% 10%, var(--deep-3) 0%, var(--deep-2) 35%, var(--deep) 75%); padding: 5rem 0; }
+  .nf__bg { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
+  .nf__num { font-family: var(--font-head); font-weight: 700; font-size: clamp(10rem, 34vw, 26rem); line-height: 1; letter-spacing: -.05em;
+    background: linear-gradient(135deg, rgba(255,107,74,.22), rgba(45,212,191,.16)); -webkit-background-clip: text; background-clip: text; color: transparent; animation: drift 9s ease-in-out infinite; }
+  @keyframes drift { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-16px) rotate(1deg); } }
+  .nf__in { position: relative; text-align: center; max-width: 720px; }
+  .nf__eyebrow { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--font-head); font-weight: 500; font-size: .92rem; padding: .45rem 1rem; border-radius: 999px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); margin-bottom: 1.3rem; }
+  .nf__eyebrow :global(.icon) { color: var(--coral); }
+  .nf h1 { color: #fff; }
+  .nf p { color: rgba(255,255,255,.82); font-size: 1.12rem; }
+  .nf__btns { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; margin: 2rem 0 2.2rem; }
+  .nf__play { font-size: .98rem !important; }
+  .nf__play a { display: inline-flex; align-items: center; gap: .35rem; color: var(--mint); font-weight: 600; text-decoration: none; }
+  .nf__play a:hover { text-decoration: underline; }
+  @media (prefers-reduced-motion: reduce) { .nf__num { animation: none; } }
+</style>

@@ -5,8 +5,8 @@ import Footer from '../components/Footer.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 import Seo from '../components/Seo.astro';
 
-interface Props { title: string; description: string }
-const { title, description } = Astro.props;
+interface Props { title: string; description: string; noindex?: boolean }
+const { title, description, noindex = false } = Astro.props;
 ---
 <!doctype html>
 <html lang="en-IN">
@@ -16,7 +16,7 @@ const { title, description } = Astro.props;
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#16123f" />
-    <Seo title={title} description={description} />
+    <Seo title={title} description={description} noindex={noindex} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <script is:inline>document.documentElement.classList.add('js');</script>
     <slot name="head" />

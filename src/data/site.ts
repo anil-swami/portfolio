@@ -43,6 +43,7 @@ export const site = {
     about: { eyebrow: 'About', stackTitle: 'What I build with', cta: 'Work with me', cvLabel: 'CV (PDF)' },
     faq: { eyebrow: 'FAQ', title: 'Questions business owners', highlight: 'ask me', intro: 'Something else on your mind? Send me an email, I usually reply the same day.', cta: 'Email me' },
     contact: { title: "Let's build your", highlight: 'website', text: "Tell me about your business. I'll reply with a clear plan and a fixed quote.", cta: 'Email me for a quote', subject: 'Website quote' },
+    notFound: { eyebrow: 'Error 404', title: 'Page not', highlight: 'found', text: "This page doesn't exist, or it moved when the site was rebuilt. Here are some ways back.", home: 'Back to home', work: 'See my work', contact: 'Contact me', playHint: 'Looking for my 3D driving-game portfolio?' },
     footer: { blurb: 'Business websites, built fast and built to be found. Based in Gurugram, India, working with clients anywhere.', explore: 'Explore', contact: 'Get in touch', follow: 'Follow', credit: 'Designed and built by me, with Astro.' },
   },
 

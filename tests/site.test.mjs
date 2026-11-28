@@ -37,7 +37,8 @@ test('client preview and resume survive the rebuild', () => {
 
 test('old 3D build output is gone', () => {
   assert.ok(!existsSync(file('dist/assets')), 'dist/assets from the Vite build should not exist');
-  assert.ok(!existsSync(file('dist/simple.html')));
+  // simple.html now exists on purpose, as a redirect (tested below); it must not be the old 3D page.
+  assert.ok(!readFileSync(file('dist/simple.html'), 'utf8').includes('/assets/'), 'simple.html is not the old 3D page');
 });
 
 // ---------- Task 2: home sections ----------
@@ -99,11 +100,48 @@ test('canonical points at trybrix.site', () => {
 import { site } from "../src/data/site.ts";
 test("section headings and intros come from the content file", () => {
   assert.ok(site.sections, "site.sections exists");
+  const notFoundHtml = readFileSync(file("dist/404.html"), "utf8");
   for (const [key, sec] of Object.entries(site.sections)) {
+    const page = key === "notFound" ? notFoundHtml : html; // the 404 wording lives on the 404 page
     for (const field of ["eyebrow", "title", "highlight"]) {
       const v = sec[field];
       // Astro writes apostrophes as &#39; in HTML.
-      if (v) assert.ok(html.includes(v) || html.includes(v.replaceAll("'", "&#39;")), key + "." + field + ": " + v);
+      if (v) assert.ok(page.includes(v) || page.includes(v.replaceAll("'", "&#39;")), key + "." + field + ": " + v);
     }
   }
+});
+
+// ---------- Sitemap, robots, old /simple address, 404 ----------
+const read = (p) => readFileSync(file(`dist/${p}`), 'utf8');
+
+test('sitemap lists the home page and no client preview', () => {
+  const xml = read('sitemap.xml');
+  assert.match(xml, /<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9">/);
+  assert.ok(xml.includes('<loc>https://trybrix.site/</loc>'));
+  assert.ok(!xml.includes('accountscall'));
+});
+
+test('robots.txt allows the site, hides the client preview, points to the sitemap', () => {
+  const txt = read('robots.txt');
+  assert.match(txt, /User-agent: \*/);
+  assert.match(txt, /Disallow: \/accountscall\//);
+  assert.match(txt, /Sitemap: https:\/\/trybrix\.site\/sitemap\.xml/);
+});
+
+test('old /simple addresses send visitors to the home page', () => {
+  for (const p of ['simple/index.html', 'simple.html']) {
+    const h = read(p);
+    assert.match(h, /<meta http-equiv="refresh" content="0; url=\/"/, p);
+    assert.ok(h.includes('<meta name="robots" content="noindex'), `${p} noindex`);
+    assert.ok(h.includes('<link rel="canonical" href="https://trybrix.site/">'), `${p} canonical`);
+    assert.ok(h.includes('href="/"'), `${p} has a plain link home`);
+  }
+});
+
+test('404 page: on-brand, not indexed, with ways back', () => {
+  const h = read('404.html');
+  assert.match(h, /not found/i);
+  assert.ok(h.includes('<meta name="robots" content="noindex'));
+  assert.equal((h.match(/<h1[\s>]/g) || []).length, 1);
+  for (const href of ['href="/"', 'href="/#work"', 'href="/#contact"', 'href="https://3d.trybrix.site/"']) assert.ok(h.includes(href), href);
 });
