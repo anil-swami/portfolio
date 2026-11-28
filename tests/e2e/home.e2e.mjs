@@ -20,7 +20,8 @@ before(async () => {
 after(async () => {
   await browser?.close();
   preview?.kill();
-  spawn('npx astro preview stop', { shell: true, stdio: 'ignore' });
+  // Wait for the stop to finish: a stop still running later can kill the next run's fresh server.
+  await new Promise((r) => spawn('npx astro preview stop', { shell: true, stdio: 'ignore' }).on('exit', r));
 });
 
 test('particles run without blocking the hero buttons, and no page errors', async () => {

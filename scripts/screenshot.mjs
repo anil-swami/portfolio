@@ -70,5 +70,6 @@ try {
 } finally {
   preview.kill();
   // The preview server outlives its shell on Windows; ask Astro to stop it.
-  spawn('npx astro preview stop', { shell: true, stdio: 'ignore' });
+  // Wait for the stop to finish: a stop still running later can kill the next run's fresh server.
+  await new Promise((r) => spawn('npx astro preview stop', { shell: true, stdio: 'ignore' }).on('exit', r));
 }
