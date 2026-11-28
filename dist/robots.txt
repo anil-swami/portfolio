@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://trybrix.site/sitemap.xml
+Sitemap: https://3d.trybrix.site/sitemap.xml
