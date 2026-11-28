@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Accounts Call · New website preview</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="description" content="Preview of two design options for the new Accounts Call website." />
+  <link rel="icon" href="classic/favicon.svg" type="image/svg+xml" />
+  <style>
+    :root { --navy: #102147; --navy-3: #24407f; --gold: #daa92a; --cyan: #44d2f6; --muted: #5b6478; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #fff;
+      background: radial-gradient(120% 90% at 85% 0%, var(--navy-3), var(--navy) 60%);
+      display: grid; place-items: center; padding: 2.5rem 1.25rem;
+    }
+    main { width: min(980px, 100%); text-align: center; }
+    .logo { display: inline-block; background: #fff; border-radius: 16px; padding: .6rem 1rem; margin-bottom: 1.5rem; }
+    .logo img { height: 58px; width: auto; display: block; }
+    h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0 0 .5rem; letter-spacing: -.02em; }
+    h1 span { color: var(--gold); }
+    .lead { color: rgba(255,255,255,.8); font-size: 1.1rem; margin: 0 auto 2.5rem; max-width: 46ch; line-height: 1.6; }
+    .options { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+    .card {
+      display: flex; flex-direction: column; text-align: left; padding: 1.8rem; border-radius: 22px; text-decoration: none; color: var(--navy);
+      background: #fff; box-shadow: 0 24px 60px -24px rgba(0,0,0,.6); transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .card:hover, .card:focus-visible { transform: translateY(-6px); box-shadow: 0 30px 70px -24px rgba(0,0,0,.75); outline: none; }
+    .tag { align-self: flex-start; font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: .3rem .75rem; border-radius: 999px; margin-bottom: 1rem; }
+    .tag--a { background: rgba(68,210,246,.16); color: #0b6f8c; }
+    .tag--b { background: rgba(218,169,42,.18); color: #7a5304; }
+    .card h2 { margin: 0 0 .5rem; font-size: 1.4rem; }
+    .card p { margin: 0 0 1.5rem; color: var(--muted); line-height: 1.6; flex: 1; }
+    .go { display: inline-flex; align-items: center; gap: .5rem; align-self: flex-start; font-weight: 700; padding: .8rem 1.3rem; border-radius: 999px; background: var(--gold); color: var(--navy); }
+    .card--b .go { background: var(--navy); color: #fff; }
+    .note { margin-top: 2rem; color: rgba(255,255,255,.65); font-size: .92rem; }
+    @media (max-width: 700px) { .options { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="logo"><img src="classic/logo.png" alt="Accounts Call" width="150" height="109" /></div>
+    <h1>Your new website: <span>two options</span></h1>
+    <p class="lead">Both use the same content, colours and layout. Open each one, scroll through it, and try it on your phone too.</p>
+    <div class="options">
+      <a class="card card--a" href="classic/">
+        <span class="tag tag--a">Option A</span>
+        <h2>Classic</h2>
+        <p>Clean and professional, with a sliding hero, smooth animations as you scroll, and colourful service cards.</p>
+        <span class="go">View Option A →</span>
+      </a>
+      <a class="card card--b" href="animated/">
+        <span class="tag tag--b">Option B</span>
+        <h2>Animated</h2>
+        <p>Everything in Option A, plus thousands of gold and cyan grains that form your logo, react to the mouse, and scatter across the page as you scroll.</p>
+        <span class="go">View Option B →</span>
+      </a>
+    </div>
+    <p class="note">Preview of the home page. The other pages are being built next.</p>
+  </main>
+</body>
+</html>
