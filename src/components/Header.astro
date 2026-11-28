@@ -10,6 +10,7 @@ const wa = whatsappLink();
     <nav class="nav" id="site-nav" aria-label="Main">
       <ul>
         {site.nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        <li><a class="nav__play" href={site.play.href} title={site.play.title}><Icon name="Gamepad2" size={18} /> {site.play.label}</a></li>
       </ul>
       <a class="btn btn--sm nav__cta-mobile" href="/#contact">Get a quote <Icon name="ArrowRight" size={16} /></a>
     </nav>
@@ -57,6 +58,11 @@ const wa = whatsappLink();
   }
   .nav a:not(.btn):hover { background: rgba(79, 70, 229, .08); color: var(--primary); }
   .nav__cta-mobile { display: none; }
+  /* "Let's play": a playful pill that leads to the 3D portfolio. */
+  .nav a.nav__play { display: inline-flex; align-items: center; gap: .4rem; color: var(--primary); background: rgba(79, 70, 229, .08); border: 1px dashed rgba(79, 70, 229, .45); }
+  .nav a.nav__play:hover { background: var(--primary); color: #fff; border-style: solid; }
+  .nav a.nav__play :global(.icon) { transition: transform .3s ease; }
+  .nav a.nav__play:hover :global(.icon) { transform: rotate(-12deg) scale(1.1); }
   .header__cta { margin-left: .25rem; }
   .menu-toggle {
     display: none; width: 46px; height: 46px; margin-left: auto; border: 0; border-radius: 12px; background: var(--bg-soft);

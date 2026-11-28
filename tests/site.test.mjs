@@ -45,9 +45,20 @@ test('home has every section', () => {
   for (const id of ['work', 'services', 'process', 'why', 'ai', 'about', 'faq', 'contact']) assert.match(html, new RegExp(`<section[^>]*id="${id}"`), id);
 });
 
-test('selected work: two case studies with live links', () => {
+test('selected work: two cards linking straight to the live sites (no case-study pages)', () => {
   assert.equal(countClass('case-card'), 2);
-  for (const s of ['/work/salsteel/', '/work/mysaanchi/', 'https://salsteel.co.in', 'https://mysaanchi.com']) assert.ok(html.includes(`href="${s}"`), s);
+  for (const s of ['https://salsteel.co.in', 'https://mysaanchi.com']) assert.ok(html.includes(`href="${s}"`), s);
+  assert.ok(!html.includes('/work/'), 'no links to case-study pages');
+  assert.ok(!/case study/i.test(html), 'no "Case study" wording');
+});
+
+test('menu has a "Let\'s play" link to the 3D portfolio', () => {
+  assert.match(html, /<a[^>]*href="https:\/\/3d\.trybrix\.site\/"[^>]*>[\s\S]{0,3000}?Let(&#39;|')s play/); // the icon's SVG sits before the text
+});
+
+test('tech-only CV is linked and exists', () => {
+  assert.ok(html.includes('href="/anil-swami-cv.pdf"'));
+  assert.ok(existsSync(file('dist/anil-swami-cv.pdf')));
 });
 
 test('4 services, 4 steps, 5 FAQs, 4 counters', () => {

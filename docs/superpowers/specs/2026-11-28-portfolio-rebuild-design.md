@@ -146,3 +146,10 @@ result (facts) · link to the live site · "Want one like this?" contact band.
 ## 7. Left to the builder
 Component structure, how much Accounts Call code is copied vs adapted, file layout, animation timings, the exact
 monogram drawing, test details, and Lighthouse tuning.
+
+## 9. Changes from Ani (28 Nov 2026, after the Phase 2 review)
+- **No case-study pages.** Work cards link straight to the live sites. (Phase 3 drops the `/work/` pages.)
+- **"Let's play" menu link** to the 3D portfolio at `https://3d.trybrix.site/`. The 3D site stays as it is in its own
+  repository; this site needs its own repository to serve trybrix.site (GitHub Pages: one custom domain per repository).
+- **Tech-only CV** at `/anil-swami-cv.pdf`, generated from `scripts/cv.html` (`npm run cv`), no phone number.
+  The old marketing resume stays served at its old address but is not linked.
