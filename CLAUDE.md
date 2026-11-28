@@ -9,4 +9,4 @@ Design: docs/superpowers/specs/2026-11-28-portfolio-rebuild-design.md. Read it b
 - Brand: deep #16123f, indigo #4f46e5, coral #ff6b4a (buttons, deep text), mint #2dd4bf. Pattern: the Accounts Call design kit.
 - Keep `public/accountscall/` (client preview) and `public/anil-swami-resume.pdf` untouched.
 - Build one phase at a time and stop for Ani's OK. Run `npm test` (and `npm run test:e2e`) before reporting.
-- Never push or merge to `main` without Ani's OK: pushing `main` publishes the live site.
+- Never publish without Ani's OK: `git push site rebuild/no-3d:main` publishes trybrix.site; pushing `origin` main publishes the 3D site (3d.trybrix.site). See DEPLOY.md.
