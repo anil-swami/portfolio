@@ -1,0 +1,37 @@
+---
+import Icon from '../Icon.astro';
+import { site } from '../../data/site';
+---
+<section class="section section--soft" id="faq">
+  <div class="wrap faq">
+    <div class="faq__intro reveal">
+      <span class="eyebrow"><Icon name="MessageCircle" size={15} /> FAQ</span>
+      <h2>Questions business owners <span class="grad-text--light">ask me</span></h2>
+      <p>Something else on your mind? Send me an email, I usually reply the same day.</p>
+      <a class="btn btn--deep btn--sm" href={`mailto:${site.email}`}><Icon name="Mail" size={16} /> Email me</a>
+    </div>
+    <div class="faq__list">
+      {site.faqs.map((f, i) => (
+        <details class="reveal" style={`--d:${i * 0.06}s`} open={i === 0}>
+          <summary>{f.q}<span class="faq__chev"><Icon name="ChevronDown" size={20} /></span></summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq { display: grid; grid-template-columns: .8fr 1.2fr; gap: 3.5rem; align-items: start; }
+  .faq__intro { position: sticky; top: calc(var(--header-h) + 2rem); }
+  .faq__intro p { color: var(--muted); font-size: 1.08rem; }
+  .faq__list { display: grid; gap: .9rem; }
+  details { border-radius: 14px; background: #fff; border: 1px solid var(--line); transition: box-shadow .3s ease, border-color .3s ease; }
+  details[open] { border-color: transparent; box-shadow: var(--shadow); }
+  summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.15rem 1.3rem; font-family: var(--font-head); font-weight: 600; color: var(--deep); font-size: 1.02rem; }
+  summary::-webkit-details-marker { display: none; }
+  .faq__chev { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--bg-soft); color: var(--deep); transition: transform .3s ease, background-color .3s ease; }
+  details[open] .faq__chev { transform: rotate(180deg); background: var(--coral); }
+  details p { margin: 0; padding: 0 1.3rem 1.2rem; color: var(--muted); }
+  @media (max-width: 960px) { .faq { grid-template-columns: 1fr; gap: 2rem; } .faq__intro { position: static; } }
+</style>

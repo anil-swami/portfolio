@@ -1,0 +1,84 @@
+---
+import Icon from '../Icon.astro';
+import BrandIcon from '../BrandIcon.astro';
+import { site } from '../../data/site';
+const ai = site.ai;
+---
+<section class="section ai" id="ai">
+  <div class="ai__bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow eyebrow--dark"><Icon name="Sparkles" size={15} /> AI corner</span>
+      <h2>I explain AI, and <span class="grad-text">build with it</span></h2>
+      <p>For people who follow my AI content: the channel, and the tools I've made with AI coding assistants.</p>
+    </div>
+
+    <div class="ai__top">
+      <div class="channel reveal">
+        <span class="channel__icon"><BrandIcon name="youtube" size={34} /></span>
+        <h3>{ai.channel.name} <small>· {ai.channel.tagline}</small></h3>
+        <p>{ai.channel.text}</p>
+        <div class="channel__btns">
+          <a class="btn" href={ai.channel.url} target="_blank" rel="noopener">Subscribe on YouTube <Icon name="ArrowUpRight" size={18} /></a>
+          <a class="btn btn--ghost" href={ai.channel.shortsUrl} target="_blank" rel="noopener"><Icon name="Play" size={16} /> Watch Shorts</a>
+        </div>
+      </div>
+      <div class="shorts">
+        {ai.shorts.map((s, i) => (
+          <a class="short reveal" href={ai.channel.shortsUrl} target="_blank" rel="noopener" data-tint={s.tint} style={`--d:${i * 0.1}s`}>
+            <span class="short__play" aria-hidden="true"><Icon name="Play" size={22} /></span>
+            <b>{s.title}</b>
+            <small>{s.views}</small>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <h3 class="built__title reveal">Things I've built with AI</h3>
+    <div class="built">
+      {ai.built.map((b, i) => (
+        <article class="built-card reveal" data-tint={b.tint} style={`--d:${i * 0.08}s`}>
+          <span class="built-card__icon"><Icon name={b.icon} size={24} /></span>
+          <h4>{b.name}</h4>
+          <p>{b.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .ai { background: radial-gradient(120% 80% at 10% 0%, var(--deep-2), var(--deep) 60%); color: rgba(255,255,255,.82); overflow: hidden; }
+  .ai__bg { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(40% 40% at 90% 20%, rgba(45,212,191,.18), transparent 70%), radial-gradient(35% 35% at 5% 90%, rgba(255,107,74,.16), transparent 70%); }
+  .ai h2, .ai h3, .ai h4 { color: #fff; }
+  .ai .section-head p { color: rgba(255,255,255,.75); }
+  .eyebrow--dark { color: var(--mint); background: rgba(45, 212, 191, .12); }
+  .ai__top { display: grid; grid-template-columns: 1.05fr 1fr; gap: 1.6rem; align-items: stretch; }
+  .channel { padding: 2rem; border-radius: 22px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); }
+  .channel__icon { color: #ff3d3d; display: inline-flex; margin-bottom: .8rem; }
+  .channel h3 { font-size: 1.6rem; margin-bottom: .6rem; }
+  .channel h3 small { font-size: 1rem; font-weight: 500; color: rgba(255,255,255,.7); }
+  .channel p { margin-bottom: 1.6rem; }
+  .channel__btns { display: flex; flex-wrap: wrap; gap: .8rem; }
+  .shorts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .short {
+    position: relative; display: flex; flex-direction: column; justify-content: flex-end; gap: .3rem; aspect-ratio: 9 / 16; max-height: 300px; padding: 1rem;
+    border-radius: 18px; color: #fff; text-decoration: none; overflow: hidden;
+    background: radial-gradient(circle at 80% 15%, rgba(255,255,255,.3), transparent 45%), linear-gradient(160deg, var(--tint), color-mix(in srgb, var(--tint) 45%, var(--deep)));
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .short:hover { transform: translateY(-6px) rotate(-1deg); box-shadow: 0 24px 40px -20px var(--tint); }
+  .short__play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -70%); width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.22); backdrop-filter: blur(4px); transition: transform .3s ease; }
+  .short:hover .short__play { transform: translate(-50%, -70%) scale(1.12); }
+  .short b { font-family: var(--font-head); font-weight: 600; line-height: 1.25; font-size: .98rem; }
+  .short small { opacity: .8; }
+  .built__title { margin: 3.5rem 0 1.2rem; font-size: 1.25rem; }
+  .built { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+  .built-card { padding: 1.4rem; border-radius: var(--radius); background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); transition: transform .3s ease, background-color .3s ease; }
+  .built-card:hover { transform: translateY(-5px); background: rgba(255,255,255,.09); }
+  .built-card__icon { width: 50px; height: 50px; border-radius: 15px; display: grid; place-items: center; margin-bottom: 1rem; color: #fff; background: linear-gradient(135deg, var(--tint), color-mix(in srgb, var(--tint) 60%, black)); box-shadow: 0 10px 22px -10px var(--tint); }
+  .built-card h4 { font-size: 1.05rem; margin-bottom: .4rem; }
+  .built-card p { font-size: .93rem; margin: 0; color: rgba(255,255,255,.72); }
+  @media (max-width: 1100px) { .ai__top { grid-template-columns: 1fr; } .built { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .built { grid-template-columns: 1fr; } .shorts { gap: .6rem; } .short { padding: .7rem; } .short b { font-size: .82rem; } }
+</style>

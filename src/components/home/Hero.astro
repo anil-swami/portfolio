@@ -1,0 +1,89 @@
+---
+import Icon from '../Icon.astro';
+import { site } from '../../data/site';
+const h = site.hero;
+---
+<section class="hero" aria-label="Introduction">
+  <div class="hero__bg" aria-hidden="true">
+    <span class="blob blob--coral"></span>
+    <span class="blob blob--mint"></span>
+    <span class="grid-lines"></span>
+  </div>
+  <div class="wrap hero__in">
+    <div class="hero__copy">
+      <span class="hero__eyebrow"><Icon name="Sparkles" size={16} /> {h.eyebrow}</span>
+      <h1>{h.title} <span class="grad-text">{h.highlight}</span></h1>
+      <p>{h.text}</p>
+      <div class="hero__ctas">
+        <a class="btn" href="/#contact">Get a quote <Icon name="ArrowRight" size={18} /></a>
+        <a class="btn btn--ghost" href="/#work">See my work</a>
+      </div>
+      <ul class="hero__chips">{h.chips.map((c) => <li><Icon name="CircleCheck" size={16} /> {c}</li>)}</ul>
+    </div>
+    <div class="hero__visual" data-hero-visual>
+      <!-- Shown when particles are off (reduced motion, Save-Data, no canvas). -->
+      <div class="mono" aria-hidden="true"><span>{site.initials}</span></div>
+      <div class="chip chip--a" aria-hidden="true"><Icon name="Zap" size={18} /> Loads in a blink</div>
+      <div class="chip chip--b" aria-hidden="true"><Icon name="TrendingUp" size={18} /> Found on Google</div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero { position: relative; overflow: hidden; color: #fff; background: radial-gradient(120% 90% at 85% 10%, var(--deep-3) 0%, var(--deep-2) 35%, var(--deep) 75%); }
+  .hero__bg { position: absolute; inset: 0; pointer-events: none; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(70px); animation: float 14s ease-in-out infinite; }
+  .blob--coral { width: 440px; height: 440px; background: var(--coral); left: -140px; bottom: -200px; opacity: .32; }
+  .blob--mint { width: 520px; height: 520px; background: var(--mint); right: -160px; top: -220px; opacity: .26; animation-delay: -7s; }
+  .grid-lines {
+    position: absolute; inset: 0; opacity: .1;
+    background-image: linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px);
+    background-size: 56px 56px; mask-image: radial-gradient(ellipse at 70% 40%, #000 0%, transparent 70%);
+  }
+  @keyframes float { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(30px, -30px) scale(1.08); } }
+
+  .hero__in { position: relative; z-index: 2; display: grid; grid-template-columns: 1.1fr .9fr; gap: 3rem; align-items: center; min-height: clamp(580px, 80vh, 720px); padding: 4rem 0 7.5rem; }
+  .hero__eyebrow { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--font-head); font-weight: 500; font-size: .92rem; padding: .45rem 1rem; border-radius: 999px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); margin-bottom: 1.4rem; }
+  .hero__eyebrow :global(.icon) { color: var(--coral); }
+  .hero h1 { color: #fff; margin-bottom: 1.1rem; }
+  .hero p { font-size: clamp(1.05rem, 1.6vw, 1.2rem); color: rgba(255,255,255,.82); max-width: 54ch; margin-bottom: 2rem; }
+  .hero__ctas { display: flex; flex-wrap: wrap; gap: .9rem; }
+  .hero__chips { list-style: none; display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; margin: 1.8rem 0 0; padding: 0; color: rgba(255,255,255,.8); font-size: .95rem; }
+  .hero__chips li { display: inline-flex; align-items: center; gap: .4rem; }
+  .hero__chips :global(.icon) { color: var(--mint); }
+  /* Entrance */
+  .hero__copy > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+  .hero__copy > :nth-child(2) { animation-delay: .1s; } .hero__copy > :nth-child(3) { animation-delay: .2s; }
+  .hero__copy > :nth-child(4) { animation-delay: .3s; } .hero__copy > :nth-child(5) { animation-delay: .4s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+
+  .hero__visual { position: relative; height: 420px; }
+  .mono {
+    position: absolute; inset: 40px 60px; border-radius: 40px; display: grid; place-items: center;
+    background: linear-gradient(145deg, rgba(255,255,255,.1), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.16);
+    box-shadow: inset 0 0 80px rgba(255, 107, 74, .18), 0 40px 80px -40px rgba(0,0,0,.6);
+  }
+  .mono span { font-family: var(--font-head); font-weight: 700; font-size: clamp(6rem, 13vw, 10rem); letter-spacing: -.04em; line-height: 1;
+    background: linear-gradient(135deg, var(--coral), #ffb08f 45%, var(--mint)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .chip { position: absolute; display: inline-flex; align-items: center; gap: .55rem; padding: .8rem 1.1rem; border-radius: 16px; background: rgba(255,255,255,.96); color: var(--deep);
+    font-family: var(--font-head); font-weight: 600; font-size: .92rem; box-shadow: var(--shadow-lg); animation: bob 5s ease-in-out infinite; }
+  .chip :global(.icon) { color: var(--coral-deep); }
+  .chip--a { left: 0; top: 10px; }
+  .chip--b { right: 0; bottom: 10px; animation-delay: -2.5s; }
+  .chip--b :global(.icon) { color: var(--primary); }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  /* With particles running, the grains replace the static monogram (chips stay). */
+  :global(.particles-on) .mono { display: none; }
+
+  @media (max-width: 960px) {
+    .hero__in { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 0 7rem; min-height: auto; }
+    .hero__visual { height: 320px; max-width: 460px; width: 100%; margin-inline: auto; }
+    .mono { inset: 30px 30px; }
+  }
+  @media (max-width: 560px) {
+    .hero__ctas .btn { flex: 1 1 100%; }
+    .hero__visual { height: 280px; }
+    .chip { font-size: .82rem; padding: .6rem .85rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .blob, .chip, .hero__copy > * { animation: none; } }
+</style>

@@ -1,0 +1,35 @@
+---
+import Icon from '../Icon.astro';
+import { site } from '../../data/site';
+---
+<section class="trust" aria-label="At a glance">
+  <div class="wrap">
+    <ul class="trust__card reveal">
+      {site.stats.map((s) => (
+        <li class="trust__item" data-tint={s.tint}>
+          <span class="trust__icon"><Icon name={s.icon} size={24} /></span>
+          <span>
+            <span class="trust__num"><span data-count={s.n}>{s.n}</span>{s.suffix}</span>
+            <span class="trust__label">{s.label}</span>
+          </span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .trust { position: relative; z-index: 3; margin-top: -3.4rem; }
+  .trust__card { list-style: none; margin: 0; padding: 1.6rem 2rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; background: #fff; border-radius: var(--radius); box-shadow: var(--shadow-lg); border: 1px solid var(--line); }
+  .trust__item { display: flex; align-items: center; gap: 1rem; }
+  .trust__item + .trust__item { border-left: 1px solid var(--line); padding-left: 1.5rem; }
+  .trust__icon { width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; flex: none; color: var(--tint); background: color-mix(in srgb, var(--tint) 13%, white); }
+  .trust__num { display: block; font-family: var(--font-head); font-weight: 700; font-size: 2rem; line-height: 1; color: var(--deep); }
+  .trust__label { display: block; color: var(--muted); font-size: .92rem; margin-top: .3rem; }
+  @media (max-width: 960px) { .trust__card { grid-template-columns: repeat(2, 1fr); } .trust__item:nth-child(3) { border-left: 0; padding-left: 0; } }
+  @media (max-width: 420px) {
+    .trust__card { padding: 1.3rem; gap: 1.2rem 1rem; }
+    .trust__item { flex-direction: column; align-items: flex-start; gap: .6rem; }
+    .trust__item + .trust__item { border-left: 0; padding-left: 0; }
+  }
+</style>

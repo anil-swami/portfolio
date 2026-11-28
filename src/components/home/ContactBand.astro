@@ -1,0 +1,49 @@
+---
+import Icon from '../Icon.astro';
+import BrandIcon from '../BrandIcon.astro';
+import { site, whatsappLink } from '../../data/site';
+const wa = whatsappLink();
+const mail = `mailto:${site.email}?subject=${encodeURIComponent('Website quote')}`;
+---
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact__box reveal">
+      <span class="contact__glow contact__glow--1" aria-hidden="true"></span>
+      <span class="contact__glow contact__glow--2" aria-hidden="true"></span>
+      <div class="contact__copy">
+        <h2>{site.contact.title.replace('website', '')}<span class="grad-text">website</span></h2>
+        <p>{site.contact.text}</p>
+        <ul class="contact__social">
+          <li><a href={site.links.linkedin} target="_blank" rel="noopener"><BrandIcon name="linkedin" size={18} /> LinkedIn</a></li>
+          <li><a href={site.links.github} target="_blank" rel="noopener"><Icon name="GitBranch" size={18} /> GitHub</a></li>
+          <li><a href={site.links.youtube} target="_blank" rel="noopener"><BrandIcon name="youtube" size={18} /> YouTube</a></li>
+        </ul>
+      </div>
+      <div class="contact__actions">
+        <a class="btn" href={mail}><Icon name="Mail" size={18} /> Email me for a quote</a>
+        {wa && <a class="btn btn--wa" href={wa} target="_blank" rel="noopener"><Icon name="MessageCircle" size={18} /> WhatsApp</a>}
+        <span class="contact__email">{site.email}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact { padding: clamp(4rem, 8vw, 6rem) 0; }
+  .contact__box { position: relative; overflow: hidden; display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: center; padding: clamp(2.2rem, 5vw, 3.5rem); border-radius: 28px; color: #fff; background: linear-gradient(120deg, var(--deep) 0%, var(--deep-3) 60%, var(--primary) 100%); box-shadow: var(--shadow-lg); }
+  .contact__glow { position: absolute; border-radius: 50%; pointer-events: none; animation: pulse 8s ease-in-out infinite; }
+  .contact__glow--1 { width: 300px; height: 300px; right: -80px; top: -120px; background: radial-gradient(circle, rgba(255,107,74,.55), transparent 70%); }
+  .contact__glow--2 { width: 240px; height: 240px; left: 30%; bottom: -150px; background: radial-gradient(circle, rgba(45,212,191,.45), transparent 70%); animation-delay: -4s; }
+  @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+  .contact__copy, .contact__actions { position: relative; }
+  .contact h2 { color: #fff; margin-bottom: .6rem; }
+  .contact p { color: rgba(255,255,255,.85); font-size: 1.08rem; }
+  .contact__social { list-style: none; display: flex; flex-wrap: wrap; gap: .6rem 1.2rem; margin: 1.2rem 0 0; padding: 0; }
+  .contact__social a { display: inline-flex; align-items: center; gap: .45rem; color: rgba(255,255,255,.85); text-decoration: none; font-weight: 500; }
+  .contact__social a:hover { color: var(--mint); }
+  .contact__actions { display: flex; flex-direction: column; align-items: flex-end; gap: .8rem; }
+  .contact__email { font-size: .92rem; color: rgba(255,255,255,.7); }
+  @media (max-width: 960px) { .contact__box { grid-template-columns: 1fr; } .contact__actions { align-items: flex-start; } }
+  @media (max-width: 560px) { .contact__actions .btn { width: 100%; } }
+  @media (prefers-reduced-motion: reduce) { .contact__glow { animation: none; } }
+</style>

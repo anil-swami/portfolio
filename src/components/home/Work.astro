@@ -1,0 +1,80 @@
+---
+import Icon from '../Icon.astro';
+import { site } from '../../data/site';
+---
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow"><Icon name="Briefcase" size={15} /> Selected work</span>
+      <h2>Real websites, <span class="grad-text--light">live on the internet</span></h2>
+      <p>Built in-house for businesses I work with. Open them, click around, check the speed on your phone.</p>
+    </div>
+
+    <div class="cases">
+      {site.work.map((w, i) => (
+        <article class="case-card reveal" data-tint={w.tint} style={`--d:${i * 0.1}s`}>
+          <a class="case-card__shot" href={`/work/${w.slug}/`} aria-label={`${w.name} case study`}>
+            <span class="browser" aria-hidden="true"><i></i><i></i><i></i><span>{w.domain}</span></span>
+            <img src={`/work/${w.slug}.jpg`} alt={`Home page of ${w.domain}`} width="1440" height="900" loading="lazy" decoding="async" />
+          </a>
+          <div class="case-card__body">
+            <span class="case-card__kind">{w.kind}</span>
+            <h3>{w.name}</h3>
+            <p>{w.summary}</p>
+            <ul class="tags">{w.tech.map((t) => <li>{t}</li>)}</ul>
+            <div class="case-card__links">
+              <a class="btn btn--deep btn--sm" href={`/work/${w.slug}/`}>Case study <Icon name="ArrowRight" size={16} /></a>
+              <a class="btn btn--outline btn--sm" href={w.url} target="_blank" rel="noopener">Visit site <Icon name="ArrowUpRight" size={16} /></a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <h3 class="more__title reveal">More I've built</h3>
+    <div class="more">
+      {site.more.map((m, i) => (
+        <a class="more-card reveal" href={m.url} target="_blank" rel="noopener" data-tint={m.tint} style={`--d:${i * 0.08}s`}>
+          <span class="more-card__icon"><Icon name={m.icon} size={24} /></span>
+          <span class="more-card__body">
+            <b>{m.name}</b>
+            <span>{m.text}</span>
+            <span class="more-card__link">{m.link} <Icon name="ArrowUpRight" size={15} /></span>
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cases { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+  .case-card { position: relative; display: flex; flex-direction: column; border-radius: 22px; background: #fff; border: 1px solid var(--line); overflow: hidden; transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease; }
+  .case-card::before { content: ''; position: absolute; inset: 0 0 auto; height: 4px; z-index: 2; background: var(--tint); transform: scaleX(.2); transform-origin: left; transition: transform .45s ease; }
+  .case-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+  .case-card:hover::before { transform: scaleX(1); }
+  .case-card__shot { display: block; background: linear-gradient(160deg, color-mix(in srgb, var(--tint) 18%, white), var(--bg-soft)); padding: 1.4rem 1.4rem 0; overflow: hidden; }
+  .browser { display: flex; align-items: center; gap: 6px; padding: .55rem .8rem; background: #fff; border-radius: 12px 12px 0 0; border: 1px solid var(--line); border-bottom: 0; font-size: .75rem; color: var(--muted); }
+  .browser i { width: 9px; height: 9px; border-radius: 50%; background: #ff6b5f; } .browser i:nth-child(2) { background: #ffbd2e; } .browser i:nth-child(3) { background: #28c940; }
+  .browser span { margin-left: .5rem; padding: .1rem .7rem; background: var(--bg-soft); border-radius: 999px; }
+  .case-card__shot img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border: 1px solid var(--line); border-top: 0; transition: transform .6s ease; }
+  .case-card:hover .case-card__shot img { transform: scale(1.03); }
+  .case-card__body { padding: 1.5rem 1.6rem 1.7rem; display: flex; flex-direction: column; flex: 1; }
+  .case-card__kind { font-family: var(--font-head); font-size: .8rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: color-mix(in srgb, var(--tint) 75%, black); }
+  .case-card h3 { font-size: 1.45rem; margin: .4rem 0 .5rem; }
+  .case-card p { color: var(--muted); }
+  .tags { list-style: none; display: flex; flex-wrap: wrap; gap: .45rem; margin: 0 0 1.4rem; padding: 0; }
+  .tags li { font-size: .82rem; padding: .25rem .7rem; border-radius: 999px; background: var(--bg-soft); border: 1px solid var(--line); color: var(--ink); }
+  .case-card__links { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: auto; }
+
+  .more__title { margin: 3.5rem 0 1.2rem; font-size: 1.25rem; }
+  .more { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .more-card { display: flex; gap: 1rem; padding: 1.3rem 1.4rem; border-radius: var(--radius); background: #fff; border: 1px solid var(--line); color: var(--ink); text-decoration: none; transition: transform .3s ease, box-shadow .3s ease; }
+  .more-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+  .more-card__icon { width: 52px; height: 52px; flex: none; border-radius: 15px; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, var(--tint), color-mix(in srgb, var(--tint) 65%, black)); box-shadow: 0 10px 20px -10px var(--tint); }
+  .more-card__body { display: flex; flex-direction: column; gap: .25rem; }
+  .more-card__body b { font-family: var(--font-head); font-weight: 600; color: var(--deep); }
+  .more-card__body > span:not(.more-card__link) { color: var(--muted); font-size: .95rem; }
+  .more-card__link { display: inline-flex; align-items: center; gap: .3rem; margin-top: .3rem; font-family: var(--font-head); font-weight: 600; font-size: .9rem; color: var(--primary); }
+  @media (max-width: 960px) { .cases, .more { grid-template-columns: 1fr; } }
+</style>

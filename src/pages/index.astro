@@ -1,7 +1,26 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/home/Hero.astro';
+import TrustStrip from '../components/home/TrustStrip.astro';
+import Work from '../components/home/Work.astro';
+import Services from '../components/home/Services.astro';
+import Process from '../components/home/Process.astro';
+import Why from '../components/home/Why.astro';
+import AiCorner from '../components/home/AiCorner.astro';
+import About from '../components/home/About.astro';
+import Faq from '../components/home/Faq.astro';
+import ContactBand from '../components/home/ContactBand.astro';
 import { site } from '../data/site';
 ---
 <BaseLayout title={site.title} description={site.description}>
-  <h1>{site.hero.title} {site.hero.highlight}</h1>
+  <Hero />
+  <TrustStrip />
+  <Work />
+  <Services />
+  <Process />
+  <Why />
+  <AiCorner />
+  <About />
+  <Faq />
+  <ContactBand />
 </BaseLayout>

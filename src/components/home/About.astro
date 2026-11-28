@@ -1,0 +1,46 @@
+---
+import Icon from '../Icon.astro';
+import { site } from '../../data/site';
+const a = site.about;
+const tints = ['indigo', 'coral', 'teal', 'amber', 'sky', 'violet'];
+---
+<section class="section" id="about">
+  <div class="wrap about">
+    <div class="about__text reveal">
+      <span class="eyebrow"><Icon name="Sparkles" size={15} /> About</span>
+      <h2>{a.title}</h2>
+      {a.paragraphs.map((p) => <p>{p}</p>)}
+      <p class="about__edu"><Icon name="CircleCheck" size={16} /> {a.education}</p>
+      <div class="about__btns">
+        <a class="btn btn--deep" href="/#contact">Work with me <Icon name="ArrowRight" size={18} /></a>
+        <a class="btn btn--outline" href={site.resume} target="_blank" rel="noopener"><Icon name="FileText" size={18} /> Resume (PDF)</a>
+      </div>
+    </div>
+    <div class="stack reveal">
+      <h3>What I build with</h3>
+      {a.stack.map((g, i) => (
+        <div class="stack__group" data-tint={tints[i % tints.length]}>
+          <span class="stack__label">{g.group}</span>
+          <ul>{g.items.map((it) => <li>{it}</li>)}</ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .about { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .about__text p { color: var(--muted); font-size: 1.08rem; }
+  .about__edu { display: flex; gap: .5rem; align-items: center; font-size: .95rem !important; }
+  .about__edu :global(.icon) { color: var(--teal); }
+  .about__btns { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.6rem; }
+  .stack { padding: 1.8rem; border-radius: 22px; background: var(--bg-soft); border: 1px solid var(--line); }
+  .stack h3 { margin-bottom: 1.2rem; }
+  .stack__group { display: grid; grid-template-columns: 120px 1fr; gap: 1rem; padding: .85rem 0; border-top: 1px solid var(--line); }
+  .stack__group:first-of-type { border-top: 0; }
+  .stack__label { font-family: var(--font-head); font-weight: 600; font-size: .9rem; color: color-mix(in srgb, var(--tint) 75%, black); }
+  .stack ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .45rem; }
+  .stack li { font-size: .85rem; padding: .25rem .7rem; border-radius: 999px; background: #fff; border: 1px solid color-mix(in srgb, var(--tint) 25%, white); }
+  @media (max-width: 960px) { .about { grid-template-columns: 1fr; gap: 2.5rem; } }
+  @media (max-width: 420px) { .stack__group { grid-template-columns: 1fr; gap: .5rem; } }
+</style>

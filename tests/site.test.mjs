@@ -39,3 +39,29 @@ test('old 3D build output is gone', () => {
   assert.ok(!existsSync(file('dist/assets')), 'dist/assets from the Vite build should not exist');
   assert.ok(!existsSync(file('dist/simple.html')));
 });
+
+// ---------- Task 2: home sections ----------
+test('home has every section', () => {
+  for (const id of ['work', 'services', 'process', 'why', 'ai', 'about', 'faq', 'contact']) assert.match(html, new RegExp(`<section[^>]*id="${id}"`), id);
+});
+
+test('selected work: two case studies with live links', () => {
+  assert.equal(countClass('case-card'), 2);
+  for (const s of ['/work/salsteel/', '/work/mysaanchi/', 'https://salsteel.co.in', 'https://mysaanchi.com']) assert.ok(html.includes(`href="${s}"`), s);
+});
+
+test('4 services, 4 steps, 5 FAQs, 4 counters', () => {
+  assert.equal(countClass('service-card'), 4);
+  assert.equal(countClass('step'), 4);
+  assert.equal(count(/<details[\s>]/g), 5);
+  assert.equal(count(/data-count="\d+"/g), 4);
+});
+
+test('AI corner links the Technly channel; resume is linked', () => {
+  assert.ok(html.includes('href="https://www.youtube.com/@Technly-990/"'));
+  assert.ok(html.includes('href="/anil-swami-resume.pdf"'));
+});
+
+test('tech work only, and no Accounts Call', () => {
+  for (const w of [/digital marketing/i, /graphic design/i, /\bcanva\b/i, /accountscall/i, /accounts call/i]) assert.ok(!w.test(html), String(w));
+});
