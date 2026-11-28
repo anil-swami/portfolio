@@ -1,0 +1,59 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import BrandIcon from './BrandIcon.astro';
+import { site, whatsappLink } from '../data/site';
+const wa = whatsappLink();
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="footer__glow" aria-hidden="true"></div>
+  <div class="wrap footer__grid">
+    <div class="footer__brand">
+      <Logo light />
+      <p>Business websites, built fast and built to be found. Based in {site.location}, working with clients anywhere.</p>
+    </div>
+    <div>
+      <h3>Explore</h3>
+      <ul>{site.nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul>
+    </div>
+    <div>
+      <h3>Get in touch</h3>
+      <ul class="footer__contact">
+        <li><a href={`mailto:${site.email}`}><Icon name="Mail" size={16} /> {site.email}</a></li>
+        {wa && <li><a href={wa} target="_blank" rel="noopener"><Icon name="MessageCircle" size={16} /> WhatsApp</a></li>}
+        <li><span><Icon name="MapPin" size={16} /> {site.location}</span></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Follow</h3>
+      <ul class="footer__contact">
+        <li><a href={site.links.youtube} target="_blank" rel="noopener"><BrandIcon name="youtube" size={16} /> Technly on YouTube</a></li>
+        <li><a href={site.links.linkedin} target="_blank" rel="noopener"><BrandIcon name="linkedin" size={16} /> LinkedIn</a></li>
+        <li><a href={site.links.github} target="_blank" rel="noopener"><Icon name="GitBranch" size={16} /> GitHub</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer__bottom">
+    <p>© {year} {site.name}. All rights reserved.</p>
+    <p>Designed and built by me, with Astro.</p>
+  </div>
+</footer>
+
+<style>
+  .footer { position: relative; overflow: hidden; background: var(--deep); color: rgba(255, 255, 255, .75); padding: 4.5rem 0 1.5rem; font-size: .95rem; }
+  .footer__glow { position: absolute; inset: -40% -10% auto auto; width: 620px; height: 620px; border-radius: 50%; background: radial-gradient(circle, rgba(45, 212, 191, .16), transparent 65%); pointer-events: none; }
+  .footer__grid { display: grid; grid-template-columns: 1.5fr 1fr 1.3fr 1.2fr; gap: 2.5rem; }
+  .footer h3 { color: #fff; font-size: 1.05rem; margin-bottom: 1.1rem; position: relative; padding-bottom: .6rem; }
+  .footer h3::after { content: ''; position: absolute; left: 0; bottom: 0; width: 34px; height: 3px; border-radius: 3px; background: var(--coral); }
+  .footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+  .footer a { color: inherit; text-decoration: none; transition: color .2s ease; }
+  .footer a:hover { color: var(--mint); }
+  .footer__brand p { margin: 1.1rem 0 0; max-width: 34ch; }
+  .footer__contact a, .footer__contact span { display: inline-flex; gap: .55rem; align-items: center; overflow-wrap: anywhere; }
+  .footer__contact :global(.icon) { color: var(--coral); }
+  .footer__bottom { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, .12); font-size: .88rem; }
+  .footer__bottom p { margin: 0; }
+  @media (max-width: 960px) { .footer__grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .footer__grid { grid-template-columns: 1fr; gap: 2rem; } }
+</style>

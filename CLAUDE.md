@@ -1,13 +1,12 @@
-# Project: Anil Swami 3D portfolio
+# Project: Anil Swami portfolio (trybrix.site)
 
-Full spec: docs/SPEC.md. Read it before starting any phase.
+Design: docs/superpowers/specs/2026-11-28-portfolio-rebuild-design.md. Read it before starting a phase.
 
 ## Working rules
-- Build one phase at a time. Stop at the end of each phase and wait for me.
-- After every phase run `npm run typecheck` and `npm run build`. Fix all errors before reporting.
-- Never hardcode portfolio text in components. All text comes from content/portfolio.json.
-- Ask before adding any dependency that is not listed in the spec.
-- The site is fully static: no server, no API calls, no secrets.
-- 3D models are optional. Every model slot must have a code-built fallback, so the site works with zero .glb files.
-- Prefer small, focused files (one component per file).
-- When you finish a phase, tell me: what was built, how to test it, and anything I must do by hand.
+- Astro static site. No server, no API calls, no secrets. Built into `dist/`, which is committed (GitHub Pages publishes it from `main`).
+- Never hardcode text in components. All words and links live in `src/data/site.ts`.
+- Tech work only: no digital-marketing, design or video services.
+- Brand: deep #16123f, indigo #4f46e5, coral #ff6b4a (buttons, deep text), mint #2dd4bf. Pattern: the Accounts Call design kit.
+- Keep `public/accountscall/` (client preview) and `public/anil-swami-resume.pdf` untouched.
+- Build one phase at a time and stop for Ani's OK. Run `npm test` (and `npm run test:e2e`) before reporting.
+- Never push or merge to `main` without Ani's OK: pushing `main` publishes the live site.

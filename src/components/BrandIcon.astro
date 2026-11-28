@@ -1,0 +1,18 @@
+---
+// Simple brand marks drawn here (Lucide has no brand logos).
+interface Props { name: 'youtube' | 'linkedin'; size?: number }
+const { name, size = 20 } = Astro.props;
+---
+{name === 'youtube' && (
+  <svg class="icon" width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <rect x="1.5" y="4.5" width="21" height="15" rx="4.5" fill="currentColor" />
+    <path d="M10 8.8v6.4l5.6-3.2z" fill="#fff" />
+  </svg>
+)}
+{name === 'linkedin' && (
+  <svg class="icon" width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <rect x="2" y="2" width="20" height="20" rx="4" fill="currentColor" />
+    <rect x="6" y="10" width="2.6" height="8" fill="#fff" /><circle cx="7.3" cy="7" r="1.5" fill="#fff" />
+    <path d="M11 10h2.5v1.2c.5-.8 1.4-1.4 2.7-1.4 2 0 3 1.2 3 3.6V18h-2.6v-4.2c0-1.1-.4-1.8-1.4-1.8s-1.6.7-1.6 1.8V18H11z" fill="#fff" />
+  </svg>
+)}

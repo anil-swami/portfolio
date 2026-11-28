@@ -1,103 +1,18 @@
-# Anil Swami: 3D portfolio
+# trybrix.site: Anil Swami
 
-A portfolio you drive through. The world is a 500 × 500 m forest landscape with dirt roads, a river with bridges, ponds and wandering animals. Each part of the portfolio is a log cabin at the end of a road; drive into the ring around a cabin and its panel opens. A minimap in the corner shows where everything is. A plain HTML "simple view" carries the same content for recruiters and search engines. The build is fully static, so it runs on any shared hosting.
+Business-website portfolio built with Astro. Design: `docs/superpowers/specs/2026-11-28-portfolio-rebuild-design.md`.
 
-Full specification: [docs/SPEC.md](docs/SPEC.md).
-
-## Setup
-
-Needs Node.js 20.19 or newer (built with Node 24).
-
-```
+```bash
 npm install
-npm run dev
+npm run dev        # http://localhost:4321
+npm test           # build + page checks
+npm run test:e2e   # browser checks in your installed Chrome (build first)
+npm run shots      # desktop + phone screenshots into docs/screenshots/
 ```
 
-Then open http://localhost:5173. The simple view is at http://localhost:5173/simple.
+- Change any text or link: `src/data/site.ts`.
+- Add your WhatsApp number: set `whatsapp.number` in `src/data/site.ts` (digits with country code, e.g. 919812345678). Every WhatsApp button appears automatically.
+- Colours and fonts: `src/styles/global.css` (tokens at the top).
+- Client previews live in `public/accountscall/` and are copied to the site unchanged.
 
-## Scripts
-
-| Command | What it does |
-|---|---|
-| `npm run dev` | Start the dev server with hot reload |
-| `npm run build` | Build the site into `dist/` |
-| `npm run preview` | Serve the built `dist/` locally to check it before deploying |
-| `npm run typecheck` | Check TypeScript types |
-| `npm run models` | Compress Blender exports from `models-src/` into `src/assets/models/` |
-
-## Editing content
-
-All portfolio text lives in one file: [content/portfolio.json](content/portfolio.json). The 3D site and the simple view both read it, so one edit updates both.
-
-- Add your **LinkedIn**, **GitHub** and **resume** in the `contact` section. An empty string hides that item. For the resume, put the PDF in `public/` (for example `public/anil-swami-resume.pdf`) and set `"resumePdf": "anil-swami-resume.pdf"`.
-- Adding or removing a skill or a project also adds or removes its carved post or notice board in the 3D world.
-- Set your real web address in [site.config.json](site.config.json). It is used for `sitemap.xml`, `robots.txt` and the link-preview tags.
-- Button and settings labels (interface text, not portfolio content) are in [src/ui/strings.ts](src/ui/strings.ts).
-
-Run `npm run build` after editing to refresh `dist/`.
-
-## Controls
-
-| Key | Action |
-|---|---|
-| W / ↑ | Accelerate |
-| S / ↓ | Reverse |
-| A / ← and D / → | Steer |
-| Shift | Boost |
-| Space | Brake |
-| E | Interact |
-| R | Reset car |
-| M | Mute |
-| Esc | Close panel |
-
-The camera follows behind the car like a racing game. Mouse wheel or pinch zooms it in and out. On touch devices, on-screen buttons appear; the Brake button reverses once the car has stopped.
-
-## Adding 3D models
-
-The site works with zero models. To replace a code-built object with a Blender model, drop a `.glb` with the right name into `src/assets/models/`. See [BLENDER.md](BLENDER.md) for names, sizes and export settings.
-
-## Deploying
-
-See [DEPLOY.md](DEPLOY.md) for GoDaddy cPanel, by Git or by manual upload.
-
-## How it is organised
-
-```
-content/portfolio.json   All portfolio text
-site.config.json         The site's public address
-index.html               The 3D site
-simple.html              The simple view (filled in from portfolio.json at build time)
-plugins/                 Vite plugin that renders simple.html, robots.txt and sitemap.xml
-public/                  Files copied as-is: .htaccess, favicon
-src/
-  scene/                 The 3D world: ground, roads, water, bridges, trees, animals, cabins, car, camera, lights
-  ui/                    Screens, HUD, minimap, panels, settings, touch controls, toasts
-  game/                  Input, audio (engine, wind, birdsong) and shared car state
-  state/store.ts         App state (zustand)
-  world/                 Plain data and logic, no three.js: layout (zones, roads, river, ponds),
-                         a lookup grid for roads and water, vegetation placement, animal behaviour
-  styles/                Design tokens and CSS
-models-src/              Raw Blender exports (input of `npm run models`)
-```
-
-Technical notes:
-
-- **Renderer.** three.js `WebGPURenderer`, which falls back to WebGL 2 by itself when WebGPU is missing. Settings → Compatibility mode forces WebGL. The browser console prints which one is in use.
-- **Text and textures in the world** (signs, log walls, crates, water ripples) are drawn with the 2D canvas (`src/scene/SilkLabel.tsx`, `src/scene/textures.ts`). There are no custom shaders and no image files, so it renders the same under WebGPU and WebGL.
-- **Everything random is seeded** (`src/world/random.ts`), so the forest, rocks and animals are the same on every visit. Tree, road and water positions are in `src/world/layout.ts` and `src/world/vegetation.ts`.
-- **Animals** (`src/world/animals.ts`) wander near home, pause to graze and run from the car; ducks stay in their pond and birds circle in flocks. Each species draws as two instanced meshes.
-- **Car tuning** (top speed, grip, steering) is a block of constants at the top of `src/scene/Car.tsx`.
-- **Performance.** Trees, plants, rocks and animals are instanced (a few draw calls for thousands of objects), the 3D code loads as a separate chunk after the first paint, models load only after the start screen appears, and the resolution drops automatically when the frame rate falls. Low quality (the default on touch devices) turns shadows off and grows about half as many bushes, flowers and grass tufts.
-
-## Bundle sizes
-
-Measured from `npm run build` (no models):
-
-| File | Size | Gzipped |
-|---|---|---|
-| App shell (React, UI, state, minimap) | 252 kB | 81 kB |
-| 3D chunk (three.js, React Three Fiber, Rapier physics, the world) | 3,914 kB | 1,299 kB |
-| CSS | 14 kB | 4 kB |
-| Fonts (4 files, woff2) | 70 kB | already compressed |
-
-With gzip on (the included `.htaccess` turns it on), the first load is about 1.4 MB. Most of the 3D chunk is the Rapier physics engine and the two three.js renderer back ends.
+Publishing: see DEPLOY.md.

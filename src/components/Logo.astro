@@ -1,0 +1,20 @@
+---
+import { site } from '../data/site';
+interface Props { light?: boolean }
+const { light = false } = Astro.props;
+---
+<a href="/" class:list={['logo', { 'logo--light': light }]} aria-label={`${site.name}, home`}>
+  <span class="logo__mark" aria-hidden="true">{site.initials}</span>
+  <span class="logo__name">{site.name}</span>
+</a>
+
+<style>
+  .logo { display: inline-flex; align-items: center; gap: .65rem; text-decoration: none; color: var(--deep); }
+  .logo--light { color: #fff; }
+  .logo__mark {
+    width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center; flex: none;
+    font-family: var(--font-head); font-weight: 700; font-size: 1.05rem; letter-spacing: -.02em; color: var(--deep);
+    background: linear-gradient(135deg, var(--coral), #ffa07a); box-shadow: 0 10px 22px -10px var(--coral);
+  }
+  .logo__name { font-family: var(--font-head); font-weight: 700; font-size: 1.2rem; letter-spacing: -.01em; }
+</style>

@@ -1,0 +1,83 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { site, whatsappLink } from '../data/site';
+const wa = whatsappLink();
+---
+<header class="header" data-header>
+  <div class="wrap header__in">
+    <Logo />
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <ul>
+        {site.nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+      </ul>
+      <a class="btn btn--sm nav__cta-mobile" href="/#contact">Get a quote <Icon name="ArrowRight" size={16} /></a>
+    </nav>
+    {wa && <a class="btn btn--wa btn--sm header__wa" href={wa} target="_blank" rel="noopener"><Icon name="MessageCircle" size={16} /> WhatsApp</a>}
+    <a class="btn btn--sm header__cta" href="/#contact">Get a quote <Icon name="ArrowRight" size={16} /></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu" data-menu-toggle>
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const setOpen = (open: boolean) => {
+    // Start the phone menu at the header's real bottom edge.
+    if (open && header) header.style.setProperty('--nav-top', `${header.getBoundingClientRect().bottom}px`);
+    toggle?.setAttribute('aria-expanded', String(open));
+    toggle?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    header?.classList.toggle('is-open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  toggle?.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  document.querySelectorAll('#site-nav a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  matchMedia('(min-width: 961px)').addEventListener('change', (e) => { if (e.matches) setOpen(false); });
+  const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 10);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+</script>
+
+<style>
+  .header { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid transparent; transition: box-shadow .3s ease, border-color .3s ease; }
+  /* Frosted glass on a layer behind the header. On .header itself, backdrop-filter would trap the fixed phone menu.
+     One filter function only: the minifier drops the space between two and Chrome then ignores the rule. */
+  .header::before { content: ''; position: absolute; inset: 0; z-index: -1; background: rgba(255, 255, 255, .9); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+  .header.is-open::before { background: #fff; }
+  .header.is-scrolled { box-shadow: 0 8px 30px -18px rgba(22, 18, 63, .45); border-color: var(--line); }
+  .header__in { height: var(--header-h); display: flex; align-items: center; gap: 1rem; }
+  .nav { margin-left: auto; }
+  .nav ul { display: flex; gap: .25rem; list-style: none; margin: 0; padding: 0; }
+  .nav a:not(.btn) {
+    display: block; padding: .55rem .9rem; border-radius: 999px; font-family: var(--font-head); font-weight: 500; font-size: .98rem;
+    color: var(--deep); text-decoration: none; transition: background-color .2s ease, color .2s ease;
+  }
+  .nav a:not(.btn):hover { background: rgba(79, 70, 229, .08); color: var(--primary); }
+  .nav__cta-mobile { display: none; }
+  .header__cta { margin-left: .25rem; }
+  .menu-toggle {
+    display: none; width: 46px; height: 46px; margin-left: auto; border: 0; border-radius: 12px; background: var(--bg-soft);
+    cursor: pointer; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+  }
+  .menu-toggle span { display: block; width: 22px; height: 2.5px; border-radius: 2px; background: var(--deep); transition: transform .3s ease, opacity .3s ease; }
+  .is-open .menu-toggle span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .is-open .menu-toggle span:nth-child(2) { opacity: 0; }
+  .is-open .menu-toggle span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+  @media (max-width: 960px) {
+    .header__cta, .header__wa { display: none; }
+    .menu-toggle { display: inline-flex; }
+    .nav {
+      position: fixed; inset: var(--nav-top, var(--header-h)) 0 0 0; background: #fff; padding: 1.5rem 1.25rem 2rem;
+      display: flex; flex-direction: column; gap: 1.25rem; overflow-y: auto;
+      opacity: 0; visibility: hidden; transform: translateY(-12px); transition: opacity .3s ease, transform .3s ease, visibility .3s;
+    }
+    .is-open .nav { opacity: 1; visibility: visible; transform: none; }
+    .nav ul { flex-direction: column; gap: .25rem; }
+    .nav a:not(.btn) { font-size: 1.2rem; padding: .85rem 1rem; border-radius: 12px; }
+    .nav__cta-mobile { display: inline-flex; }
+  }
+</style>

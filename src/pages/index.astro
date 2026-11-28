@@ -1,0 +1,7 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+<BaseLayout title={site.title} description={site.description}>
+  <h1>{site.hero.title} {site.hero.highlight}</h1>
+</BaseLayout>
