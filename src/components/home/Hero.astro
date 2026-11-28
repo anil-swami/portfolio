@@ -4,6 +4,7 @@ import { site } from '../../data/site';
 const h = site.hero;
 ---
 <section class="hero" aria-label="Introduction">
+  <canvas class="particles" data-particles aria-hidden="true"></canvas>
   <div class="hero__bg" aria-hidden="true">
     <span class="blob blob--coral"></span>
     <span class="blob blob--mint"></span>
@@ -29,9 +30,26 @@ const h = site.hero;
   </div>
 </section>
 
+<script>
+  import { startParticles } from '../../scripts/particles';
+
+  // Grain particles form the AS monogram. Skipped for reduced motion or Save-Data; the static monogram shows instead.
+  const canvas = document.querySelector<HTMLCanvasElement>('[data-particles]');
+  const hero = document.querySelector<HTMLElement>('.hero');
+  const visual = document.querySelector<HTMLElement>('[data-hero-visual]');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+  if (canvas && hero && visual && !reduce && !saveData) {
+    if (startParticles(canvas, () => visual, hero)) document.documentElement.classList.add('particles-on');
+  }
+</script>
+
 <style>
   .hero { position: relative; overflow: hidden; color: #fff; background: radial-gradient(120% 90% at 85% 10%, var(--deep-3) 0%, var(--deep-2) 35%, var(--deep) 75%); }
   .hero__bg { position: absolute; inset: 0; pointer-events: none; }
+  /* One fixed canvas for the whole page: above section backgrounds, below content (see global.css). */
+  .particles { position: fixed; inset: 0; z-index: 1; pointer-events: none; display: none; }
+  :global(.particles-on) .particles { display: block; }
   .blob { position: absolute; border-radius: 50%; filter: blur(70px); animation: float 14s ease-in-out infinite; }
   .blob--coral { width: 440px; height: 440px; background: var(--coral); left: -140px; bottom: -200px; opacity: .32; }
   .blob--mint { width: 520px; height: 520px; background: var(--mint); right: -160px; top: -220px; opacity: .26; animation-delay: -7s; }

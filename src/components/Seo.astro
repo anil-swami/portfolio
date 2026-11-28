@@ -12,3 +12,29 @@ const canonical = new URL(Astro.url.pathname, site.url).href;
 <meta property="og:url" content={canonical} />
 <meta property="og:locale" content="en_IN" />
 <meta name="twitter:card" content="summary" />
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': `${site.url}/#anil`,
+      name: site.name,
+      url: site.url,
+      email: `mailto:${site.email}`,
+      jobTitle: 'Web developer',
+      address: { '@type': 'PostalAddress', addressLocality: 'Gurugram', addressCountry: 'IN' },
+      sameAs: [site.links.linkedin, site.links.github, site.links.youtube],
+      knowsAbout: ['Web development', 'Astro', 'Node.js', 'React', 'SEO', 'AI-assisted development'],
+    },
+    {
+      '@type': 'ProfessionalService',
+      name: `${site.name}: website design and development`,
+      url: site.url,
+      founder: { '@id': `${site.url}/#anil` },
+      description: site.description,
+      areaServed: 'IN',
+      address: { '@type': 'PostalAddress', addressLocality: 'Gurugram', addressCountry: 'IN' },
+      serviceType: site.services.map((s) => s.title),
+    },
+  ],
+})} />

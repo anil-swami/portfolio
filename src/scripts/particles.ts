@@ -1,10 +1,10 @@
-// Grain particles: they form a shape in the hero (the AC logo, a growth chart, a check badge, one per
-// slide), push away from the pointer, and scatter into a soft dust field behind the page as you scroll.
-// Original implementation for Accounts Call. Off under reduced motion or without canvas support.
+// Grain particles: they form the "AS" monogram in the hero, push away from the pointer, wander gently at rest,
+// and scatter into a soft dust field behind the page as you scroll. Adapted from the Accounts Call design kit.
+// Off under reduced motion, Save-Data, or without canvas support.
 
 type Shape = { x: Float32Array; y: Float32Array; c: Uint8Array }; // points normalised to 0..1, colour index
 
-const COLOURS = ['#daa92a', '#f6c443', '#44d2f6', '#ffffff', '#4f8df5']; // gold, light gold, cyan, white, blue
+const COLOURS = ['#ff6b4a', '#ffa07a', '#2dd4bf', '#ffffff', '#8b85ff']; // coral, light coral, mint, white, indigo
 const DUST_ALPHA = 0.55;
 
 export function startParticles(canvas: HTMLCanvasElement, getTarget: () => HTMLElement | null, hero: HTMLElement) {
@@ -118,7 +118,7 @@ export function startParticles(canvas: HTMLCanvasElement, getTarget: () => HTMLE
     ctx.globalAlpha = 1;
   };
 
-  buildShapes(small ? 1400 : 3200, canvas.dataset.logo || '/logo.png').then((built) => {
+  buildShapes(small ? 1400 : 3200).then((built) => {
     shapes = built;
     setShape(0);
     raf = requestAnimationFrame(frame);
@@ -157,46 +157,28 @@ function sample(draw: (g: CanvasRenderingContext2D) => void, colourOf: (r: numbe
   return out;
 }
 
+// Brand colours: coral and light coral for "A", mint and white for "S", indigo for the ring.
 const byColour = (r: number, g: number, b: number) => {
-  if (r > 150 && g > 110 && b < 120) return Math.random() < 0.75 ? 0 : 1; // gold
-  if (b > 180 && g > 160) return 2; // cyan
-  if (b > 150 && r < 120) return 4; // blue
-  return Math.random() < 0.7 ? 3 : 2; // dark logo strokes become white/cyan on the navy hero
+  if (r > 200 && g < 160) return Math.random() < 0.72 ? 0 : 1; // coral
+  if (g > 170 && b > 150 && r < 120) return Math.random() < 0.7 ? 2 : 3; // mint / white
+  return 4; // indigo
 };
 
-async function buildShapes(n: number, logoUrl: string): Promise<Shape[]> {
-  const logo = new Image();
-  logo.src = logoUrl;
-  await logo.decode().catch(() => {});
-
-  const logoShape = sample((g) => {
-    if (!logo.naturalWidth) return;
-    // Only the "AC" mark: the bottom quarter of the file is the name text.
-    const sw = logo.naturalWidth, sh = logo.naturalHeight * 0.74;
-    const scale = Math.min((S * 0.92) / sw, (S * 0.92) / sh);
-    const w = sw * scale, h = sh * scale;
-    g.drawImage(logo, 0, 0, sw, sh, (S - w) / 2, (S - h) / 2, w, h);
+async function buildShapes(n: number): Promise<Shape[]> {
+  // The monogram uses Poppins Bold; wait for it so the letters are drawn in the right font.
+  await document.fonts.load('700 100px Poppins').catch(() => {});
+  const monogram = sample((g) => {
+    g.textBaseline = 'middle';
+    g.font = '700 250px Poppins, system-ui, sans-serif';
+    const wA = g.measureText('A').width, wS = g.measureText('S').width, gap = -6;
+    const left = (S - (wA + wS + gap)) / 2;
+    g.fillStyle = '#ff6b4a';
+    g.fillText('A', left, S / 2 + 10);
+    g.fillStyle = '#2dd4bf';
+    g.fillText('S', left + wA + gap, S / 2 + 10);
+    // A soft ring under the letters, in indigo.
+    g.strokeStyle = '#8b85ff'; g.lineWidth = 6; g.lineCap = 'round';
+    g.beginPath(); g.arc(S / 2, S / 2, 188, 0.18 * Math.PI, 0.82 * Math.PI); g.stroke();
   }, byColour, n);
-
-  const chartShape = sample((g) => {
-    const bars = [0.38, 0.52, 0.46, 0.66, 0.6, 0.82];
-    bars.forEach((h, i) => {
-      g.fillStyle = i % 2 ? '#daa92a' : '#44d2f6';
-      const x = 40 + i * 56, top = S - 30 - h * 300;
-      g.fillRect(x, top, 38, S - 30 - top);
-    });
-    g.strokeStyle = '#ffffff'; g.lineWidth = 12; g.lineCap = 'round'; g.lineJoin = 'round';
-    g.beginPath(); g.moveTo(40, 250); g.bezierCurveTo(120, 230, 170, 150, 240, 140); g.lineTo(340, 50); g.stroke();
-    g.beginPath(); g.moveTo(300, 46); g.lineTo(346, 44); g.lineTo(344, 90); g.stroke();
-  }, byColour, n);
-
-  const checkShape = sample((g) => {
-    g.lineCap = 'round'; g.lineJoin = 'round';
-    g.strokeStyle = '#44d2f6'; g.lineWidth = 26;
-    g.beginPath(); g.arc(S / 2, S / 2, 160, 0, Math.PI * 2); g.stroke();
-    g.strokeStyle = '#daa92a'; g.lineWidth = 34;
-    g.beginPath(); g.moveTo(120, 205); g.lineTo(180, 265); g.lineTo(290, 140); g.stroke();
-  }, byColour, n);
-
-  return [logoShape, chartShape, checkShape];
+  return [monogram];
 }

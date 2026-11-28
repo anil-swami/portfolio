@@ -65,3 +65,16 @@ test('AI corner links the Technly channel; resume is linked', () => {
 test('tech work only, and no Accounts Call', () => {
   for (const w of [/digital marketing/i, /graphic design/i, /\bcanva\b/i, /accountscall/i, /accounts call/i]) assert.ok(!w.test(html), String(w));
 });
+
+// ---------- Task 3: SEO ----------
+test('structured data: Person with profiles, and the web service', () => {
+  const ld = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap((m) => [].concat(JSON.parse(m[1])['@graph'] || JSON.parse(m[1])));
+  const person = ld.find((d) => d['@type'] === 'Person');
+  assert.ok(person, 'Person');
+  for (const u of ['https://www.linkedin.com/in/anil-swami-5044bb176/', 'https://github.com/anil-swami', 'https://www.youtube.com/@Technly-990/']) assert.ok(person.sameAs.includes(u), u);
+  assert.ok(ld.find((d) => d['@type'] === 'ProfessionalService'), 'ProfessionalService');
+});
+
+test('canonical points at trybrix.site', () => {
+  assert.ok(html.includes('<link rel="canonical" href="https://trybrix.site/">'));
+});
