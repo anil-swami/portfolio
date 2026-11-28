@@ -7,7 +7,7 @@ type Shape = { x: Float32Array; y: Float32Array; c: Uint8Array }; // points norm
 const COLOURS = ['#ff6b4a', '#ffa07a', '#2dd4bf', '#ffffff', '#8b85ff']; // coral, light coral, mint, white, indigo
 const DUST_ALPHA = 0.55;
 
-export function startParticles(canvas: HTMLCanvasElement, getTarget: () => HTMLElement | null, hero: HTMLElement) {
+export function startParticles(canvas: HTMLCanvasElement, getTarget: () => HTMLElement | null) {
   const ctx = canvas.getContext('2d');
   if (!ctx) return null;
 
@@ -71,9 +71,9 @@ export function startParticles(canvas: HTMLCanvasElement, getTarget: () => HTMLE
     const target = getTarget();
     if (!target) return;
     const box = target.getBoundingClientRect();
-    const heroBox = hero.getBoundingClientRect();
-    // 0 at the top of the page, 1 once the hero has mostly scrolled away.
-    const p = Math.min(1, Math.max(0, -heroBox.top / (heroBox.height * 0.75)));
+    // Scatter follows the shape itself: 0 while its box sits in the lower half of the screen or below,
+    // 1 once it has scrolled off the top. On tall phone heroes the shape stays whole while you read past it.
+    const p = Math.min(1, Math.max(0, (H * 0.5 - box.bottom) / (H * 0.5)));
     const ease = p * p * (3 - 2 * p);
     const side = Math.min(box.width, box.height); // keep the shape square inside the box
     const ox = box.left + (box.width - side) / 2, oy = box.top + (box.height - side) / 2;

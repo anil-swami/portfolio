@@ -73,3 +73,30 @@ test('phone: menu fills the screen below the header, no sideways scroll', async 
   assert.ok(r.onTop);
   await page.close();
 });
+
+test('phone: the AS stays formed while it is still in the lower half of the screen', async () => {
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 1 });
+  await page.goto(SITE, { waitUntil: 'networkidle' });
+  // Scroll so the monogram box sits in the lower half of the screen.
+  await page.evaluate(() => {
+    const b = document.querySelector('[data-hero-visual]').getBoundingClientRect();
+    scrollTo(0, Math.max(0, b.bottom - innerHeight * 0.55));
+  });
+  await page.waitForTimeout(3000);
+  const share = await page.evaluate(() => {
+    const c = document.querySelector('[data-particles]');
+    const k = c.width / innerWidth;
+    const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data;
+    const b = document.querySelector('[data-hero-visual]').getBoundingClientRect();
+    let inside = 0, all = 0;
+    for (let y = 0; y < c.height; y += 2) for (let x = 0; x < c.width; x += 2) {
+      if (d[(y * c.width + x) * 4 + 3] < 100) continue;
+      all++;
+      const px = x / k, py = y / k;
+      if (px >= b.left - 20 && px <= b.right + 20 && py >= b.top - 20 && py <= b.bottom + 20) inside++;
+    }
+    return all ? inside / all : 0;
+  });
+  assert.ok(share > 0.7, `only ${Math.round(share * 100)}% of grains are in the monogram box`);
+  await page.close();
+});

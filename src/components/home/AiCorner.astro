@@ -80,5 +80,12 @@ const ai = site.ai;
   .built-card h4 { font-size: 1.05rem; margin-bottom: .4rem; }
   .built-card p { font-size: .93rem; margin: 0; color: rgba(255,255,255,.72); }
   @media (max-width: 1100px) { .ai__top { grid-template-columns: 1fr; } .built { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 560px) { .built { grid-template-columns: 1fr; } .shorts { gap: .6rem; } .short { padding: .7rem; } .short b { font-size: .82rem; } }
+  @media (max-width: 560px) {
+    .built { grid-template-columns: 1fr; }
+    .shorts { gap: .6rem; }
+    .short { padding: .7rem; }
+    .short b { font-size: .82rem; }
+    /* Small tiles: play button in the top corner so it never covers the title. */
+    .short__play, .short:hover .short__play { top: .6rem; left: .6rem; width: 36px; height: 36px; transform: none; }
+  }
 </style>

@@ -35,12 +35,11 @@ const h = site.hero;
 
   // Grain particles form the AS monogram. Skipped for reduced motion or Save-Data; the static monogram shows instead.
   const canvas = document.querySelector<HTMLCanvasElement>('[data-particles]');
-  const hero = document.querySelector<HTMLElement>('.hero');
   const visual = document.querySelector<HTMLElement>('[data-hero-visual]');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
-  if (canvas && hero && visual && !reduce && !saveData) {
-    if (startParticles(canvas, () => visual, hero)) document.documentElement.classList.add('particles-on');
+  if (canvas && visual && !reduce && !saveData) {
+    if (startParticles(canvas, () => visual)) document.documentElement.classList.add('particles-on');
   }
 </script>
 
